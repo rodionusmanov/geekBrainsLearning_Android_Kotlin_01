@@ -4,12 +4,30 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".MainActivity">
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/button"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/button"/>
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        android:text="@string/button" />
+
+    <TextView
+        android:id="@+id/cat_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:gravity="center"
+        android:textSize="50sp"/>
+    <TextView
+        android:id="@+id/cat_weight"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:gravity="center"
+        android:textSize="50sp"/>
 
 </LinearLayout>
