@@ -16,6 +16,13 @@ class MainActivity : AppCompatActivity() {
         data class Cat(val name: String, val weight: Int)
         val cat = Cat("Усатый", 5)
 
+       /* var dog = object {
+            var name = "Слюнявый"
+            var weight = 20
+        }*/
+
+        val newCat = cat.copy(name = "Усатый")
+
         val button = findViewById<Button>(R.id.button)
         button.setOnClickListener(object : View.OnClickListener {
             @SuppressLint("ResourceAsColor")
@@ -25,8 +32,9 @@ class MainActivity : AppCompatActivity() {
                 } else {
                     button.setText("button")
                 }
-                findViewById<TextView>(R.id.cat_name).setText(cat.name)
-                findViewById<TextView>(R.id.cat_weight).setText(cat.weight.toString())
+
+                findViewById<TextView>(R.id.cat_name).setText(newCat.name)
+                findViewById<TextView>(R.id.cat_weight).setText(newCat.weight.toString())
             }
         })
     }
