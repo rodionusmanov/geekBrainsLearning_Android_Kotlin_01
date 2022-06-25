@@ -5,6 +5,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/container"
     tools:context=".MainActivity">
 
        <!-- <LinearLayout
@@ -29,9 +30,6 @@
 
     <!--    </LinearLayout>-->
 
-    <include
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        layout="@layout/weather_fragment_frame"/>
+
 
 </LinearLayout>
