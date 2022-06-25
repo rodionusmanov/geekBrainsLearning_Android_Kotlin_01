@@ -32,6 +32,6 @@
     <include
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        layout="@layout/weather_main_fragment"/>
+        layout="@layout/weather_fragment_frame"/>
 
 </LinearLayout>
