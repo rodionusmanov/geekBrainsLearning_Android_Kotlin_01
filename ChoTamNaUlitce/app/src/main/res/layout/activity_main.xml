@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <!--    <LinearLayout-->
+       <!-- <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal">
 
-    <!--<ImageView
+    <ImageView
         android:layout_width="50dp"
         android:layout_height="?attr/actionBarSize"
         android:src="@drawable/startpicture"></ImageView>-->
@@ -20,7 +21,7 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/teal_700"
+        android:background="@color/black"
         app:subtitleTextColor="@color/white"
         app:title="@string/toolbar_title"
         app:titleTextColor="@color/white"
@@ -28,4 +29,9 @@
 
     <!--    </LinearLayout>-->
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <include
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        layout="@layout/weather_main_fragment"/>
+
+</LinearLayout>
