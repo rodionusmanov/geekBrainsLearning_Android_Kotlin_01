@@ -13,6 +13,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.chotamnaulitce.R
 import com.example.chotamnaulitce.databinding.WeatherFragmentFrameBinding
 import com.example.chotamnaulitce.viewmodel.AppState
+import com.example.chotamnaulitce.domain.Weather
 import kotlin.random.Random
 
 class WeatherFrameFragment : Fragment() {
@@ -34,7 +35,7 @@ class WeatherFrameFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this).get(WeatherFrameViewModel::class.java)
-        viewModel.liveData.observe(viewLifecycleOwner, object : Observer<AppState> {
+        viewModel.getLiveData().observe(viewLifecycleOwner, object : Observer<AppState> {
             override fun onChanged(t: AppState) {
                 renderData(t)
 //                Toast.makeText(requireContext(), "$t отработал", Toast.LENGTH_SHORT).show()
@@ -46,6 +47,7 @@ class WeatherFrameFragment : Fragment() {
         button.setOnClickListener(object : View.OnClickListener {
             override fun onClick(v: View) {
                 viewModel.sentRequest()
+                viewModel.getLiveData()
             }
         })
     }
@@ -63,6 +65,11 @@ class WeatherFrameFragment : Fragment() {
             is AppState.Success -> {
                 loadingLayout.visibility = View.GONE
                 val result = appState.weatherData
+                binding.cityName.text = result.city.name
+                binding.latitudeEntry.setText(result.city.latitude.toString())
+                binding.longtitudeEntry.setText(result.city.longtitude.toString())
+                binding.temperatureActualValue.text = result.temperatureActual.toString()
+                binding.temperatureFeelsValue.text = result.temperatureFeels.toString()
                 Toast.makeText(requireContext(), "$result отработал", Toast.LENGTH_SHORT).show()
             }
         }
