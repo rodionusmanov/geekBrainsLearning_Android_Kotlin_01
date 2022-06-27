@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">ChoTamNaUlitce</string>
+    <string name="moscow">Москва</string>
+    <string name="toolbar_title">Чо там на улице?</string>
+    <string name="longitude">Долгота</string>
+    <string name="latitude">Широта</string>
+    <string name="cho_tam">Чо там с погодой?</string>
+    <string name="temperature_actual">На градуснике:</string>
+    <string name="temperature_feels">Но по ощущениям:</string>
+    <string name="humidity">И влажность:</string>
+    <string name="state">А вообще на улице:</string>
+    <string name="wind_speed">И ветер:</string>
+    <string name="wind_direction">Поддувает на:</string>
+</resources>
