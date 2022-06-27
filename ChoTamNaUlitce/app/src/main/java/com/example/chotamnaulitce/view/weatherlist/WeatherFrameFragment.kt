@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
-import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -13,8 +12,6 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.chotamnaulitce.R
 import com.example.chotamnaulitce.databinding.WeatherFragmentFrameBinding
 import com.example.chotamnaulitce.viewmodel.AppState
-import com.example.chotamnaulitce.domain.Weather
-import kotlin.random.Random
 
 class WeatherFrameFragment : Fragment() {
     companion object {
@@ -38,7 +35,6 @@ class WeatherFrameFragment : Fragment() {
         viewModel.getLiveData().observe(viewLifecycleOwner, object : Observer<AppState> {
             override fun onChanged(t: AppState) {
                 renderData(t)
-//                Toast.makeText(requireContext(), "$t отработал", Toast.LENGTH_SHORT).show()
             }
         })
         viewModel.sentRequest()
