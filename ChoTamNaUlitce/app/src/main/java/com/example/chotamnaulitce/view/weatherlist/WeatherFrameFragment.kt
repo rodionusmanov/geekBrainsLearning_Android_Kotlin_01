@@ -18,20 +18,27 @@ class WeatherFrameFragment : Fragment() {
         fun newInstance() = WeatherFrameFragment()
     }
 
-    lateinit var binding: WeatherFragmentFrameBinding
+    private var _binding: WeatherFragmentFrameBinding? = null
+    private val binding: WeatherFragmentFrameBinding
+    get(){
+        return _binding!!
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
+    }
+
     lateinit var viewModel: WeatherFrameViewModel
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = WeatherFragmentFrameBinding.inflate(inflater)
+        _binding = WeatherFragmentFrameBinding.inflate(inflater)
         return binding.weatherFrameFragment
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
