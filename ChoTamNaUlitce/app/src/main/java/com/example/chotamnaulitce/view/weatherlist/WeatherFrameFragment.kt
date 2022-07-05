@@ -29,6 +29,10 @@ class WeatherFrameFragment : Fragment() {
         return binding.weatherFrameFragment
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this).get(WeatherFrameViewModel::class.java)
