@@ -4,9 +4,9 @@ import com.example.chotamnaulitce.domain.Weather
 import com.example.chotamnaulitce.viewmodel.AppState
 import kotlin.random.Random
 
-class RepositoryRemoteImpl: IRepository {
+class RepositoryRemoteImpl: IRepositorySingle {
 
-    override fun getWeatherList():List<Weather> {
+    override fun getWeatherList(location: Location):List<Weather> {
         Thread {
             Thread.sleep(200L)
         }.start()

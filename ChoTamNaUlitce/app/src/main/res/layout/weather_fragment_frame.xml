@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/weather_frame_fragment"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"    >
+
+<LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -59,102 +64,130 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:text="@string/cho_tam"/>
+        android:text="@string/cho_tam" />
 
     <TableLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <TableRow>
+
             <TextView
                 android:id="@+id/temperature_actual_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/temperature_actual"/>
+                android:text="@string/temperature_actual" />
+
             <TextView
                 android:id="@+id/temperature_actual_value"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                tools:text="10"/>
+                tools:text="10" />
         </TableRow>
 
         <TableRow>
+
             <TextView
                 android:id="@+id/temperature_feels_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/temperature_feels"/>
+                android:text="@string/temperature_feels" />
+
             <TextView
                 android:id="@+id/temperature_feels_value"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                tools:text="12"/>
+                tools:text="12" />
         </TableRow>
 
         <TableRow>
+
             <TextView
                 android:id="@+id/humidity_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/humidity"/>
+                android:text="@string/humidity" />
+
             <TextView
                 android:id="@+id/humidity_value"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                tools:text="10%"/>
+                tools:text="10%" />
         </TableRow>
 
         <TableRow>
+
             <TextView
                 android:id="@+id/state_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/state"/>
+                android:text="@string/state" />
+
             <TextView
                 android:id="@+id/state_value"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                tools:text="град"/>
+                tools:text="град" />
         </TableRow>
 
         <TableRow>
+
             <TextView
                 android:id="@+id/wind_speed_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/wind_speed"/>
+                android:text="@string/wind_speed" />
+
             <TextView
                 android:id="@+id/wind_speed_value"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                tools:text="10 м/c"/>
+                tools:text="10 м/c" />
         </TableRow>
 
         <TableRow>
+
             <TextView
                 android:id="@+id/wind_direction_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/wind_direction"/>
+                android:text="@string/wind_direction" />
+
             <TextView
                 android:id="@+id/wind_direction_value"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                tools:text="север"/>
+                tools:text="север" />
         </TableRow>
 
     </TableLayout>
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/cities_fragment_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/choose_location_floating_action_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:src="@drawable/rus"
+        app:tint="@null"
+        app:maxImageSize="56dp" />
+
 </LinearLayout>
+</androidx.core.widget.NestedScrollView>

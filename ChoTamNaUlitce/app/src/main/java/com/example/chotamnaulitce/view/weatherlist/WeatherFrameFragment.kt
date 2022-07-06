@@ -11,6 +11,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.chotamnaulitce.R
 import com.example.chotamnaulitce.databinding.WeatherFragmentFrameBinding
+import com.example.chotamnaulitce.model.Location
 import com.example.chotamnaulitce.viewmodel.AppState
 
 class WeatherFrameFragment : Fragment() {
@@ -18,11 +19,13 @@ class WeatherFrameFragment : Fragment() {
         fun newInstance() = WeatherFrameFragment()
     }
 
+    var locationSwitchForFAB = 1
+
     private var _binding: WeatherFragmentFrameBinding? = null
     private val binding: WeatherFragmentFrameBinding
-    get(){
-        return _binding!!
-    }
+        get() {
+            return _binding!!
+        }
 
     override fun onDestroy() {
         super.onDestroy()
@@ -39,7 +42,6 @@ class WeatherFrameFragment : Fragment() {
         return binding.weatherFrameFragment
     }
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this).get(WeatherFrameViewModel::class.java)
@@ -48,28 +50,37 @@ class WeatherFrameFragment : Fragment() {
                 renderData(t)
             }
         })
-        viewModel.sentRequest()
 
-        val button = binding.buttonChoTam
+        binding.chooseLocationFloatingActionButton.setOnClickListener{
+            if(locationSwitchForFAB == 1){
+                viewModel.getWeatherListForRus()
+            } else {
+                viewModel.getWeatherListForWorld()
+            }
+            locationSwitchForFAB = (locationSwitchForFAB + 1) % 2
+        }
+
+        /*val button = binding.buttonChoTam
         button.setOnClickListener(object : View.OnClickListener {
             override fun onClick(v: View) {
                 viewModel.sentRequest()
                 viewModel.getLiveData()
             }
-        })
+        })*/
     }
-
-
 
     private fun renderData(appState: AppState) {
         val loadingLayout = requireActivity().findViewById<FrameLayout>(R.id.loading_layout)
         when (appState) {
-            is AppState.Error -> {loadingLayout.visibility = View.GONE
-                Toast.makeText(requireContext(), "сломался, не отработал", Toast.LENGTH_SHORT).show()}
+            is AppState.Error -> {
+                loadingLayout.visibility = View.GONE
+                Toast.makeText(requireContext(), "сломался, не отработал", Toast.LENGTH_SHORT)
+                    .show()
+            }
             AppState.Loading -> {
                 loadingLayout.visibility = View.VISIBLE
             }
-            is AppState.Success -> {
+            is AppState.SuccessSingle -> {
                 loadingLayout.visibility = View.GONE
                 val result = appState.weatherData
                 binding.cityName.text = result.city.name
@@ -78,6 +89,11 @@ class WeatherFrameFragment : Fragment() {
                 binding.temperatureActualValue.text = result.temperatureActual.toString()
                 binding.temperatureFeelsValue.text = result.temperatureFeels.toString()
                 Toast.makeText(requireContext(), "$result отработал", Toast.LENGTH_SHORT).show()
+            }
+            is AppState.SuccessMulti -> {
+                loadingLayout.visibility = View.GONE
+                binding.citiesFragmentRecyclerView.adapter =
+                WeatherListAdapter(appState.weatherList)
             }
         }
     }
