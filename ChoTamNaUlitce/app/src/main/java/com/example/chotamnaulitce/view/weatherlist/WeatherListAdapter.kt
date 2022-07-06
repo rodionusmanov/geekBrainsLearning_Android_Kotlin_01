@@ -6,8 +6,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.chotamnaulitce.databinding.WeatherFragmentFrameRecyclerItemBinding
 import com.example.chotamnaulitce.domain.Weather
+import com.example.chotamnaulitce.view.details.IOnItemClick
 
-class WeatherListAdapter(private val dataList: List<Weather>) :
+class WeatherListAdapter(private val dataList: List<Weather>, private val callback: IOnItemClick) :
     RecyclerView.Adapter<WeatherListAdapter.WeatherViewHolder>() {
 
 
@@ -25,10 +26,13 @@ class WeatherListAdapter(private val dataList: List<Weather>) :
         return dataList.size
     }
 
-    class WeatherViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+    inner class WeatherViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         fun bind(weather: Weather) {
             val binding = WeatherFragmentFrameRecyclerItemBinding.bind(itemView)
             binding.cityNameRecyclerItem.text = weather.city.name
+            binding.root.setOnClickListener {
+                callback.onItemClick(weather)
+            }
         }
     }
 

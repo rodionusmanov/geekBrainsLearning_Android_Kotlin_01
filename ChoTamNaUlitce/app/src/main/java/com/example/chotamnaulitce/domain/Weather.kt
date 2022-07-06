@@ -1,18 +1,23 @@
 package com.example.chotamnaulitce.domain
 
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
+@Parcelize
 data class Weather(
     val city: City = getDefaultCity(),
     val temperatureActual: Int = 0,
     val temperatureFeels: Int = 0
-)
+) : Parcelable
 
+@Parcelize
 data class City(
     val name: String,
     val latitude: Double,
     val longtitude: Double
-)
+) : Parcelable
 
-fun getRusCities(): List<Weather>{
+fun getRusCities(): List<Weather> {
     return listOf(
         Weather(City("Москва", 55.45, 37.36), 1, 2),
         Weather(City("Санкт-Петербург", 59.93, 30.34), 3, 4),
@@ -28,7 +33,7 @@ fun getRusCities(): List<Weather>{
     )
 }
 
-fun getWorldCities(): List<Weather>{
+fun getWorldCities(): List<Weather> {
     return listOf(
         Weather(City("Лондон", 51.51, -0.13), 1, 2),
         Weather(City("Токио", 35.7, 139.69), 3, 4),
