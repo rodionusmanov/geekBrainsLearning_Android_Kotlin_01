@@ -51,22 +51,11 @@ class WeatherFrameFragment : Fragment() {
             }
         })
 
-        binding.chooseLocationFloatingActionButton.setOnClickListener{
-            if(locationSwitchForFAB == 1){
-                viewModel.getWeatherListForRus()
-            } else {
-                viewModel.getWeatherListForWorld()
-            }
-            locationSwitchForFAB = (locationSwitchForFAB + 1) % 2
+        binding.chooseLocationFloatingActionButton.setOnClickListener {
+            showCitiesWithCorrectLocation()
         }
+        showCitiesWithCorrectLocation()
 
-        /*val button = binding.buttonChoTam
-        button.setOnClickListener(object : View.OnClickListener {
-            override fun onClick(v: View) {
-                viewModel.sentRequest()
-                viewModel.getLiveData()
-            }
-        })*/
     }
 
     private fun renderData(appState: AppState) {
@@ -93,8 +82,19 @@ class WeatherFrameFragment : Fragment() {
             is AppState.SuccessMulti -> {
                 loadingLayout.visibility = View.GONE
                 binding.citiesFragmentRecyclerView.adapter =
-                WeatherListAdapter(appState.weatherList)
+                    WeatherListAdapter(appState.weatherList)
             }
         }
+    }
+
+    private fun showCitiesWithCorrectLocation() {
+        if (locationSwitchForFAB == 1) {
+            viewModel.getWeatherListForRus()
+            binding.chooseLocationFloatingActionButton.setImageResource(R.drawable.rus)
+        } else {
+            viewModel.getWeatherListForWorld()
+            binding.chooseLocationFloatingActionButton.setImageResource(R.drawable.earth)
+        }
+        locationSwitchForFAB = (locationSwitchForFAB + 1) % 2
     }
 }
