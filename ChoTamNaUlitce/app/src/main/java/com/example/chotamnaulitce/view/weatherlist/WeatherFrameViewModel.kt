@@ -2,9 +2,7 @@ package com.example.chotamnaulitce.view.weatherlist
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.chotamnaulitce.model.IRepository
-import com.example.chotamnaulitce.model.RepositoryLocalImpl
-import com.example.chotamnaulitce.model.RepositoryRemoteImpl
+import com.example.chotamnaulitce.model.*
 import com.example.chotamnaulitce.viewmodel.AppState
 import kotlin.random.Random
 
@@ -13,7 +11,8 @@ class WeatherFrameViewModel(
 ) :
     ViewModel() {
 
-    lateinit var repository: IRepository
+    lateinit var repositoryMulti: IRepositoryMulti
+    lateinit var repositorySingle: IRepositorySingle
 
     fun getLiveData(): MutableLiveData<AppState> {
         chooseRepository()
@@ -21,17 +20,25 @@ class WeatherFrameViewModel(
     }
 
     private fun chooseRepository() {
-        repository = if (isConnected()) {
+        repositorySingle = if (isConnected()) {
             RepositoryRemoteImpl()
         } else {
             RepositoryLocalImpl()
         }
+        repositoryMulti = RepositoryLocalImpl()
     }
 
-    fun sentRequest() {
+    fun getWeatherListForRus(){
+        sentRequest(Location.Rus)
+    }
+    fun getWeatherListForWorld(){
+        sentRequest(Location.World)
+    }
+
+    private fun sentRequest(location: Location) {
         liveData.value = AppState.Loading
-        if (Random.nextInt(0, 3) < 2) {
-            liveData.value = AppState.Success(repository.getWeather(55.45, 37.36))
+        if (Random.nextInt(0, 1) < 2) {
+            liveData.value = AppState.SuccessMulti(repositoryMulti.getWeatherList(location))
         } else {
             liveData.postValue(AppState.Error(Any()))
         }
