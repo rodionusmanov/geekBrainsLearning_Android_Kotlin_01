@@ -4,11 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.chotamnaulitce.databinding.DetailsWeatherFragmentBinding
 import com.example.chotamnaulitce.domain.Weather
-import com.example.chotamnaulitce.view.weatherlist.WeatherFrameFragment
 import com.example.chotamnaulitce.view.weatherlist.WeatherFrameViewModel
 
 class DetailsFragment : Fragment() {
@@ -50,7 +48,7 @@ class DetailsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val weather = arguments?.get(BUNDLE_WEATHER_EXTRA)
-        if (weather != null){
+        if (weather != null) {
             renderData(weather as Weather)
         }
     }
@@ -61,5 +59,9 @@ class DetailsFragment : Fragment() {
         binding.longtitudeEntry.setText(weather.city.longtitude.toString())
         binding.temperatureActualValue.text = weather.temperatureActual.toString()
         binding.temperatureFeelsValue.text = weather.temperatureFeels.toString()
+        binding.humidityValue.text = weather.humidity.toString()
+        binding.conditionValue.text = weather.condition.toString()
+        binding.windSpeedValue.text = weather.windSpeed.toString()
+        binding.windDirectionValue.text = weather.windDirection.toString()
     }
 }

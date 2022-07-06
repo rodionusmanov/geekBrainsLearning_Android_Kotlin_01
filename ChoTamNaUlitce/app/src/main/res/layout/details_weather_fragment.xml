@@ -112,14 +112,14 @@
         <TableRow>
 
             <TextView
-                android:id="@+id/state_title"
+                android:id="@+id/condition_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/state" />
 
             <TextView
-                android:id="@+id/state_value"
+                android:id="@+id/condition_value"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"

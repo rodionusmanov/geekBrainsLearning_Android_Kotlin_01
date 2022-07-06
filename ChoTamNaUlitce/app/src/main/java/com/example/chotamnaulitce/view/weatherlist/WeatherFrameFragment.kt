@@ -9,7 +9,6 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.example.chotamnaulitce.MainActivity
 import com.example.chotamnaulitce.R
 import com.example.chotamnaulitce.databinding.WeatherFragmentFrameBinding
 import com.example.chotamnaulitce.domain.Weather
@@ -75,12 +74,6 @@ class WeatherFrameFragment : Fragment(), IOnItemClick {
             is AppState.SuccessSingle -> {
                 loadingLayout.visibility = View.GONE
                 val result = appState.weatherData
-                /*binding.cityName.text = result.city.name
-                binding.latitudeEntry.setText(result.city.latitude.toString())
-                binding.longtitudeEntry.setText(result.city.longtitude.toString())
-                binding.temperatureActualValue.text = result.temperatureActual.toString()
-                binding.temperatureFeelsValue.text = result.temperatureFeels.toString()
-                Toast.makeText(requireContext(), "$result отработал", Toast.LENGTH_SHORT).show()*/
             }
             is AppState.SuccessMulti -> {
                 loadingLayout.visibility = View.GONE
