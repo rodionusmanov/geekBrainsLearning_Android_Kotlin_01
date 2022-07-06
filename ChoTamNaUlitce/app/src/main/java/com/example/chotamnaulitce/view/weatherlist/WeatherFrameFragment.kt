@@ -21,7 +21,7 @@ class WeatherFrameFragment : Fragment(), IOnItemClick {
         fun newInstance() = WeatherFrameFragment()
     }
 
-    var locationSwitchForFAB = 1
+    private var locationSwitchForFAB = 1
 
     private var _binding: WeatherFragmentFrameBinding? = null
     private val binding: WeatherFragmentFrameBinding
@@ -34,7 +34,7 @@ class WeatherFrameFragment : Fragment(), IOnItemClick {
         _binding = null
     }
 
-    lateinit var viewModel: WeatherFrameViewModel
+    private lateinit var viewModel: WeatherFrameViewModel
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -73,7 +73,6 @@ class WeatherFrameFragment : Fragment(), IOnItemClick {
             }
             is AppState.SuccessSingle -> {
                 loadingLayout.visibility = View.GONE
-                val result = appState.weatherData
             }
             is AppState.SuccessMulti -> {
                 loadingLayout.visibility = View.GONE
