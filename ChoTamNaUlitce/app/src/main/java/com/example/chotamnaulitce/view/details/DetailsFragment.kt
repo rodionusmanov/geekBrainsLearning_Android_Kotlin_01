@@ -4,14 +4,15 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.chotamnaulitce.databinding.DetailsWeatherFragmentBinding
 import com.example.chotamnaulitce.domain.Weather
-import com.example.chotamnaulitce.view.weatherlist.WeatherFrameViewModel
+import com.google.android.material.textfield.TextInputEditText
 
 class DetailsFragment : Fragment() {
     companion object {
-        val BUNDLE_WEATHER_EXTRA = "BWE_key"
+        private const val BUNDLE_WEATHER_EXTRA = "BWE_key"
         fun newInstance(weather: Weather): DetailsFragment {
             val bundle = Bundle()
             bundle.putParcelable(BUNDLE_WEATHER_EXTRA, weather)
@@ -20,8 +21,6 @@ class DetailsFragment : Fragment() {
             return fr
         }
     }
-
-    var locationSwitchForFAB = 1
 
     private var _binding: DetailsWeatherFragmentBinding? = null
     private val binding: DetailsWeatherFragmentBinding
@@ -34,7 +33,6 @@ class DetailsFragment : Fragment() {
         _binding = null
     }
 
-    lateinit var viewModel: WeatherFrameViewModel
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -54,14 +52,32 @@ class DetailsFragment : Fragment() {
     }
 
     private fun renderData(weather: Weather) {
-        binding.cityName.text = weather.city.name
-        binding.latitudeEntry.setText(weather.city.latitude.toString())
-        binding.longtitudeEntry.setText(weather.city.longtitude.toString())
-        binding.temperatureActualValue.text = weather.temperatureActual.toString()
-        binding.temperatureFeelsValue.text = weather.temperatureFeels.toString()
-        binding.humidityValue.text = weather.humidity.toString()
-        binding.conditionValue.text = weather.condition.toString()
-        binding.windSpeedValue.text = weather.windSpeed.toString()
-        binding.windDirectionValue.text = weather.windDirection.toString()
+        with(binding) {
+            cityName.text = weather.city.name
+            latitudeEntry.setText(weather.city.latitude.toString())
+            longitudeEntry.setText(weather.city.longitude.toString())
+            temperatureActualValue.setText(weather.temperatureActual.toString())
+            temperatureFeelsValue.setText(weather.temperatureFeels.toString())
+            humidityValue.setText(weather.humidity.toString())
+            conditionValue.setText(weather.condition)
+            windSpeedValue.setText(weather.windSpeed.toString())
+            toTextField(weather.windDirection, ::fieldToString)(windDirectionValue, weather.windDirection.toString())
+        }
+    }
+
+    private fun toTextField(
+        textInput: Any,
+        fToString: (Any) -> String
+    ): (TextInputEditText, String) -> Unit {
+        Toast.makeText(requireContext(),fToString(textInput),Toast.LENGTH_SHORT).show()
+        return ::returnToTextField
+    }
+
+    private fun fieldToString(field: Any): String {
+        return field.toString()
+    }
+
+    private fun returnToTextField(value: TextInputEditText, string: String) {
+        return value.setText(string)
     }
 }

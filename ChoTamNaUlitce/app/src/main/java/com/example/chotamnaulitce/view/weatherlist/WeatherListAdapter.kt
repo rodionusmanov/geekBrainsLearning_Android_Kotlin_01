@@ -11,7 +11,6 @@ import com.example.chotamnaulitce.view.details.IOnItemClick
 class WeatherListAdapter(private val dataList: List<Weather>, private val callback: IOnItemClick) :
     RecyclerView.Adapter<WeatherListAdapter.WeatherViewHolder>() {
 
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WeatherViewHolder {
         val binding =
             WeatherFragmentFrameRecyclerItemBinding.inflate(LayoutInflater.from(parent.context))
@@ -28,12 +27,13 @@ class WeatherListAdapter(private val dataList: List<Weather>, private val callba
 
     inner class WeatherViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         fun bind(weather: Weather) {
-            val binding = WeatherFragmentFrameRecyclerItemBinding.bind(itemView)
-            binding.cityNameRecyclerItem.text = weather.city.name
-            binding.root.setOnClickListener {
-                callback.onItemClick(weather)
+            WeatherFragmentFrameRecyclerItemBinding.bind(itemView).apply {
+                cityNameRecyclerItem.text = weather.city.name
+                root.setOnClickListener {
+                    callback.onItemClick(weather)
+                }
             }
+
         }
     }
-
 }

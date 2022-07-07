@@ -18,7 +18,7 @@ data class Weather(
 data class City(
     val name: String,
     val latitude: Double,
-    val longtitude: Double
+    val longitude: Double
 ) : Parcelable
 
 fun getRusCities(): List<Weather> {
@@ -26,7 +26,7 @@ fun getRusCities(): List<Weather> {
         Weather(City("Москва", 55.45, 37.36), 1, 2, 0, "Солнечно", 0.0, "Север"),
         Weather(City("Санкт-Петербург", 59.93, 30.34), 3, 4, 0, "Дождь", 0.0, "Север"),
         Weather(City("Новосибирск", 55.01, 82.94), 5, 6, 0, "Солнечно", 0.0, "Север"),
-        Weather(City("Екатеринбург", 56.84, 60.61), 7, 8, 0, "Град", 0.0, "Север"),
+        Weather(City("Екатеринбург", 56.84, 60.61), 7, 8, 0, "Град", 0.0, "Юг"),
         Weather(City("Нижний Новгород", 56.3, 43.94), 9, 10, 0, "Солнечно", 0.0, "Север"),
         Weather(City("Казань", 55.83, 49.07), 11, 12, 0, "Солнечно", 0.0, "Север"),
         Weather(City("Челябинск", 55.16, 61.44), 13, 14, 0, "Дождь", 0.0, "Север"),

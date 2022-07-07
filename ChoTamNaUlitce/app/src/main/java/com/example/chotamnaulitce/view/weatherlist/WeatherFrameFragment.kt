@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.chotamnaulitce.R
 import com.example.chotamnaulitce.databinding.WeatherFragmentFrameBinding
@@ -21,7 +20,7 @@ class WeatherFrameFragment : Fragment(), IOnItemClick {
         fun newInstance() = WeatherFrameFragment()
     }
 
-    var locationSwitchForFAB = 1
+    private var locationSwitchForFAB = 1
 
     private var _binding: WeatherFragmentFrameBinding? = null
     private val binding: WeatherFragmentFrameBinding
@@ -34,7 +33,7 @@ class WeatherFrameFragment : Fragment(), IOnItemClick {
         _binding = null
     }
 
-    lateinit var viewModel: WeatherFrameViewModel
+    private lateinit var viewModel: WeatherFrameViewModel
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -47,11 +46,9 @@ class WeatherFrameFragment : Fragment(), IOnItemClick {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this).get(WeatherFrameViewModel::class.java)
-        viewModel.getLiveData().observe(viewLifecycleOwner, object : Observer<AppState> {
-            override fun onChanged(t: AppState) {
-                renderData(t)
-            }
-        })
+        viewModel.run {
+            getLiveData().observe(viewLifecycleOwner) { t -> renderData(t) }
+        }
 
         binding.chooseLocationFloatingActionButton.setOnClickListener {
             showCitiesWithCorrectLocation()
@@ -73,7 +70,6 @@ class WeatherFrameFragment : Fragment(), IOnItemClick {
             }
             is AppState.SuccessSingle -> {
                 loadingLayout.visibility = View.GONE
-                val result = appState.weatherData
             }
             is AppState.SuccessMulti -> {
                 loadingLayout.visibility = View.GONE

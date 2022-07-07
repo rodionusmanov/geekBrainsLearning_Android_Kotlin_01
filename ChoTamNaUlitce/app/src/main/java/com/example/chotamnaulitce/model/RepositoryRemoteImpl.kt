@@ -1,8 +1,6 @@
 package com.example.chotamnaulitce.model
 
 import com.example.chotamnaulitce.domain.Weather
-import com.example.chotamnaulitce.viewmodel.AppState
-import kotlin.random.Random
 
 class RepositoryRemoteImpl: IRepositorySingle {
 

@@ -16,7 +16,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:baselineAligned="false">
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
@@ -45,7 +46,7 @@
             android:textColor="@color/black">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/longtitude_entry"
+                android:id="@+id/longitude_entry"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/longitude"
@@ -54,112 +55,100 @@
         </com.google.android.material.textfield.TextInputLayout>
     </LinearLayout>
 
-    <TableLayout
+    <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:gravity="center"
+        android:textColor="@color/black">
 
-        <TableRow>
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/temperature_actual_value"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/temperature_actual"
+            android:inputType="textMultiLine|text"
+            android:textSize="24sp" />
+    </com.google.android.material.textfield.TextInputLayout>
 
-            <TextView
-                android:id="@+id/temperature_actual_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/temperature_actual" />
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:gravity="center"
+        android:textColor="@color/black">
 
-            <TextView
-                android:id="@+id/temperature_actual_value"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                tools:text="10" />
-        </TableRow>
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/temperature_feels_value"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/temperature_feels"
+            android:inputType="textMultiLine|text"
+            android:textSize="24sp" />
+    </com.google.android.material.textfield.TextInputLayout>
 
-        <TableRow>
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:gravity="center"
+        android:textColor="@color/black">
 
-            <TextView
-                android:id="@+id/temperature_feels_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/temperature_feels" />
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/humidity_value"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/humidity"
+            android:inputType="textMultiLine|text"
+            android:textSize="24sp" />
+    </com.google.android.material.textfield.TextInputLayout>
 
-            <TextView
-                android:id="@+id/temperature_feels_value"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                tools:text="12" />
-        </TableRow>
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:gravity="center"
+        android:textColor="@color/black">
 
-        <TableRow>
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/condition_value"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/condition"
+            android:inputType="textMultiLine|text"
+            android:textSize="24sp" />
+    </com.google.android.material.textfield.TextInputLayout>
 
-            <TextView
-                android:id="@+id/humidity_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/humidity" />
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:gravity="center"
+        android:textColor="@color/black">
 
-            <TextView
-                android:id="@+id/humidity_value"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                tools:text="10%" />
-        </TableRow>
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/wind_speed_value"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/wind_speed"
+            android:inputType="textMultiLine|text"
+            android:textSize="24sp" />
+    </com.google.android.material.textfield.TextInputLayout>
 
-        <TableRow>
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:gravity="center"
+        android:textColor="@color/black">
 
-            <TextView
-                android:id="@+id/condition_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/state" />
-
-            <TextView
-                android:id="@+id/condition_value"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                tools:text="град" />
-        </TableRow>
-
-        <TableRow>
-
-            <TextView
-                android:id="@+id/wind_speed_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/wind_speed" />
-
-            <TextView
-                android:id="@+id/wind_speed_value"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                tools:text="10 м/c" />
-        </TableRow>
-
-        <TableRow>
-
-            <TextView
-                android:id="@+id/wind_direction_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/wind_direction" />
-
-            <TextView
-                android:id="@+id/wind_direction_value"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                tools:text="север" />
-        </TableRow>
-
-    </TableLayout>
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/wind_direction_value"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/wind_direction"
+            android:inputType="textMultiLine|text"
+            android:textSize="24sp" />
+    </com.google.android.material.textfield.TextInputLayout>
 
 </LinearLayout>
