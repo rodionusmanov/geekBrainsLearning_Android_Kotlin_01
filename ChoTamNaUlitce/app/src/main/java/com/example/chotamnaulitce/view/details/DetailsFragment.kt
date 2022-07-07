@@ -10,7 +10,7 @@ import com.example.chotamnaulitce.domain.Weather
 
 class DetailsFragment : Fragment() {
     companion object {
-        const val BUNDLE_WEATHER_EXTRA = "BWE_key"
+        private const val BUNDLE_WEATHER_EXTRA = "BWE_key"
         fun newInstance(weather: Weather): DetailsFragment {
             val bundle = Bundle()
             bundle.putParcelable(BUNDLE_WEATHER_EXTRA, weather)
@@ -50,7 +50,7 @@ class DetailsFragment : Fragment() {
     }
 
     private fun renderData(weather: Weather) {
-        with (binding) {
+        with(binding) {
             cityName.text = weather.city.name
             latitudeEntry.setText(weather.city.latitude.toString())
             longitudeEntry.setText(weather.city.longitude.toString())
