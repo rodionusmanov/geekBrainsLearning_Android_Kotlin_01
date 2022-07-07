@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.chotamnaulitce.databinding.DetailsWeatherFragmentBinding
 import com.example.chotamnaulitce.domain.Weather
+import com.google.android.material.textfield.TextInputEditText
 
 class DetailsFragment : Fragment() {
     companion object {
@@ -59,7 +60,30 @@ class DetailsFragment : Fragment() {
             humidityValue.setText(weather.humidity.toString())
             conditionValue.setText(weather.condition)
             windSpeedValue.setText(weather.windSpeed.toString())
-            windDirectionValue.setText(weather.windDirection)
+//            windDirectionValue.setText(weather.windDirection)
+            toTextField(windDirectionValue, weather.windDirection, ::fieldToString)
+
         }
+    }
+
+    private fun toTextField(
+        value: TextInputEditText,
+        textInput: Any,
+        fToString: (Any) -> String
+    ) {
+        val string = fToString(textInput)
+        return value.setText(string)
+    }
+
+    fun fieldToString(field: Any): String {
+        return field.toString()
+    }
+
+    fun fieldToString(field: Int): String {
+        return field.toString()
+    }
+
+    fun fieldToString(field: Double): String {
+        return field.toString()
     }
 }
