@@ -50,14 +50,16 @@ class DetailsFragment : Fragment() {
     }
 
     private fun renderData(weather: Weather) {
-        binding.cityName.text = weather.city.name
-        binding.latitudeEntry.setText(weather.city.latitude.toString())
-        binding.longitudeEntry.setText(weather.city.longitude.toString())
-        binding.temperatureActualValue.setText(weather.temperatureActual.toString())
-        binding.temperatureFeelsValue.setText(weather.temperatureFeels.toString())
-        binding.humidityValue.setText(weather.humidity.toString())
-        binding.conditionValue.setText(weather.condition)
-        binding.windSpeedValue.setText(weather.windSpeed.toString())
-        binding.windDirectionValue.setText(weather.windDirection)
+        with (binding) {
+            cityName.text = weather.city.name
+            latitudeEntry.setText(weather.city.latitude.toString())
+            longitudeEntry.setText(weather.city.longitude.toString())
+            temperatureActualValue.setText(weather.temperatureActual.toString())
+            temperatureFeelsValue.setText(weather.temperatureFeels.toString())
+            humidityValue.setText(weather.humidity.toString())
+            conditionValue.setText(weather.condition)
+            windSpeedValue.setText(weather.windSpeed.toString())
+            windDirectionValue.setText(weather.windDirection)
+        }
     }
 }
