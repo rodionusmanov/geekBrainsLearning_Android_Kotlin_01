@@ -18,7 +18,7 @@ data class Weather(
 data class City(
     val name: String,
     val latitude: Double,
-    val longtitude: Double
+    val longitude: Double
 ) : Parcelable
 
 fun getRusCities(): List<Weather> {

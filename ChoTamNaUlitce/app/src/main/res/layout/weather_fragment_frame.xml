@@ -26,7 +26,8 @@
         android:scaleType="centerCrop"
         android:src="@drawable/rus"
         app:tint="@null"
-        app:maxImageSize="56dp" />
+        app:maxImageSize="56dp"
+        android:contentDescription="@string/location_change" />
 
 </LinearLayout>
 </androidx.core.widget.NestedScrollView>

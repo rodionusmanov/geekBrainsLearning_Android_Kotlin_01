@@ -7,11 +7,10 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.chotamnaulitce.databinding.DetailsWeatherFragmentBinding
 import com.example.chotamnaulitce.domain.Weather
-import com.example.chotamnaulitce.view.weatherlist.WeatherFrameViewModel
 
 class DetailsFragment : Fragment() {
     companion object {
-        val BUNDLE_WEATHER_EXTRA = "BWE_key"
+        const val BUNDLE_WEATHER_EXTRA = "BWE_key"
         fun newInstance(weather: Weather): DetailsFragment {
             val bundle = Bundle()
             bundle.putParcelable(BUNDLE_WEATHER_EXTRA, weather)
@@ -20,8 +19,6 @@ class DetailsFragment : Fragment() {
             return fr
         }
     }
-
-    var locationSwitchForFAB = 1
 
     private var _binding: DetailsWeatherFragmentBinding? = null
     private val binding: DetailsWeatherFragmentBinding
@@ -34,7 +31,6 @@ class DetailsFragment : Fragment() {
         _binding = null
     }
 
-    lateinit var viewModel: WeatherFrameViewModel
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -56,12 +52,12 @@ class DetailsFragment : Fragment() {
     private fun renderData(weather: Weather) {
         binding.cityName.text = weather.city.name
         binding.latitudeEntry.setText(weather.city.latitude.toString())
-        binding.longtitudeEntry.setText(weather.city.longtitude.toString())
-        binding.temperatureActualValue.text = weather.temperatureActual.toString()
-        binding.temperatureFeelsValue.text = weather.temperatureFeels.toString()
-        binding.humidityValue.text = weather.humidity.toString()
-        binding.conditionValue.text = weather.condition.toString()
-        binding.windSpeedValue.text = weather.windSpeed.toString()
-        binding.windDirectionValue.text = weather.windDirection.toString()
+        binding.longitudeEntry.setText(weather.city.longitude.toString())
+        binding.temperatureActualValue.setText(weather.temperatureActual.toString())
+        binding.temperatureFeelsValue.setText(weather.temperatureFeels.toString())
+        binding.humidityValue.setText(weather.humidity.toString())
+        binding.conditionValue.setText(weather.condition)
+        binding.windSpeedValue.setText(weather.windSpeed.toString())
+        binding.windDirectionValue.setText(weather.windDirection)
     }
 }

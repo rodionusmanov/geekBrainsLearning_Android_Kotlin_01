@@ -8,7 +8,8 @@
     <string name="temperature_actual">На градуснике:</string>
     <string name="temperature_feels">Но по ощущениям:</string>
     <string name="humidity">И влажность:</string>
-    <string name="state">А вообще на улице:</string>
+    <string name="condition">А вообще на улице:</string>
     <string name="wind_speed">И ветер:</string>
-    <string name="wind_direction">Поддувает на:</string>
+    <string name="wind_direction">Дует на:</string>
+    <string name="location_change">location change</string>
 </resources>
