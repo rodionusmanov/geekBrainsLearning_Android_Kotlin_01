@@ -67,7 +67,7 @@ class DetailsFragment : Fragment() {
                 windDirectionValue,
                 weather.windDirection
             )
-            returnSnackbar(
+            requireView().withAction(
                 weather.city.name,
                 getString(R.string.return_to_cities_list)
             ) {
@@ -80,7 +80,7 @@ class DetailsFragment : Fragment() {
         }
     }
 
-    private fun returnSnackbar(
+    private fun View.withAction(
         text: String,
         returnText: String,
         returnAction: () -> Unit
