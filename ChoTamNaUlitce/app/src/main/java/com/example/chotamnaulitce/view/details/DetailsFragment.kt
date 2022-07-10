@@ -6,8 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import com.example.chotamnaulitce.R
 import com.example.chotamnaulitce.databinding.DetailsWeatherFragmentBinding
 import com.example.chotamnaulitce.domain.Weather
+import com.example.chotamnaulitce.view.weatherlist.WeatherFrameFragment
+import com.example.chotamnaulitce.view.weatherlist.WeatherListAdapter
+import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputEditText
 
 class DetailsFragment : Fragment() {
@@ -62,14 +66,29 @@ class DetailsFragment : Fragment() {
             conditionValue.setText(weather.condition)
             windSpeedValue.setText(weather.windSpeed.toString())
             toTextField(weather.windDirection, ::fieldToString)(windDirectionValue, weather.windDirection.toString())
+            returnSnackbar(weather.city.name, "Вернуться к списку", requireView())
         }
+    }
+
+    private fun returnSnackbar(
+        text: String,
+        returnText: String,
+        view: View
+    ){
+        Snackbar.make(view, text, Snackbar.LENGTH_INDEFINITE)
+        .setAction(returnText){
+            requireActivity()
+                .supportFragmentManager
+                .beginTransaction().hide(this)
+                .add(R.id.container, WeatherFrameFragment.newInstance())
+                .commit()
+        }.show()
     }
 
     private fun toTextField(
         textInput: Any,
         fToString: (Any) -> String
     ): (TextInputEditText, String) -> Unit {
-        Toast.makeText(requireContext(),fToString(textInput),Toast.LENGTH_SHORT).show()
         return ::returnToTextField
     }
 
