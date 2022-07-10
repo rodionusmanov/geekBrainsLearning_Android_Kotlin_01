@@ -46,8 +46,8 @@ class WeatherFrameFragment : Fragment(), IOnItemClick {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this).get(WeatherFrameViewModel::class.java)
-        viewModel.run {
-            getLiveData().observe(viewLifecycleOwner) { t -> renderData(t) }
+        viewModel?.let {
+            it.getLiveData().observe(viewLifecycleOwner) { t -> renderData(t) }
         }
 
         binding.chooseLocationFloatingActionButton.setOnClickListener {
