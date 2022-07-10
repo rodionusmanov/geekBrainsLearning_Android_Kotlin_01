@@ -12,4 +12,5 @@
     <string name="wind_speed">И ветер:</string>
     <string name="wind_direction">Дует на:</string>
     <string name="location_change">location change</string>
+    <string name="return_to_cities_list">Вернуться к списку</string>
 </resources>
