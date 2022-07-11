@@ -1,27 +1,18 @@
 package com.example.chotamnaulitce.view.details
 
+import android.annotation.SuppressLint
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.example.chotamnaulitce.BuildConfig.WEATHER_API_KEY
 import com.example.chotamnaulitce.R
 import com.example.chotamnaulitce.databinding.DetailsWeatherFragmentBinding
 import com.example.chotamnaulitce.domain.Weather
-import com.example.chotamnaulitce.model.DataTransferObject.WeatherDataTransferObject
-import com.example.chotamnaulitce.utils.getLines
+import com.example.chotamnaulitce.utils.WeatherLoader
 import com.example.chotamnaulitce.view.weatherlist.WeatherFrameFragment
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputEditText
-import com.google.gson.Gson
-import java.io.BufferedReader
-import java.io.InputStreamReader
-import java.net.URL
-import java.util.stream.Collectors
-import javax.net.ssl.HttpsURLConnection
 
 class DetailsFragment : Fragment() {
     companion object {
@@ -61,41 +52,31 @@ class DetailsFragment : Fragment() {
         val weather = arguments?.let { it.getParcelable<Weather>(BUNDLE_WEATHER_EXTRA) }
 
         weather?.let {
-            val uri =
-                URL("https://api.weather.yandex.ru/v2/informers?lat=${it.city.latitude}&lon=${it.city.longitude}")
-            var weatherConnection: HttpsURLConnection? = null
-
-            weatherConnection = uri.openConnection() as HttpsURLConnection
-            weatherConnection.readTimeout = 5000
-            weatherConnection.addRequestProperty("X-Yandex-API-Key", WEATHER_API_KEY)
-            val handler = Handler(Looper.myLooper()!!)
-            Thread {
-                val reader = BufferedReader(InputStreamReader(weatherConnection.inputStream))
-
-                val weatherDataTransferObject =
-                    Gson().fromJson(getLines(reader), WeatherDataTransferObject::class.java)
-
+            WeatherLoader.weatherRequest(it){
                 requireActivity().runOnUiThread {
-                    renderData(it.apply {
-                        temperatureActual = weatherDataTransferObject.fact.temp
-                        temperatureFeels = weatherDataTransferObject.fact.feelsLike
-                        humidity = weatherDataTransferObject.fact.humidity
-                        condition = weatherDataTransferObject.fact.condition
-                        windSpeed = weatherDataTransferObject.fact.windSpeed
-                        windDirection = weatherDataTransferObject.fact.windDir
+                    renderData(weather.apply {
+                        temperatureActual = it.fact.temp
+                        temperatureFeels = it.fact.feelsLike
+                        humidity = it.fact.humidity
+                        condition = it.fact.condition
+                        windSpeed = it.fact.windSpeed
+                        windDirection = it.fact.windDir
                     })
                 }
-            }.start()
+            }
+
+
         }
 
 
 
 
         if (weather != null) {
-            renderData(weather as Weather)
+            renderData(weather)
         }
     }
 
+    @SuppressLint("SetTextI18n")
     private fun renderData(weather: Weather) {
         with(binding) {
             cityName.text = weather.city.name
@@ -165,7 +146,7 @@ class DetailsFragment : Fragment() {
             "showers" -> {return "ливень"}
             "wet-snow" -> {return "дождь со снегом"}
             "light-snow" -> {return "небольшой снег"}
-            "snow" -> {return "cнег"}
+            "snow" -> {return "снег"}
             "snow-showers" -> {return "снегопад"}
             "hail" -> {return " небольшой снег"}
             "thunderstorm" -> {return "гроза"}
@@ -176,17 +157,35 @@ class DetailsFragment : Fragment() {
     }
 
     private fun windDirectionToRus(string:String):String{
-        when (string){
-            "n" -> {return "север"}
-            "ne" -> {return "северо-восток"}
-            "e" -> {return "восток"}
-            "se" -> {return "юго-восток"}
-            "s" -> {return "юг"}
-            "sw" -> {return "юго-запад"}
-            "w" -> {return "запад"}
-            "nw" -> {return "северо-запад"}
-            "c" -> {return "штиль"}
-            else -> return "неизвестно"
+        return when (string){
+            "n" -> {
+                "север"
+            }
+            "ne" -> {
+                "северо-восток"
+            }
+            "e" -> {
+                "восток"
+            }
+            "se" -> {
+                "юго-восток"
+            }
+            "s" -> {
+                "юг"
+            }
+            "sw" -> {
+                "юго-запад"
+            }
+            "w" -> {
+                "запад"
+            }
+            "nw" -> {
+                "северо-запад"
+            }
+            "c" -> {
+                "штиль"
+            }
+            else -> "неизвестно"
         }
     }
 }
