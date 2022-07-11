@@ -33,7 +33,6 @@ class WeatherListAdapter(private val dataList: List<Weather>, private val callba
                     callback.onItemClick(weather)
                 }
             }
-
         }
     }
 }

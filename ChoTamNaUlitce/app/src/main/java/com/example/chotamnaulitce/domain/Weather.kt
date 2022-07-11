@@ -1,17 +1,18 @@
 package com.example.chotamnaulitce.domain
 
 import android.os.Parcelable
+import com.example.chotamnaulitce.BuildConfig
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class Weather(
     val city: City = getDefaultCity(),
-    val temperatureActual: Int = 0,
-    val temperatureFeels: Int = 0,
-    val humidity: Int = 0,
-    val condition: String = "",
-    val windSpeed: Double = 0.0,
-    val windDirection: String = ""
+    var temperatureActual: Int = 0,
+    var temperatureFeels: Int = 0,
+    var humidity: Int = 0,
+    var condition: String = "",
+    var windSpeed: Double = 0.0,
+    var windDirection: String = ""
 ) : Parcelable
 
 @Parcelize
