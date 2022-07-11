@@ -82,7 +82,8 @@ class WeatherFrameFragment : Fragment(), IOnItemClick {
     override fun onItemClick(weather: Weather) {
         requireActivity()
             .supportFragmentManager
-            .beginTransaction().hide(this)
+            .beginTransaction()
+            .hide(this)
             .add(R.id.container, DetailsFragment.newInstance(weather))
             .addToBackStack(null)
             .commit()
