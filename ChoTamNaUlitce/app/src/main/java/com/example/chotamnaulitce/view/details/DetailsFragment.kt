@@ -52,7 +52,7 @@ class DetailsFragment : Fragment() {
         val weather = arguments?.let { it.getParcelable<Weather>(BUNDLE_WEATHER_EXTRA) }
 
         weather?.let {
-            WeatherLoader.weatherRequest(it){
+            WeatherLoader.weatherRequest(it) {
                 requireActivity().runOnUiThread {
                     renderData(weather.apply {
                         temperatureActual = it.fact.temp
@@ -64,12 +64,7 @@ class DetailsFragment : Fragment() {
                     })
                 }
             }
-
-
         }
-
-
-
 
         if (weather != null) {
             renderData(weather)
@@ -131,33 +126,71 @@ class DetailsFragment : Fragment() {
         return value.setText(string)
     }
 
-    private fun conditionToRus(string:String):String{
-        when (string){
-            "clear" -> {return "ясно"}
-            "partly-cloudy" -> {return "малооблачно"}
-            "cloudy" -> {return "малооблачно с прояснениями"}
-            "overcast" -> {return "пасмурно"}
-            "drizzle" -> {return "морось"}
-            "light-rain" -> {return "небольшой дождь"}
-            "rain" -> {return "дождь"}
-            "moderate-rain" -> {return "умеренно сильный дождь"}
-            "heavy-rain" -> {return "сильный дождь"}
-            "continuous-heavy-rain" -> {return " длительный сильный дождь"}
-            "showers" -> {return "ливень"}
-            "wet-snow" -> {return "дождь со снегом"}
-            "light-snow" -> {return "небольшой снег"}
-            "snow" -> {return "снег"}
-            "snow-showers" -> {return "снегопад"}
-            "hail" -> {return " небольшой снег"}
-            "thunderstorm" -> {return "гроза"}
-            "thunderstorm-with-rain" -> {return "дождь с грозой"}
-            "thunderstorm-with-hail" -> {return "гроза с градом"}
+    private fun conditionToRus(string: String): String {
+        when (string) {
+            "clear" -> {
+                return "ясно"
+            }
+            "partly-cloudy" -> {
+                return "малооблачно"
+            }
+            "cloudy" -> {
+                return "малооблачно с прояснениями"
+            }
+            "overcast" -> {
+                return "пасмурно"
+            }
+            "drizzle" -> {
+                return "морось"
+            }
+            "light-rain" -> {
+                return "небольшой дождь"
+            }
+            "rain" -> {
+                return "дождь"
+            }
+            "moderate-rain" -> {
+                return "умеренно сильный дождь"
+            }
+            "heavy-rain" -> {
+                return "сильный дождь"
+            }
+            "continuous-heavy-rain" -> {
+                return " длительный сильный дождь"
+            }
+            "showers" -> {
+                return "ливень"
+            }
+            "wet-snow" -> {
+                return "дождь со снегом"
+            }
+            "light-snow" -> {
+                return "небольшой снег"
+            }
+            "snow" -> {
+                return "снег"
+            }
+            "snow-showers" -> {
+                return "снегопад"
+            }
+            "hail" -> {
+                return " небольшой снег"
+            }
+            "thunderstorm" -> {
+                return "гроза"
+            }
+            "thunderstorm-with-rain" -> {
+                return "дождь с грозой"
+            }
+            "thunderstorm-with-hail" -> {
+                return "гроза с градом"
+            }
             else -> return "неизвестно"
         }
     }
 
-    private fun windDirectionToRus(string:String):String{
-        return when (string){
+    private fun windDirectionToRus(string: String): String {
+        return when (string) {
             "n" -> {
                 "север"
             }
