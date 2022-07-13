@@ -1,8 +1,11 @@
 package com.example.chotamnaulitce.model.DataTransferObject
 
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 data class Fact(
     @SerializedName("condition")
     val condition: String,
@@ -16,4 +19,4 @@ data class Fact(
     val windDir: String,
     @SerializedName("wind_speed")
     val windSpeed: Double
-)
+) : Parcelable
