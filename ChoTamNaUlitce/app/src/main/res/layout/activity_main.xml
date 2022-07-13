@@ -23,6 +23,7 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@color/black"
+        app:navigationIcon="@android:drawable/presence_offline"
         app:subtitleTextColor="@color/white"
         app:title="@string/toolbar_title"
         app:titleTextColor="@color/white"

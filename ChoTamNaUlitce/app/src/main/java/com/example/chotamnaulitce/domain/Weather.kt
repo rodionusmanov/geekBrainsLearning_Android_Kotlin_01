@@ -1,7 +1,6 @@
 package com.example.chotamnaulitce.domain
 
 import android.os.Parcelable
-import com.example.chotamnaulitce.BuildConfig
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize

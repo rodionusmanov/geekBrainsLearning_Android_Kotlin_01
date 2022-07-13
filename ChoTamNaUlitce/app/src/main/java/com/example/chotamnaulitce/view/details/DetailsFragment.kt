@@ -1,14 +1,24 @@
 package com.example.chotamnaulitce.view.details
 
 import android.annotation.SuppressLint
+import android.content.BroadcastReceiver
+import android.content.Context
+import android.content.Intent
+import android.content.IntentFilter
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.example.chotamnaulitce.R
 import com.example.chotamnaulitce.databinding.DetailsWeatherFragmentBinding
 import com.example.chotamnaulitce.domain.Weather
+import com.example.chotamnaulitce.model.DataTransferObject.WeatherDataTransferObject
+import com.example.chotamnaulitce.utils.BUNDLE_LAT_KEY
+import com.example.chotamnaulitce.utils.BUNDLE_WEATHER_DTO_KEY
+import com.example.chotamnaulitce.utils.WAVE_KEY
 import com.example.chotamnaulitce.utils.WeatherLoader
 import com.example.chotamnaulitce.view.weatherlist.WeatherFrameFragment
 import com.google.android.material.snackbar.Snackbar
@@ -31,10 +41,31 @@ class DetailsFragment : Fragment() {
         get() {
             return _binding!!
         }
+    lateinit var weatherLocal: Weather
+    private val receiver = object : BroadcastReceiver() {
+        override fun onReceive(context: Context?, intent: Intent?) {
+            intent?.let {
+                it.getParcelableExtra<WeatherDataTransferObject>(BUNDLE_WEATHER_DTO_KEY)
+                    ?.let {
+                        requireActivity().runOnUiThread {
+                            renderData(weatherLocal.apply {
+                                temperatureActual = it.fact.temp
+                                temperatureFeels = it.fact.feelsLike
+                                humidity = it.fact.humidity
+                                condition = it.fact.condition
+                                windSpeed = it.fact.windSpeed
+                                windDirection = it.fact.windDir
+                            })
+                        }
+                    }
+            }
+        }
+    }
 
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
+        LocalBroadcastManager.getInstance(requireContext()).unregisterReceiver(receiver)
     }
 
     override fun onCreateView(
@@ -51,25 +82,21 @@ class DetailsFragment : Fragment() {
 
         val weather = arguments?.let { it.getParcelable<Weather>(BUNDLE_WEATHER_EXTRA) }
 
-        weather?.let {
-            WeatherLoader.weatherRequest(it){
-                requireActivity().runOnUiThread {
-                    renderData(weather.apply {
-                        temperatureActual = it.fact.temp
-                        temperatureFeels = it.fact.feelsLike
-                        humidity = it.fact.humidity
-                        condition = it.fact.condition
-                        windSpeed = it.fact.windSpeed
-                        windDirection = it.fact.windDir
-                    })
-                }
-            }
+        weather?.let {weatherLocal ->
+            this.weatherLocal = weatherLocal
+            LocalBroadcastManager.getInstance(requireContext()).registerReceiver(
+                receiver, IntentFilter(WAVE_KEY)
+            )
 
-
+            requireActivity().startService(
+                Intent(
+                    requireContext(),
+                    DetailsServiceIntent::class.java
+                ).apply {
+                    putExtra(BUNDLE_LAT_KEY, weatherLocal.city.latitude)
+                    putExtra(BUNDLE_LAT_KEY, weatherLocal.city.longitude)
+                })
         }
-
-
-
 
         if (weather != null) {
             renderData(weather)
@@ -91,7 +118,7 @@ class DetailsFragment : Fragment() {
                 windDirectionValue,
                 windDirectionToRus(weather.windDirection)
             )
-            requireView().withAction(
+            view?.withAction(
                 weather.city.name,
                 getString(R.string.return_to_cities_list)
             ) {
@@ -131,33 +158,71 @@ class DetailsFragment : Fragment() {
         return value.setText(string)
     }
 
-    private fun conditionToRus(string:String):String{
-        when (string){
-            "clear" -> {return "ясно"}
-            "partly-cloudy" -> {return "малооблачно"}
-            "cloudy" -> {return "малооблачно с прояснениями"}
-            "overcast" -> {return "пасмурно"}
-            "drizzle" -> {return "морось"}
-            "light-rain" -> {return "небольшой дождь"}
-            "rain" -> {return "дождь"}
-            "moderate-rain" -> {return "умеренно сильный дождь"}
-            "heavy-rain" -> {return "сильный дождь"}
-            "continuous-heavy-rain" -> {return " длительный сильный дождь"}
-            "showers" -> {return "ливень"}
-            "wet-snow" -> {return "дождь со снегом"}
-            "light-snow" -> {return "небольшой снег"}
-            "snow" -> {return "снег"}
-            "snow-showers" -> {return "снегопад"}
-            "hail" -> {return " небольшой снег"}
-            "thunderstorm" -> {return "гроза"}
-            "thunderstorm-with-rain" -> {return "дождь с грозой"}
-            "thunderstorm-with-hail" -> {return "гроза с градом"}
+    private fun conditionToRus(string: String): String {
+        when (string) {
+            "clear" -> {
+                return "ясно"
+            }
+            "partly-cloudy" -> {
+                return "малооблачно"
+            }
+            "cloudy" -> {
+                return "малооблачно с прояснениями"
+            }
+            "overcast" -> {
+                return "пасмурно"
+            }
+            "drizzle" -> {
+                return "морось"
+            }
+            "light-rain" -> {
+                return "небольшой дождь"
+            }
+            "rain" -> {
+                return "дождь"
+            }
+            "moderate-rain" -> {
+                return "умеренно сильный дождь"
+            }
+            "heavy-rain" -> {
+                return "сильный дождь"
+            }
+            "continuous-heavy-rain" -> {
+                return " длительный сильный дождь"
+            }
+            "showers" -> {
+                return "ливень"
+            }
+            "wet-snow" -> {
+                return "дождь со снегом"
+            }
+            "light-snow" -> {
+                return "небольшой снег"
+            }
+            "snow" -> {
+                return "снег"
+            }
+            "snow-showers" -> {
+                return "снегопад"
+            }
+            "hail" -> {
+                return " небольшой снег"
+            }
+            "thunderstorm" -> {
+                return "гроза"
+            }
+            "thunderstorm-with-rain" -> {
+                return "дождь с грозой"
+            }
+            "thunderstorm-with-hail" -> {
+                return "гроза с градом"
+            }
             else -> return "неизвестно"
         }
     }
 
-    private fun windDirectionToRus(string:String):String{
-        return when (string){
+    private fun windDirectionToRus(string: String): String {
+        return when (string) {
             "n" -> {
                 "север"
             }
