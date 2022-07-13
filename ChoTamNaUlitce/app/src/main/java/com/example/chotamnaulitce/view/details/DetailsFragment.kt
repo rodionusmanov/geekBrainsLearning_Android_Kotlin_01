@@ -41,10 +41,31 @@ class DetailsFragment : Fragment() {
         get() {
             return _binding!!
         }
+    lateinit var weatherLocal: Weather
+    private val receiver = object : BroadcastReceiver() {
+        override fun onReceive(context: Context?, intent: Intent?) {
+            intent?.let {
+                it.getParcelableExtra<WeatherDataTransferObject>(BUNDLE_WEATHER_DTO_KEY)
+                    ?.let {
+                        requireActivity().runOnUiThread {
+                            renderData(weatherLocal.apply {
+                                temperatureActual = it.fact.temp
+                                temperatureFeels = it.fact.feelsLike
+                                humidity = it.fact.humidity
+                                condition = it.fact.condition
+                                windSpeed = it.fact.windSpeed
+                                windDirection = it.fact.windDir
+                            })
+                        }
+                    }
+            }
+        }
+    }
 
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
+        LocalBroadcastManager.getInstance(requireContext()).unregisterReceiver(receiver)
     }
 
     override fun onCreateView(
@@ -61,27 +82,10 @@ class DetailsFragment : Fragment() {
 
         val weather = arguments?.let { it.getParcelable<Weather>(BUNDLE_WEATHER_EXTRA) }
 
-        weather?.let {
+        weather?.let {weatherLocal ->
+            this.weatherLocal = weatherLocal
             LocalBroadcastManager.getInstance(requireContext()).registerReceiver(
-                object : BroadcastReceiver() {
-                    override fun onReceive(context: Context?, intent: Intent?) {
-                        intent?.let {
-                            it.getParcelableExtra<WeatherDataTransferObject>(BUNDLE_WEATHER_DTO_KEY)
-                                ?.let {
-                                    requireActivity().runOnUiThread {
-                                        renderData(weather.apply {
-                                            temperatureActual = it.fact.temp
-                                            temperatureFeels = it.fact.feelsLike
-                                            humidity = it.fact.humidity
-                                            condition = it.fact.condition
-                                            windSpeed = it.fact.windSpeed
-                                            windDirection = it.fact.windDir
-                                        })
-                                    }
-                                }
-                        }
-                    }
-                }, IntentFilter(WAVE_KEY)
+                receiver, IntentFilter(WAVE_KEY)
             )
 
             requireActivity().startService(
@@ -89,8 +93,8 @@ class DetailsFragment : Fragment() {
                     requireContext(),
                     DetailsServiceIntent::class.java
                 ).apply {
-                    putExtra(BUNDLE_LAT_KEY, weather.city.latitude)
-                    putExtra(BUNDLE_LAT_KEY, weather.city.longitude)
+                    putExtra(BUNDLE_LAT_KEY, weatherLocal.city.latitude)
+                    putExtra(BUNDLE_LAT_KEY, weatherLocal.city.longitude)
                 })
         }
 
@@ -114,7 +118,7 @@ class DetailsFragment : Fragment() {
                 windDirectionValue,
                 windDirectionToRus(weather.windDirection)
             )
-            requireView().withAction(
+            view?.withAction(
                 weather.city.name,
                 getString(R.string.return_to_cities_list)
             ) {
