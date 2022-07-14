@@ -6,7 +6,6 @@ import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,7 +18,6 @@ import com.example.chotamnaulitce.model.DataTransferObject.WeatherDataTransferOb
 import com.example.chotamnaulitce.utils.BUNDLE_LAT_KEY
 import com.example.chotamnaulitce.utils.BUNDLE_WEATHER_DTO_KEY
 import com.example.chotamnaulitce.utils.WAVE_KEY
-import com.example.chotamnaulitce.utils.WeatherLoader
 import com.example.chotamnaulitce.view.weatherlist.WeatherFrameFragment
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputEditText

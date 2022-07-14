@@ -19,14 +19,11 @@ class DetailsServiceIntent : IntentService("") {
 
     override fun onHandleIntent(intent: Intent?) {
         intent?.let {
-            val uri =
-                URL(
-                    "https://api.weather.yandex.ru/v2/informers?lat=${
-                        intent.getDoubleExtra(
-                            BUNDLE_LAT_KEY, 0.0
-                        )
-                    }&lon=${intent.getDoubleExtra(BUNDLE_LON_KEY, 0.0)}"
-                )
+            val uri = URL(
+                "https://api.weather.yandex.ru/v2/informers?" +
+                        "lat=${intent.getDoubleExtra(BUNDLE_LAT_KEY, 0.0)}" +
+                        "&lon=${intent.getDoubleExtra(BUNDLE_LON_KEY, 0.0)}"
+            )
             val weatherConnection: HttpsURLConnection?
             weatherConnection = uri.openConnection() as HttpsURLConnection
             Thread {
