@@ -4,13 +4,12 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
-import android.content.res.Resources
 import android.net.ConnectivityManager
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.chotamnaulitce.databinding.ActivityMainBinding
-import com.example.chotamnaulitce.view.weatherlist.WeatherFrameFragment
+import com.example.chotamnaulitce.view.citieslist.CitiesListFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -28,7 +27,7 @@ class MainActivity : AppCompatActivity() {
             supportFragmentManager
                 .beginTransaction()
                 .replace(
-                    R.id.container, WeatherFrameFragment
+                    R.id.container, CitiesListFragment
                         .newInstance()
                 ).commit()
         }

@@ -18,7 +18,7 @@ import com.example.chotamnaulitce.model.DataTransferObject.WeatherDataTransferOb
 import com.example.chotamnaulitce.utils.BUNDLE_LAT_KEY
 import com.example.chotamnaulitce.utils.BUNDLE_WEATHER_DTO_KEY
 import com.example.chotamnaulitce.utils.WAVE_KEY
-import com.example.chotamnaulitce.view.weatherlist.WeatherFrameFragment
+import com.example.chotamnaulitce.view.citieslist.CitiesListFragment
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputEditText
 
@@ -123,7 +123,7 @@ class DetailsFragment : Fragment() {
                 requireActivity()
                     .supportFragmentManager
                     .beginTransaction()
-                    .replace(R.id.container, WeatherFrameFragment.newInstance())
+                    .replace(R.id.container, CitiesListFragment.newInstance())
                     .commit()
             }
         }
