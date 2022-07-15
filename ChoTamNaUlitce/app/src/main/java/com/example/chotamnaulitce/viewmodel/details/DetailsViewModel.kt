@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.chotamnaulitce.model.*
 import com.example.chotamnaulitce.model.DataTransferObject.WeatherDataTransferObject
+import com.example.chotamnaulitce.model.retrofit.RepositoryDetailsRetrofitImpl
 import java.io.IOException
 
 class DetailsViewModel(
@@ -24,6 +25,9 @@ class DetailsViewModel(
                 RepositoryDetailsOkhttpImpl()
             }
             2 -> {
+                RepositoryDetailsRetrofitImpl()
+            }
+            3 -> {
                 RepositoryDetailsLocalImpl()
             }
             else -> {RepositoryDetailsLocalImpl()}
