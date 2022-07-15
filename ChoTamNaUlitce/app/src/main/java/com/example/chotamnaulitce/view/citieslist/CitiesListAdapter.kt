@@ -1,4 +1,4 @@
-package com.example.chotamnaulitce.view.weatherlist
+package com.example.chotamnaulitce.view.citieslist
 
 import android.view.LayoutInflater
 import android.view.View
@@ -8,8 +8,8 @@ import com.example.chotamnaulitce.databinding.WeatherFragmentFrameRecyclerItemBi
 import com.example.chotamnaulitce.domain.Weather
 import com.example.chotamnaulitce.view.details.IOnItemClick
 
-class WeatherListAdapter(private val dataList: List<Weather>, private val callback: IOnItemClick) :
-    RecyclerView.Adapter<WeatherListAdapter.WeatherViewHolder>() {
+class CitiesListAdapter(private val dataList: List<Weather>, private val callback: IOnItemClick) :
+    RecyclerView.Adapter<CitiesListAdapter.WeatherViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WeatherViewHolder {
         val binding =

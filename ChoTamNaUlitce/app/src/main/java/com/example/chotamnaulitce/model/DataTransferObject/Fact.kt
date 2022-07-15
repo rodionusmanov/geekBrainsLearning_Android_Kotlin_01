@@ -18,5 +18,6 @@ data class Fact(
     @SerializedName("wind_dir")
     val windDir: String,
     @SerializedName("wind_speed")
-    val windSpeed: Double
+    val windSpeed: Double,
+    val icon: String
 ) : Parcelable
