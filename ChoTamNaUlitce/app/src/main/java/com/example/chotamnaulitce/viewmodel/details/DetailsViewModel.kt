@@ -19,12 +19,15 @@ class DetailsViewModel(
     }
 
     private fun chooseRepository() {
-        repository = RepositoryDetailsOkhttpImpl()
-        /*repository = if (isConnected()) {
-            RepositoryDetailsOkhttpImpl()
-        } else {
-            RepositoryDetailsRetrofitImpl()
-        }*/
+        repository = when (2) {
+            1 -> {
+                RepositoryDetailsOkhttpImpl()
+            }
+            2 -> {
+                RepositoryDetailsLocalImpl()
+            }
+            else -> {RepositoryDetailsLocalImpl()}
+        }
     }
 
     fun getWeather(latitude: Double, longitude: Double) {
@@ -33,7 +36,7 @@ class DetailsViewModel(
         repository.getWeather(latitude, longitude, callback)
     }
 
-    val callback = object :IUniversalCallback{
+    private val callback = object : IUniversalCallback {
         override fun onResponse(weatherDataTransferObject: WeatherDataTransferObject) {
             liveData.postValue(DetailsFragmentAppState.Success(weatherDataTransferObject))
         }
@@ -41,9 +44,5 @@ class DetailsViewModel(
         override fun onFailure(e: IOException) {
             liveData.postValue(DetailsFragmentAppState.Error(e))
         }
-    }
-
-    private fun isConnected(): Boolean {
-        return false
     }
 }
