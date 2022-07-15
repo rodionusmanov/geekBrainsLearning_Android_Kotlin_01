@@ -35,7 +35,7 @@ class RepositoryDetailsLocalImpl : IRepositoryDetails {
     }
 
     private fun convertModelToDTO(weather: Weather): WeatherDataTransferObject {
-        val fact = Fact("неизвестно", weather.temperatureFeels, 0,weather.temperatureActual, "неизвестно", 0.0)
+        val fact = Fact("неизвестно", weather.temperatureFeels, 0,weather.temperatureActual, "неизвестно", 0.0, "")
         val info = Info(weather.city.latitude, weather.city.longitude, "")
         return WeatherDataTransferObject(fact, info)
     }

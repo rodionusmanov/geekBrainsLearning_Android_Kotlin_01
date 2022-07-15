@@ -20,7 +20,7 @@ class DetailsViewModel(
     }
 
     private fun chooseRepository() {
-        repository = when (2) {
+        repository = when (1) {
             1 -> {
                 RepositoryDetailsOkhttpImpl()
             }

@@ -11,6 +11,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
+import coil.ImageLoader
+import coil.decode.SvgDecoder
+import coil.load
 import com.example.chotamnaulitce.R
 import com.example.chotamnaulitce.databinding.DetailsWeatherFragmentBinding
 import com.example.chotamnaulitce.domain.Weather
@@ -32,13 +35,15 @@ class DetailsFragment : Fragment() {
         }
     }
 
+
+
     private var _binding: DetailsWeatherFragmentBinding? = null
     private val binding: DetailsWeatherFragmentBinding
         get() {
             return _binding!!
         }
 
-    private val viewModel by lazy{
+    private val viewModel by lazy {
         ViewModelProvider(this).get(DetailsViewModel::class.java)
     }
 
@@ -68,7 +73,7 @@ class DetailsFragment : Fragment() {
 
         val weather = arguments?.let { it.getParcelable<Weather>(BUNDLE_WEATHER_EXTRA) }
 
-        weather?.let {weatherLocal ->
+        weather?.let { weatherLocal ->
             this.weatherLocal = weatherLocal
             viewModel.getWeather(weatherLocal.city.latitude, weatherLocal.city.longitude)
             viewModel.getLiveData().observe(viewLifecycleOwner) {
@@ -80,7 +85,7 @@ class DetailsFragment : Fragment() {
     @SuppressLint("SetTextI18n")
     private fun renderData(detailsFragmentAppState: DetailsFragmentAppState) {
 
-        when(detailsFragmentAppState){
+        when (detailsFragmentAppState) {
             is DetailsFragmentAppState.Error -> {}
             DetailsFragmentAppState.Loading -> {}
             is DetailsFragmentAppState.Success -> {
@@ -93,7 +98,10 @@ class DetailsFragment : Fragment() {
                     humidityValue.setText("${detailsFragmentAppState.weatherData.fact.humidity} %")
                     conditionValue.setText(conditionToRus(detailsFragmentAppState.weatherData.fact.condition))
                     windSpeedValue.setText("${detailsFragmentAppState.weatherData.fact.windSpeed} м/c")
-                    toTextField(windDirectionToRus(detailsFragmentAppState.weatherData.fact.windDir), ::fieldToString)(
+                    toTextField(
+                        windDirectionToRus(detailsFragmentAppState.weatherData.fact.windDir),
+                        ::fieldToString
+                    )(
                         windDirectionValue,
                         windDirectionToRus(detailsFragmentAppState.weatherData.fact.windDir)
                     )
@@ -107,6 +115,13 @@ class DetailsFragment : Fragment() {
                             .replace(R.id.container, CitiesListFragment.newInstance())
                             .commit()
                     }
+
+                    val imageLoader = ImageLoader.Builder(requireContext())
+                    .components {
+                        add(SvgDecoder.Factory())
+                    }
+                    .build()
+                    conditionImageView.load("https://yastatic.net/weather/i/icons/funky/dark/${detailsFragmentAppState.weatherData.fact.icon}.svg", imageLoader)
                 }
             }
         }
