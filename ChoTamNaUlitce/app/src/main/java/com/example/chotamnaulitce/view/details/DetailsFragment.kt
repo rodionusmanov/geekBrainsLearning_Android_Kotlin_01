@@ -35,8 +35,6 @@ class DetailsFragment : Fragment() {
         }
     }
 
-
-
     private var _binding: DetailsWeatherFragmentBinding? = null
     private val binding: DetailsWeatherFragmentBinding
         get() {

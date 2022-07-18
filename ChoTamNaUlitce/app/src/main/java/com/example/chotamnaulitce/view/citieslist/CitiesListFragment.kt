@@ -1,5 +1,6 @@
 package com.example.chotamnaulitce.view.citieslist
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,9 +9,11 @@ import android.widget.FrameLayout
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.example.chotamnaulitce.ChoTamNaUlitceApp
 import com.example.chotamnaulitce.R
 import com.example.chotamnaulitce.databinding.WeatherFragmentFrameBinding
 import com.example.chotamnaulitce.domain.Weather
+import com.example.chotamnaulitce.utils.LOCATION_CITIES_LIST
 import com.example.chotamnaulitce.view.details.DetailsFragment
 import com.example.chotamnaulitce.view.details.IOnItemClick
 import com.example.chotamnaulitce.viewmodel.citieslist.CitiesListViewModel
@@ -20,8 +23,9 @@ class CitiesListFragment : Fragment(), IOnItemClick {
     companion object {
         fun newInstance() = CitiesListFragment()
     }
-
-    private var locationSwitchForFAB = 1
+    val weatherSharedPreferences = ChoTamNaUlitceApp.getChoTamNaUlitce()
+        .getSharedPreferences("Prefs", Context.MODE_PRIVATE)
+    private var locationSwitchForFAB = weatherSharedPreferences.getInt(LOCATION_CITIES_LIST, 1)
 
     private var _binding: WeatherFragmentFrameBinding? = null
     private val binding: WeatherFragmentFrameBinding
@@ -55,7 +59,10 @@ class CitiesListFragment : Fragment(), IOnItemClick {
             showCitiesWithCorrectLocation()
         }
         showCitiesWithCorrectLocation()
-
+        weatherSharedPreferences.edit().apply {
+            putInt(LOCATION_CITIES_LIST, locationSwitchForFAB)
+            apply()
+        }
     }
 
     private fun renderData(appState: CitiesListFragmentAppState) {
