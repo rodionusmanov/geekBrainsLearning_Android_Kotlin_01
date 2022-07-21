@@ -13,4 +13,8 @@
     <string name="wind_direction">Дует на:</string>
     <string name="location_change">location change</string>
     <string name="return_to_cities_list">Вернуться к списку</string>
+    <string name="repo_okhttp">OkHTTP репозиторий</string>
+    <string name="repo_retrofit">Retrofit репозиторий</string>
+    <string name="repo_local">Локальный репозиторий</string>
+    <string name="repo_room">Room репозиторий</string>
 </resources>

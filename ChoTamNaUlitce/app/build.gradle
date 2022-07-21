@@ -59,6 +59,13 @@ dependencies {
     //coil
     implementation 'io.coil-kt:coil:2.1.0'
     implementation 'io.coil-kt:coil-svg:2.1.0'
+    implementation 'androidx.room:room-common:2.3.0'
+    implementation 'androidx.room:room-ktx:2.3.0'
+
+    //room
+    apply plugin: 'kotlin-kapt'
+    implementation 'androidx.room:room-runtime:2.4.2'
+    kapt 'androidx.room:room-compiler:2.4.2'
 
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.4.2'

@@ -9,6 +9,7 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.chotamnaulitce.databinding.ActivityMainBinding
+import com.example.chotamnaulitce.utils.isConnected
 import com.example.chotamnaulitce.view.citieslist.CitiesListFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -31,6 +32,7 @@ class MainActivity : AppCompatActivity() {
                         .newInstance()
                 ).commit()
         }
+
     }
 
     private var networkStateReceiver: BroadcastReceiver = object : BroadcastReceiver() {
@@ -46,13 +48,13 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun onConnectionLost() {
-        Toast.makeText(this, "Connection lost", Toast.LENGTH_LONG).show()
         toolbar.setNavigationIcon(android.R.drawable.presence_offline)
+        isConnected = false
     }
 
     fun onConnectionFound() {
-        Toast.makeText(this, "Connection found", Toast.LENGTH_LONG).show()
         toolbar.setNavigationIcon(android.R.drawable.presence_online)
+        isConnected = true
     }
 
     override fun onDestroy() {

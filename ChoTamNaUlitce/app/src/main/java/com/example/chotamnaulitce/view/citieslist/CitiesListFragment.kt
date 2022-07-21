@@ -1,5 +1,6 @@
 package com.example.chotamnaulitce.view.citieslist
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,10 +8,17 @@ import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModelProvider
+import com.example.chotamnaulitce.ChoTamNaUlitceApp
 import com.example.chotamnaulitce.R
 import com.example.chotamnaulitce.databinding.WeatherFragmentFrameBinding
 import com.example.chotamnaulitce.domain.Weather
+import com.example.chotamnaulitce.utils.LOCATION_CITIES_LIST
+import com.example.chotamnaulitce.utils.REPOSITORY_CHOSEN
+import com.example.chotamnaulitce.utils.chosenRepository
+import com.example.chotamnaulitce.utils.isConnected
+import com.example.chotamnaulitce.view.ChooseRepositoryFragment
 import com.example.chotamnaulitce.view.details.DetailsFragment
 import com.example.chotamnaulitce.view.details.IOnItemClick
 import com.example.chotamnaulitce.viewmodel.citieslist.CitiesListViewModel
@@ -20,8 +28,9 @@ class CitiesListFragment : Fragment(), IOnItemClick {
     companion object {
         fun newInstance() = CitiesListFragment()
     }
-
-    private var locationSwitchForFAB = 1
+    val weatherSharedPreferences = ChoTamNaUlitceApp.getChoTamNaUlitce()
+        .getSharedPreferences("Prefs", Context.MODE_PRIVATE)
+    private var locationSwitchForFAB = weatherSharedPreferences.getInt(LOCATION_CITIES_LIST, 1)
 
     private var _binding: WeatherFragmentFrameBinding? = null
     private val binding: WeatherFragmentFrameBinding
@@ -46,16 +55,32 @@ class CitiesListFragment : Fragment(), IOnItemClick {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        chosenRepository = weatherSharedPreferences.getInt(REPOSITORY_CHOSEN, 4)
+
         viewModel = ViewModelProvider(this).get(CitiesListViewModel::class.java)
         viewModel?.let {
             it.getLiveData().observe(viewLifecycleOwner) { t -> renderData(t) }
         }
 
         binding.chooseLocationFloatingActionButton.setOnClickListener {
+            locationSwitchForFAB = (locationSwitchForFAB + 1) % 2
+            weatherSharedPreferences.edit().apply {
+                putInt(LOCATION_CITIES_LIST, locationSwitchForFAB)
+                apply()
+            }
             showCitiesWithCorrectLocation()
         }
         showCitiesWithCorrectLocation()
+        weatherSharedPreferences.edit().apply {
+            putInt(LOCATION_CITIES_LIST, locationSwitchForFAB)
+            apply()
+        }
 
+        binding.chooseRepositoryFloatingActionButton.setOnClickListener{
+            val dialog = ChooseRepositoryFragment()
+            dialog.show(requireActivity().supportFragmentManager,"repo")
+        }
     }
 
     private fun renderData(appState: CitiesListFragmentAppState) {
@@ -98,6 +123,5 @@ class CitiesListFragment : Fragment(), IOnItemClick {
             viewModel.getWeatherListForWorld()
             binding.chooseLocationFloatingActionButton.setImageResource(R.drawable.earth)
         }
-        locationSwitchForFAB = (locationSwitchForFAB + 1) % 2
     }
 }

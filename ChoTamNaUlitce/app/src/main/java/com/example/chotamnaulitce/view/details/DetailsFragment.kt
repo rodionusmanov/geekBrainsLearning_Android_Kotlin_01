@@ -35,8 +35,6 @@ class DetailsFragment : Fragment() {
         }
     }
 
-
-
     private var _binding: DetailsWeatherFragmentBinding? = null
     private val binding: DetailsWeatherFragmentBinding
         get() {
@@ -75,7 +73,7 @@ class DetailsFragment : Fragment() {
 
         weather?.let { weatherLocal ->
             this.weatherLocal = weatherLocal
-            viewModel.getWeather(weatherLocal.city.latitude, weatherLocal.city.longitude)
+            viewModel.getWeather(weatherLocal)
             viewModel.getLiveData().observe(viewLifecycleOwner) {
                 renderData(it)
             }
@@ -90,20 +88,21 @@ class DetailsFragment : Fragment() {
             DetailsFragmentAppState.Loading -> {}
             is DetailsFragmentAppState.Success -> {
                 with(binding) {
-                    cityName.text = weatherLocal.city.name
+                    val weather = detailsFragmentAppState.weatherData
+                    cityName.text = weather.city.name
                     latitudeEntry.setText(weatherLocal.city.latitude.toString())
                     longitudeEntry.setText(weatherLocal.city.longitude.toString())
-                    temperatureActualValue.setText("${detailsFragmentAppState.weatherData.fact.temp} C")
-                    temperatureFeelsValue.setText("${detailsFragmentAppState.weatherData.fact.feelsLike} C")
-                    humidityValue.setText("${detailsFragmentAppState.weatherData.fact.humidity} %")
-                    conditionValue.setText(conditionToRus(detailsFragmentAppState.weatherData.fact.condition))
-                    windSpeedValue.setText("${detailsFragmentAppState.weatherData.fact.windSpeed} м/c")
+                    temperatureActualValue.setText("${detailsFragmentAppState.weatherData.temperatureActual} C")
+                    temperatureFeelsValue.setText("${detailsFragmentAppState.weatherData.temperatureFeels} C")
+                    humidityValue.setText("${detailsFragmentAppState.weatherData.humidity} %")
+                    conditionValue.setText(conditionToRus(detailsFragmentAppState.weatherData.condition))
+                    windSpeedValue.setText("${detailsFragmentAppState.weatherData.windSpeed} м/c")
                     toTextField(
-                        windDirectionToRus(detailsFragmentAppState.weatherData.fact.windDir),
+                        windDirectionToRus(detailsFragmentAppState.weatherData.windDirection),
                         ::fieldToString
                     )(
                         windDirectionValue,
-                        windDirectionToRus(detailsFragmentAppState.weatherData.fact.windDir)
+                        windDirectionToRus(detailsFragmentAppState.weatherData.windDirection)
                     )
                     view?.withAction(
                         weatherLocal.city.name,
@@ -121,7 +120,7 @@ class DetailsFragment : Fragment() {
                         add(SvgDecoder.Factory())
                     }
                     .build()
-                    conditionImageView.load("https://yastatic.net/weather/i/icons/funky/dark/${detailsFragmentAppState.weatherData.fact.icon}.svg", imageLoader)
+                    conditionImageView.load("https://yastatic.net/weather/i/icons/funky/dark/${detailsFragmentAppState.weatherData.icon}.svg", imageLoader)
                 }
             }
         }
