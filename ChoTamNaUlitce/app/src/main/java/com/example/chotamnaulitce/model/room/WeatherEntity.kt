@@ -2,8 +2,6 @@ package com.example.chotamnaulitce.model.room
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.example.chotamnaulitce.domain.City
-import com.example.chotamnaulitce.domain.getDefaultCity
 
 @Entity(tableName = "weather_entity_table")
 class WeatherEntity(

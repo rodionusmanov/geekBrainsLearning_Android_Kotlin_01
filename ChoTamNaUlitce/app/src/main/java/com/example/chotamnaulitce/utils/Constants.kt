@@ -9,3 +9,5 @@ const val BUNDLE_WEATHER_DTO_KEY = "bundle weather"
 const val BUNDLE_LAT_KEY = "bundle LAT"
 const val BUNDLE_LON_KEY = "bundle LON"
 const val LOCATION_CITIES_LIST = "Location"
+
+const val ROOM_DB_NAME_WEATHER = "WeatherDB"
