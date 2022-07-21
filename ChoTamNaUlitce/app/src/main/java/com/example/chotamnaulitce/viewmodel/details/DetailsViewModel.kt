@@ -6,6 +6,7 @@ import com.example.chotamnaulitce.domain.Weather
 import com.example.chotamnaulitce.model.*
 import com.example.chotamnaulitce.model.DataTransferObject.WeatherDataTransferObject
 import com.example.chotamnaulitce.model.retrofit.RepositoryLocationToWeatherRetrofitImpl
+import com.example.chotamnaulitce.utils.isConnected
 import java.io.IOException
 
 class DetailsViewModel(
@@ -13,7 +14,8 @@ class DetailsViewModel(
 ) :
     ViewModel() {
 
-    private lateinit var repository: IRepositoryLocationToWeather
+    private lateinit var repositoryLocationToWeather: IRepositoryLocationToWeather
+    lateinit var repositoryAddable: IRepositoryAddable
 
     fun getLiveData(): MutableLiveData<DetailsFragmentAppState> {
         chooseRepository()
@@ -21,28 +23,60 @@ class DetailsViewModel(
     }
 
     private fun chooseRepository() {
-        repository = when (1) {
-            1 -> {
-                RepositoryLocationToWeatherOkhttpImpl()
+        if (isConnected) {
+            repositoryLocationToWeather = when (1) {
+                1 -> {
+                    RepositoryLocationToWeatherOkhttpImpl()
+                }
+                2 -> {
+                    RepositoryLocationToWeatherRetrofitImpl()
+                }
+                3 -> {
+                    RepositoryLocationToWeatherLocalImpl()
+                }
+                4 -> {
+                    RepositoryLocationToWeatherRoomImpl()
+                }
+                else -> {
+                    RepositoryLocationToWeatherLocalImpl()
+                }
             }
-            2 -> {
-                RepositoryLocationToWeatherRetrofitImpl()
+            repositoryAddable = when (0) {
+                1 -> {
+                    RepositoryLocationToWeatherRoomImpl()
+                }
+
+                else -> {
+                    RepositoryLocationToWeatherRoomImpl()
+                }
             }
-            3 -> {
-                RepositoryLocationToWeatherLocalImpl()
+        } else {
+            repositoryLocationToWeather = when (4) {
+                3 -> {
+                    RepositoryLocationToWeatherLocalImpl()
+                }
+                4 -> {
+                    RepositoryLocationToWeatherRoomImpl()
+                }
+                else -> {
+                    RepositoryLocationToWeatherLocalImpl()
+                }
             }
-            else -> {RepositoryLocationToWeatherLocalImpl()}
         }
     }
 
-    fun getWeather(latitude: Double, longitude: Double) {
+
+    fun getWeather(weather: Weather) {
         chooseRepository()
         liveData.value = DetailsFragmentAppState.Loading
-        repository.getWeather(latitude, longitude, callback)
+        repositoryLocationToWeather.getWeather(weather, callback)
     }
 
     private val callback = object : IUniversalCallback {
         override fun onResponse(weather: Weather) {
+            if (isConnected) {
+                repositoryAddable.addWeather(weather)
+            }
             liveData.postValue(DetailsFragmentAppState.Success(weather))
         }
 

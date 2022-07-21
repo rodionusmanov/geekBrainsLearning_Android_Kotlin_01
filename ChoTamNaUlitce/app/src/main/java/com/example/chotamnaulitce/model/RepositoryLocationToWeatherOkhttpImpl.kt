@@ -2,6 +2,7 @@ package com.example.chotamnaulitce.model
 
 import android.util.Log
 import com.example.chotamnaulitce.BuildConfig
+import com.example.chotamnaulitce.domain.Weather
 import com.example.chotamnaulitce.model.DataTransferObject.WeatherDataTransferObject
 import com.example.chotamnaulitce.utils.WEATHER_KEY
 import com.example.chotamnaulitce.utils.convertDTOToWeather
@@ -11,8 +12,7 @@ import java.io.IOException
 
 class RepositoryLocationToWeatherOkhttpImpl : IRepositoryLocationToWeather {
     override fun getWeather(
-        latitude: Double,
-        longitude: Double,
+        weather: Weather,
         callback: IUniversalCallback
     ){
         val client = OkHttpClient()
@@ -20,8 +20,8 @@ class RepositoryLocationToWeatherOkhttpImpl : IRepositoryLocationToWeather {
         builder.addHeader(WEATHER_KEY, BuildConfig.WEATHER_API_KEY)
         builder.url(
             "https://api.weather.yandex.ru/v2/informers?" +
-                    "lat=${latitude}" +
-                    "&lon=${longitude}"
+                    "lat=${weather.city.latitude}" +
+                    "&lon=${weather.city.longitude}"
         )
         val request: Request = builder.build()
         val call: Call = client.newCall(request)
@@ -37,7 +37,7 @@ class RepositoryLocationToWeatherOkhttpImpl : IRepositoryLocationToWeather {
                         val responseString = it.string()
                         val weatherDataTransferObject =
                             Gson().fromJson((responseString), WeatherDataTransferObject::class.java)
-                        callback.onResponse(convertDTOToWeather(weatherDataTransferObject))
+                        callback.onResponse(convertDTOToWeather(weatherDataTransferObject, weather.city))
                     }
                 } else {
                     callback.onFailure(IOException("4xx"))

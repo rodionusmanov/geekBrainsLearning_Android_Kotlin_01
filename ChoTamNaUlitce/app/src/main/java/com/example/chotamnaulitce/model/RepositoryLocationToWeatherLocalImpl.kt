@@ -10,14 +10,13 @@ import com.example.chotamnaulitce.model.DataTransferObject.WeatherDataTransferOb
 
 class RepositoryLocationToWeatherLocalImpl : IRepositoryLocationToWeather {
     override fun getWeather(
-        latitude: Double,
-        longitude: Double,
+        weather: Weather,
         callback: IUniversalCallback
     ) {
         val list = getRusCities().toMutableList()
         list.addAll(getWorldCities())
         val response =
-            list.filter { it.city.latitude == latitude && it.city.longitude == longitude }
+            list.filter { it.city.latitude == weather.city.latitude && it.city.longitude == weather.city.longitude }
         callback.onResponse(response.first())
     }
 

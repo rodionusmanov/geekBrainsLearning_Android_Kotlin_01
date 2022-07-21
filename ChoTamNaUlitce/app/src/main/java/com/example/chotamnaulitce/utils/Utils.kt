@@ -14,10 +14,10 @@ fun getLines(reader: BufferedReader): String {
     return reader.lines().collect(Collectors.joining("\n"))
 }
 
-fun convertDTOToWeather(weatherDataTransferObject: WeatherDataTransferObject): Weather {
+fun convertDTOToWeather(weatherDataTransferObject: WeatherDataTransferObject, city: City): Weather {
     val fact = weatherDataTransferObject.fact
     return (Weather(
-        getDefaultCity(),
+        city,
         fact.temp,
         fact.feelsLike,
         fact.humidity,
@@ -61,7 +61,7 @@ fun convertWeatherEntityToWeatherDTO(entityList: List<WeatherEntity>): List<Weat
 fun convertWeatherEntityToWeather(entityList: List<WeatherEntity>): List<Weather> {
     return entityList.map {
         Weather(
-            City(it.name, it.latitude, it.longitude),
+            City("${it.name}%", it.latitude, it.longitude),
             it.temperatureActual,
             it.temperatureFeels,
             it.humidity,

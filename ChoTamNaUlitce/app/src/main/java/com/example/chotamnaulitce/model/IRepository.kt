@@ -5,7 +5,7 @@ import com.example.chotamnaulitce.model.DataTransferObject.WeatherDataTransferOb
 import java.io.IOException
 
 interface IRepositoryLocationToWeather {
-    fun getWeather(latitude: Double, longtitude: Double, callback: IUniversalCallback)
+    fun getWeather(weather: Weather, callback: IUniversalCallback)
 }
 
 interface IRepositoryAddable {

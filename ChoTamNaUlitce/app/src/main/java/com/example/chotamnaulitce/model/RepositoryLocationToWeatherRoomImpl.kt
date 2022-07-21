@@ -8,20 +8,23 @@ import com.example.chotamnaulitce.utils.convertWeatherToWeatherEntity
 class RepositoryLocationToWeatherRoomImpl : IRepositoryLocationToWeather, IRepositoryAddable {
 
     override fun getWeather(
-        latitude: Double,
-        longitude: Double,
+        weather: Weather,
         callback: IUniversalCallback
     ) {
-        callback.onResponse(
-            ChoTamNaUlitceApp.getWeatherDatabase().weatherDAO()
-                .getWeatherByLocation(latitude, longitude).let {
-                    convertWeatherEntityToWeather(it).last()
-                }
-        )
+        Thread {
+            callback.onResponse(
+                ChoTamNaUlitceApp.getWeatherDatabase().weatherDAO()
+                    .getWeatherByLocation(weather.city.latitude, weather.city.longitude).let {
+                        convertWeatherEntityToWeather(it).last()
+                    }
+            )
+        }.start()
     }
 
     override fun addWeather(weather: Weather) {
-        ChoTamNaUlitceApp.getWeatherDatabase().weatherDAO().insertRoom(convertWeatherToWeatherEntity(weather))
+        Thread {
+            ChoTamNaUlitceApp.getWeatherDatabase().weatherDAO()
+                .insertRoom(convertWeatherToWeatherEntity(weather))
+        }.start()
     }
-
 }

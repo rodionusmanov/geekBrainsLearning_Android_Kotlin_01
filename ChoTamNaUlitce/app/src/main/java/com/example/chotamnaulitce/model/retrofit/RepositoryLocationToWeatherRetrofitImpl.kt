@@ -1,6 +1,7 @@
 package com.example.chotamnaulitce.model.retrofit
 
 import com.example.chotamnaulitce.BuildConfig
+import com.example.chotamnaulitce.domain.Weather
 import com.example.chotamnaulitce.model.DataTransferObject.WeatherDataTransferObject
 import com.example.chotamnaulitce.model.IRepositoryLocationToWeather
 import com.example.chotamnaulitce.model.IUniversalCallback
@@ -14,14 +15,14 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.io.IOException
 
 class RepositoryLocationToWeatherRetrofitImpl : IRepositoryLocationToWeather {
-    override fun getWeather(latitude: Double, longtitude: Double, callback: IUniversalCallback) {
+    override fun getWeather(weather: Weather, callback: IUniversalCallback) {
         val retrofitImpl = Retrofit.Builder()
         retrofitImpl.baseUrl("https://api.weather.yandex.ru")
         retrofitImpl.addConverterFactory(
             GsonConverterFactory.create(GsonBuilder().setLenient().create())
         )
         val api = retrofitImpl.build().create(WeatherAPI::class.java)
-        api.getWeather(BuildConfig.WEATHER_API_KEY, latitude, longtitude)
+        api.getWeather(BuildConfig.WEATHER_API_KEY, weather.city.latitude, weather.city.longitude)
             .enqueue(object : Callback<WeatherDataTransferObject> {
 
                 override fun onResponse(
@@ -29,7 +30,7 @@ class RepositoryLocationToWeatherRetrofitImpl : IRepositoryLocationToWeather {
                     response: Response<WeatherDataTransferObject>
                 ) {
                     if (response.isSuccessful && response.body() != null) {
-                        callback.onResponse(convertDTOToWeather(response.body()!!))
+                        callback.onResponse(convertDTOToWeather(response.body()!!, weather.city))
                     } else {
                         callback.onFailure(IOException("4xx"))
                     }

@@ -15,6 +15,5 @@ class RepositoryCitiesListImpl : IRepositoryCitiesList {
                 getWorldCities()
             }
         }
-        return listOf(Weather())
     }
 }
