@@ -2,6 +2,7 @@ package com.example.chotamnaulitce.viewmodel.details
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.chotamnaulitce.domain.Weather
 import com.example.chotamnaulitce.model.*
 import com.example.chotamnaulitce.model.DataTransferObject.WeatherDataTransferObject
 import com.example.chotamnaulitce.model.retrofit.RepositoryLocationToWeatherRetrofitImpl
@@ -41,8 +42,8 @@ class DetailsViewModel(
     }
 
     private val callback = object : IUniversalCallback {
-        override fun onResponse(weatherDataTransferObject: WeatherDataTransferObject) {
-            liveData.postValue(DetailsFragmentAppState.Success(weatherDataTransferObject))
+        override fun onResponse(weather: Weather) {
+            liveData.postValue(DetailsFragmentAppState.Success(weather))
         }
 
         override fun onFailure(e: IOException) {

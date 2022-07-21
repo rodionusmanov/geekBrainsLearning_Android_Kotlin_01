@@ -9,11 +9,11 @@ interface IRepositoryLocationToWeather {
 }
 
 interface IRepositoryAddable {
-    fun addWeather(weatherDataTransferObject: WeatherDataTransferObject)
+    fun addWeather(weather: Weather)
 }
 
 interface IUniversalCallback {
-    fun onResponse(weatherDataTransferObject: WeatherDataTransferObject)
+    fun onResponse(weather: Weather)
     fun onFailure(e: IOException)
 }
 

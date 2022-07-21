@@ -18,25 +18,7 @@ class RepositoryLocationToWeatherLocalImpl : IRepositoryLocationToWeather {
         list.addAll(getWorldCities())
         val response =
             list.filter { it.city.latitude == latitude && it.city.longitude == longitude }
-        callback.onResponse(convertModelToDTO(response.first()))
+        callback.onResponse(response.first())
     }
 
-    fun convertDTOToModel(weatherDataTransferObject: WeatherDataTransferObject): Weather {
-        val fact = weatherDataTransferObject.fact
-        return (Weather(
-            getDefaultCity(),
-            fact.temp,
-            fact.feelsLike,
-            fact.humidity,
-            fact.condition,
-            fact.windSpeed,
-            fact.windDir
-        ))
-    }
-
-    private fun convertModelToDTO(weather: Weather): WeatherDataTransferObject {
-        val fact = Fact("неизвестно", weather.temperatureFeels, 0,weather.temperatureActual, "неизвестно", 0.0, "")
-        val info = Info(weather.city.latitude, weather.city.longitude, "")
-        return WeatherDataTransferObject(fact, info)
-    }
 }

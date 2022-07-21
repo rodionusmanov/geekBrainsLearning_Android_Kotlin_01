@@ -1,10 +1,9 @@
 package com.example.chotamnaulitce.model
 
 import com.example.chotamnaulitce.ChoTamNaUlitceApp
-import com.example.chotamnaulitce.model.DataTransferObject.Fact
-import com.example.chotamnaulitce.model.DataTransferObject.Info
-import com.example.chotamnaulitce.model.DataTransferObject.WeatherDataTransferObject
-import com.example.chotamnaulitce.model.room.WeatherEntity
+import com.example.chotamnaulitce.domain.Weather
+import com.example.chotamnaulitce.utils.convertWeatherEntityToWeather
+import com.example.chotamnaulitce.utils.convertWeatherToWeatherEntity
 
 class RepositoryLocationToWeatherRoomImpl : IRepositoryLocationToWeather, IRepositoryAddable {
 
@@ -16,30 +15,13 @@ class RepositoryLocationToWeatherRoomImpl : IRepositoryLocationToWeather, IRepos
         callback.onResponse(
             ChoTamNaUlitceApp.getWeatherDatabase().weatherDAO()
                 .getWeatherByLocation(latitude, longitude).let {
-                    convertWeatherEntityToWeatherDTO(it).last()
+                    convertWeatherEntityToWeather(it).last()
                 }
         )
     }
 
-    fun convertWeatherEntityToWeatherDTO(entityList: List<WeatherEntity>): List<WeatherDataTransferObject> {
-        return entityList.map {
-            WeatherDataTransferObject(
-                Fact(
-                    it.condition,
-                    it.temperatureFeels,
-                    it.humidity,
-                    it.temperatureActual,
-                    it.windDirection,
-                    it.windSpeed,
-                    "bkn_d"
-                ),
-                Info(it.latitude, it.longitude, it.name)
-            )
-        }
-    }
-
-    override fun addWeather(weatherDataTransferObject: WeatherDataTransferObject) {
-
+    override fun addWeather(weather: Weather) {
+        ChoTamNaUlitceApp.getWeatherDatabase().weatherDAO().insertRoom(convertWeatherToWeatherEntity(weather))
     }
 
 }

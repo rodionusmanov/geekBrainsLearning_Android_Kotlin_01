@@ -4,6 +4,7 @@ import android.util.Log
 import com.example.chotamnaulitce.BuildConfig
 import com.example.chotamnaulitce.model.DataTransferObject.WeatherDataTransferObject
 import com.example.chotamnaulitce.utils.WEATHER_KEY
+import com.example.chotamnaulitce.utils.convertDTOToWeather
 import com.google.gson.Gson
 import okhttp3.*
 import java.io.IOException
@@ -36,7 +37,7 @@ class RepositoryLocationToWeatherOkhttpImpl : IRepositoryLocationToWeather {
                         val responseString = it.string()
                         val weatherDataTransferObject =
                             Gson().fromJson((responseString), WeatherDataTransferObject::class.java)
-                        callback.onResponse(weatherDataTransferObject)
+                        callback.onResponse(convertDTOToWeather(weatherDataTransferObject))
                     }
                 } else {
                     callback.onFailure(IOException("4xx"))
