@@ -48,13 +48,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun onConnectionLost() {
-        Toast.makeText(this, "Connection lost", Toast.LENGTH_LONG).show()
         toolbar.setNavigationIcon(android.R.drawable.presence_offline)
         isConnected = false
     }
 
     fun onConnectionFound() {
-        Toast.makeText(this, "Connection found", Toast.LENGTH_LONG).show()
         toolbar.setNavigationIcon(android.R.drawable.presence_online)
         isConnected = true
     }

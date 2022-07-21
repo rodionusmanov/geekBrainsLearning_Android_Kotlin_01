@@ -6,6 +6,7 @@ import com.example.chotamnaulitce.domain.Weather
 import com.example.chotamnaulitce.model.*
 import com.example.chotamnaulitce.model.DataTransferObject.WeatherDataTransferObject
 import com.example.chotamnaulitce.model.retrofit.RepositoryLocationToWeatherRetrofitImpl
+import com.example.chotamnaulitce.utils.chosenRepository
 import com.example.chotamnaulitce.utils.isConnected
 import java.io.IOException
 
@@ -18,13 +19,13 @@ class DetailsViewModel(
     lateinit var repositoryAddable: IRepositoryAddable
 
     fun getLiveData(): MutableLiveData<DetailsFragmentAppState> {
-        chooseRepository()
+//        chooseRepository()
         return liveData
     }
 
     private fun chooseRepository() {
         if (isConnected) {
-            repositoryLocationToWeather = when (1) {
+            repositoryLocationToWeather = when (chosenRepository) {
                 1 -> {
                     RepositoryLocationToWeatherOkhttpImpl()
                 }
@@ -32,11 +33,12 @@ class DetailsViewModel(
                     RepositoryLocationToWeatherRetrofitImpl()
                 }
                 3 -> {
-                    RepositoryLocationToWeatherLocalImpl()
-                }
-                4 -> {
                     RepositoryLocationToWeatherRoomImpl()
                 }
+                4 -> {
+                    RepositoryLocationToWeatherLocalImpl()
+                }
+
                 else -> {
                     RepositoryLocationToWeatherLocalImpl()
                 }
@@ -51,12 +53,12 @@ class DetailsViewModel(
                 }
             }
         } else {
-            repositoryLocationToWeather = when (4) {
+            repositoryLocationToWeather = when (chosenRepository) {
                 3 -> {
-                    RepositoryLocationToWeatherLocalImpl()
+                    RepositoryLocationToWeatherRoomImpl()
                 }
                 4 -> {
-                    RepositoryLocationToWeatherRoomImpl()
+                    RepositoryLocationToWeatherLocalImpl()
                 }
                 else -> {
                     RepositoryLocationToWeatherLocalImpl()

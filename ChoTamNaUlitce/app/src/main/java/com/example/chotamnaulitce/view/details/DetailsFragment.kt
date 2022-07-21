@@ -88,7 +88,8 @@ class DetailsFragment : Fragment() {
             DetailsFragmentAppState.Loading -> {}
             is DetailsFragmentAppState.Success -> {
                 with(binding) {
-                    cityName.text = weatherLocal.city.name
+                    val weather = detailsFragmentAppState.weatherData
+                    cityName.text = weather.city.name
                     latitudeEntry.setText(weatherLocal.city.latitude.toString())
                     longitudeEntry.setText(weatherLocal.city.longitude.toString())
                     temperatureActualValue.setText("${detailsFragmentAppState.weatherData.temperatureActual} C")

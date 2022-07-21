@@ -61,7 +61,7 @@ fun convertWeatherEntityToWeatherDTO(entityList: List<WeatherEntity>): List<Weat
 fun convertWeatherEntityToWeather(entityList: List<WeatherEntity>): List<Weather> {
     return entityList.map {
         Weather(
-            City("${it.name}%", it.latitude, it.longitude),
+            City(it.name, it.latitude, it.longitude),
             it.temperatureActual,
             it.temperatureFeels,
             it.humidity,
@@ -73,8 +73,10 @@ fun convertWeatherEntityToWeather(entityList: List<WeatherEntity>): List<Weather
 }
 
 fun convertWeatherToWeatherEntity(weather: Weather): WeatherEntity {
+    weather.city.name += " offline"
     return WeatherEntity(
-        0, weather.city.name,
+        0,
+        weather.city.name,
         weather.city.latitude,
         weather.city.longitude,
         weather.temperatureActual,
