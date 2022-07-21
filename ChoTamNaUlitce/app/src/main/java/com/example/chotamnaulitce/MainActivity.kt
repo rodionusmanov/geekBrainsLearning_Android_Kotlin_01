@@ -31,6 +31,7 @@ class MainActivity : AppCompatActivity() {
                         .newInstance()
                 ).commit()
         }
+
     }
 
     private var networkStateReceiver: BroadcastReceiver = object : BroadcastReceiver() {

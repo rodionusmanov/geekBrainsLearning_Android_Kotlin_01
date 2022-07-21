@@ -4,8 +4,12 @@ import com.example.chotamnaulitce.domain.Weather
 import com.example.chotamnaulitce.model.DataTransferObject.WeatherDataTransferObject
 import java.io.IOException
 
-interface IRepositoryDetails {
+interface IRepositoryLocationToWeather {
     fun getWeather(latitude: Double, longtitude: Double, callback: IUniversalCallback)
+}
+
+interface IRepositoryAddable {
+    fun addWeather(weatherDataTransferObject: WeatherDataTransferObject)
 }
 
 interface IUniversalCallback {

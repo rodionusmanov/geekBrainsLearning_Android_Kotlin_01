@@ -6,7 +6,7 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 
 @Dao
-interface WeatherDAO {
+interface IWeatherDAO {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertRoom(weatherEntity: WeatherEntity)
@@ -26,7 +26,7 @@ interface WeatherDAO {
     )
 
     @Query("SELECT * FROM weather_entity_table WHERE latitude=:mLatitude AND longitude=:mLongitude LIMIT 1")
-    fun getWeatherOne(mLatitude: Double, mLongitude: Double):List<WeatherEntity>
+    fun getWeatherByLocation(mLatitude: Double, mLongitude: Double):List<WeatherEntity>
 
     @Query("SELECT * FROM weather_entity_table")
     fun getWeatherAll():List<WeatherEntity>

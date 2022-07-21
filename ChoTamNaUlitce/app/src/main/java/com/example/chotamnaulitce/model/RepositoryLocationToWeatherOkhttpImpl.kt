@@ -2,14 +2,13 @@ package com.example.chotamnaulitce.model
 
 import android.util.Log
 import com.example.chotamnaulitce.BuildConfig
-import com.example.chotamnaulitce.domain.Weather
 import com.example.chotamnaulitce.model.DataTransferObject.WeatherDataTransferObject
 import com.example.chotamnaulitce.utils.WEATHER_KEY
 import com.google.gson.Gson
 import okhttp3.*
 import java.io.IOException
 
-class RepositoryDetailsOkhttpImpl : IRepositoryDetails {
+class RepositoryLocationToWeatherOkhttpImpl : IRepositoryLocationToWeather {
     override fun getWeather(
         latitude: Double,
         longitude: Double,

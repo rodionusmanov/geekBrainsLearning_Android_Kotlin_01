@@ -13,14 +13,15 @@ class ChoTamNaUlitceApp : Application() {
 
     companion object {
         private var choTamNaUlitceApp: ChoTamNaUlitceApp? = null
-        private var weatherDatabase: WeatherDatabase?=null
+        private var weatherDatabase: WeatherDatabase? = null
         fun getChoTamNaUlitce() = choTamNaUlitceApp!!
-        fun getWeatherDatabase():WeatherDatabase{
-            if(weatherDatabase==null){
+        fun getWeatherDatabase(): WeatherDatabase {
+            if (weatherDatabase == null) {
                 weatherDatabase = Room.databaseBuilder(
                     getChoTamNaUlitce(),
                     WeatherDatabase::class.java,
-                    ROOM_DB_NAME_WEATHER).build()
+                    ROOM_DB_NAME_WEATHER
+                ).build()
             }
             return weatherDatabase!!
         }

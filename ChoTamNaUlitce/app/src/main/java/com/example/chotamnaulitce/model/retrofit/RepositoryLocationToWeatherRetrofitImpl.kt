@@ -2,7 +2,7 @@ package com.example.chotamnaulitce.model.retrofit
 
 import com.example.chotamnaulitce.BuildConfig
 import com.example.chotamnaulitce.model.DataTransferObject.WeatherDataTransferObject
-import com.example.chotamnaulitce.model.IRepositoryDetails
+import com.example.chotamnaulitce.model.IRepositoryLocationToWeather
 import com.example.chotamnaulitce.model.IUniversalCallback
 import com.google.gson.GsonBuilder
 import retrofit2.Call
@@ -12,7 +12,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.io.IOException
 
-class RepositoryDetailsRetrofitImpl : IRepositoryDetails {
+class RepositoryLocationToWeatherRetrofitImpl : IRepositoryLocationToWeather {
     override fun getWeather(latitude: Double, longtitude: Double, callback: IUniversalCallback) {
         val retrofitImpl = Retrofit.Builder()
         retrofitImpl.baseUrl("https://api.weather.yandex.ru")

@@ -8,7 +8,7 @@ import com.example.chotamnaulitce.model.DataTransferObject.Fact
 import com.example.chotamnaulitce.model.DataTransferObject.Info
 import com.example.chotamnaulitce.model.DataTransferObject.WeatherDataTransferObject
 
-class RepositoryDetailsLocalImpl : IRepositoryDetails {
+class RepositoryLocationToWeatherLocalImpl : IRepositoryLocationToWeather {
     override fun getWeather(
         latitude: Double,
         longitude: Double,

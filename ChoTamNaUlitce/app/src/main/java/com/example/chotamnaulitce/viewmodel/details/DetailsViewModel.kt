@@ -4,7 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.chotamnaulitce.model.*
 import com.example.chotamnaulitce.model.DataTransferObject.WeatherDataTransferObject
-import com.example.chotamnaulitce.model.retrofit.RepositoryDetailsRetrofitImpl
+import com.example.chotamnaulitce.model.retrofit.RepositoryLocationToWeatherRetrofitImpl
 import java.io.IOException
 
 class DetailsViewModel(
@@ -12,7 +12,7 @@ class DetailsViewModel(
 ) :
     ViewModel() {
 
-    private lateinit var repository: IRepositoryDetails
+    private lateinit var repository: IRepositoryLocationToWeather
 
     fun getLiveData(): MutableLiveData<DetailsFragmentAppState> {
         chooseRepository()
@@ -20,17 +20,17 @@ class DetailsViewModel(
     }
 
     private fun chooseRepository() {
-        repository = when (3) {
+        repository = when (1) {
             1 -> {
-                RepositoryDetailsOkhttpImpl()
+                RepositoryLocationToWeatherOkhttpImpl()
             }
             2 -> {
-                RepositoryDetailsRetrofitImpl()
+                RepositoryLocationToWeatherRetrofitImpl()
             }
             3 -> {
-                RepositoryDetailsLocalImpl()
+                RepositoryLocationToWeatherLocalImpl()
             }
-            else -> {RepositoryDetailsLocalImpl()}
+            else -> {RepositoryLocationToWeatherLocalImpl()}
         }
     }
 
