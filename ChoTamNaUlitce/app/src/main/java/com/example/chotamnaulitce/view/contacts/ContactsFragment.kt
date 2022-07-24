@@ -1,6 +1,7 @@
 package com.example.chotamnaulitce.view.contacts
 
 import android.Manifest
+import android.app.AlertDialog
 import android.content.ContentResolver
 import android.content.pm.PackageManager
 import android.database.Cursor
@@ -13,8 +14,10 @@ import android.view.ViewGroup
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import com.example.chotamnaulitce.R
 import com.example.chotamnaulitce.databinding.ContactsFragmentBinding
 import com.example.chotamnaulitce.utils.REQUEST_CODE_READ_CONTACTS
+import com.example.chotamnaulitce.view.citieslist.CitiesListFragment
 import okhttp3.Request
 
 class ContactsFragment : Fragment() {
@@ -49,12 +52,37 @@ class ContactsFragment : Fragment() {
             ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.READ_CONTACTS)
         if (permResult == PackageManager.PERMISSION_GRANTED) {
             getContacts()
+        } else if (shouldShowRequestPermissionRationale(Manifest.permission.READ_CONTACTS)) {
+            AlertDialog.Builder(requireContext())
+                .setTitle("Доступ к контактам")
+                .setMessage("Запрос на доступ к контактам. В случае отказа, доступ можно будет предоставить только в настройках приложения.")
+                .setPositiveButton("Предоставить доступ") { _, _ ->
+                    permissionRequest(Manifest.permission.READ_CONTACTS)
+                }
+                .setNegativeButton("Отказать в запросе") { dialog, _ -> dialog.dismiss() }
+                .create()
+                .show()
         } else {
             permissionRequest(Manifest.permission.READ_CONTACTS)
+            AlertDialog.Builder(requireContext())
+                .setTitle("Доступ к контактам")
+                .setMessage("Доступ к контактам отсутствует. Доступ можно будет предоставить только в настройках приложения.")
+                .setPositiveButton("Закрыть сообщение") {
+                        dialog, _ -> dialog.dismiss()
+
+                    requireActivity().supportFragmentManager.apply {
+                        beginTransaction()
+                            .replace(R.id.container, (CitiesListFragment()))
+                            .addToBackStack(null)
+                            .commitAllowingStateLoss()
+                    }
+                }
+                .create()
+                .show()
         }
     }
 
-    fun permissionRequest(permission: String) {
+    private fun permissionRequest(permission: String) {
         requestPermissions(arrayOf(permission), REQUEST_CODE_READ_CONTACTS)
     }
 
