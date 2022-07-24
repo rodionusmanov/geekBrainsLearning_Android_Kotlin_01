@@ -13,7 +13,9 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.chotamnaulitce.databinding.ActivityMainBinding
 import com.example.chotamnaulitce.utils.isConnected
 import com.example.chotamnaulitce.view.citieslist.CitiesListFragment
+import com.example.chotamnaulitce.view.contacts.ContactsFragment
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.contacts_fragment.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -39,13 +41,18 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.contacts_menu,menu)
+        menuInflater.inflate(R.menu.contacts_menu, menu)
         return super.onCreateOptionsMenu(menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
         R.id.contacts_item -> {
-            Toast.makeText(this,"Contacts",Toast.LENGTH_SHORT).show()
+            supportFragmentManager.apply {
+                beginTransaction()
+                    .replace(R.id.container, (ContactsFragment()))
+                    .addToBackStack(null)
+                    .commitAllowingStateLoss()
+            }
             true
         }
         else -> {
