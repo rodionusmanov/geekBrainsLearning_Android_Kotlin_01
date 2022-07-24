@@ -2,6 +2,7 @@ package com.example.chotamnaulitce.model
 
 import com.example.chotamnaulitce.ChoTamNaUlitceApp
 import com.example.chotamnaulitce.domain.Weather
+import com.example.chotamnaulitce.domain.getFailureWeather
 import com.example.chotamnaulitce.utils.convertWeatherEntityToWeather
 import com.example.chotamnaulitce.utils.convertWeatherToWeatherEntity
 
@@ -15,7 +16,11 @@ class RepositoryLocationToWeatherRoomImpl : IRepositoryLocationToWeather, IRepos
             callback.onResponse(
                 ChoTamNaUlitceApp.getWeatherDatabase().weatherDAO()
                     .getWeatherByLocation(weather.city.latitude, weather.city.longitude).let {
-                        convertWeatherEntityToWeather(it).last()
+                        if (it.size > 0) {
+                            convertWeatherEntityToWeather(it).last()
+                        } else {
+                            getFailureWeather()
+                        }
                     }
             )
         }.start()
