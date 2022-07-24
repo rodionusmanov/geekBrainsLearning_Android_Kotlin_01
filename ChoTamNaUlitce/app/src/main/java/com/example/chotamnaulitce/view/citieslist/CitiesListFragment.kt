@@ -56,9 +56,8 @@ class CitiesListFragment : Fragment(), IOnItemClick {
         super.onViewCreated(view, savedInstanceState)
 
         chosenRepository = weatherSharedPreferences.getInt(REPOSITORY_CHOSEN, 4)
-
         viewModel = ViewModelProvider(this).get(CitiesListViewModel::class.java)
-        viewModel?.let {
+        viewModel.let {
             it.getLiveData().observe(viewLifecycleOwner) { t -> renderData(t) }
         }
 

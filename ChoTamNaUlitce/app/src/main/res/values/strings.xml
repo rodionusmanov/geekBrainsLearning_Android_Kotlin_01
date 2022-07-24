@@ -17,4 +17,5 @@
     <string name="repo_retrofit">Retrofit репозиторий</string>
     <string name="repo_local">Локальный репозиторий</string>
     <string name="repo_room">Room репозиторий</string>
+    <string name="contacts">Контакты</string>
 </resources>
