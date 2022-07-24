@@ -14,25 +14,33 @@
             android:id="@+id/repository_okhttp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/repo_okhttp" />
+            android:text="@string/repo_okhttp"
+            android:textSize="24sp"
+            android:layout_margin="10dp"/>
 
         <RadioButton
             android:id="@+id/repository_retrofit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/repo_retrofit"/>
+            android:text="@string/repo_retrofit"
+            android:textSize="24sp"
+            android:layout_margin="10dp"/>
 
         <RadioButton
             android:id="@+id/repository_room"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/repo_room"/>
+            android:text="@string/repo_room"
+            android:textSize="24sp"
+            android:layout_margin="10dp"/>
 
         <RadioButton
             android:id="@+id/repository_local"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/repo_local"/>
+            android:text="@string/repo_local"
+            android:textSize="24sp"
+            android:layout_margin="10dp"/>
 
     </RadioGroup>
 </FrameLayout>

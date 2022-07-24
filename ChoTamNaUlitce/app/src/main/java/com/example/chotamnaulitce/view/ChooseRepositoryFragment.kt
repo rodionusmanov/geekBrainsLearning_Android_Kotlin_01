@@ -8,14 +8,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
-import androidx.fragment.app.Fragment
 import com.example.chotamnaulitce.ChoTamNaUlitceApp
 import com.example.chotamnaulitce.R
-import com.example.chotamnaulitce.databinding.RepositoryRadiobuttonFragmentBinding
-import com.example.chotamnaulitce.utils.LOCATION_CITIES_LIST
 import com.example.chotamnaulitce.utils.REPOSITORY_CHOSEN
 import com.example.chotamnaulitce.utils.chosenRepository
-import com.example.chotamnaulitce.view.citieslist.CitiesListFragment
 import kotlinx.android.synthetic.main.repository_radiobutton_fragment.*
 
 class ChooseRepositoryFragment: DialogFragment() {
@@ -25,9 +21,7 @@ class ChooseRepositoryFragment: DialogFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        var rootView : View = inflater.inflate(R.layout.repository_radiobutton_fragment, container, false)
-
-        return rootView
+        return inflater.inflate(R.layout.repository_radiobutton_fragment, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -73,7 +67,7 @@ class ChooseRepositoryFragment: DialogFragment() {
         }
     }
 
-    fun saveRepositoryState(weatherSharedPreferences:SharedPreferences){
+    private fun saveRepositoryState(weatherSharedPreferences:SharedPreferences){
         weatherSharedPreferences.edit().apply {
             putInt(REPOSITORY_CHOSEN, chosenRepository)
             apply()

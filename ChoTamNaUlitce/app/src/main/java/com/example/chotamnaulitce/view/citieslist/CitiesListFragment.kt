@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModelProvider
 import com.example.chotamnaulitce.ChoTamNaUlitceApp
 import com.example.chotamnaulitce.R
@@ -17,7 +16,6 @@ import com.example.chotamnaulitce.domain.Weather
 import com.example.chotamnaulitce.utils.LOCATION_CITIES_LIST
 import com.example.chotamnaulitce.utils.REPOSITORY_CHOSEN
 import com.example.chotamnaulitce.utils.chosenRepository
-import com.example.chotamnaulitce.utils.isConnected
 import com.example.chotamnaulitce.view.ChooseRepositoryFragment
 import com.example.chotamnaulitce.view.details.DetailsFragment
 import com.example.chotamnaulitce.view.details.IOnItemClick
@@ -28,7 +26,8 @@ class CitiesListFragment : Fragment(), IOnItemClick {
     companion object {
         fun newInstance() = CitiesListFragment()
     }
-    val weatherSharedPreferences = ChoTamNaUlitceApp.getChoTamNaUlitce()
+
+    private val weatherSharedPreferences = ChoTamNaUlitceApp.getChoTamNaUlitce()
         .getSharedPreferences("Prefs", Context.MODE_PRIVATE)
     private var locationSwitchForFAB = weatherSharedPreferences.getInt(LOCATION_CITIES_LIST, 1)
 
@@ -57,9 +56,8 @@ class CitiesListFragment : Fragment(), IOnItemClick {
         super.onViewCreated(view, savedInstanceState)
 
         chosenRepository = weatherSharedPreferences.getInt(REPOSITORY_CHOSEN, 4)
-
         viewModel = ViewModelProvider(this).get(CitiesListViewModel::class.java)
-        viewModel?.let {
+        viewModel.let {
             it.getLiveData().observe(viewLifecycleOwner) { t -> renderData(t) }
         }
 
@@ -77,9 +75,9 @@ class CitiesListFragment : Fragment(), IOnItemClick {
             apply()
         }
 
-        binding.chooseRepositoryFloatingActionButton.setOnClickListener{
+        binding.chooseRepositoryFloatingActionButton.setOnClickListener {
             val dialog = ChooseRepositoryFragment()
-            dialog.show(requireActivity().supportFragmentManager,"repo")
+            dialog.show(requireActivity().supportFragmentManager, "repo")
         }
     }
 
