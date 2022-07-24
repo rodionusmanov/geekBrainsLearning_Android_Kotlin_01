@@ -11,6 +11,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -56,7 +57,7 @@ class ContactsFragment : Fragment() {
             AlertDialog.Builder(requireContext())
                 .setTitle("Доступ к контактам")
                 .setMessage("Запрос на доступ к контактам. В случае отказа, доступ можно будет предоставить только в настройках приложения.")
-                .setPositiveButton("Предоставить доступ") { _, _ ->
+                .setPositiveButton("Открыть окно предоставления доступа") { _, _ ->
                     permissionRequest(Manifest.permission.READ_CONTACTS)
                 }
                 .setNegativeButton("Отказать в запросе") { dialog, _ -> dialog.dismiss() }
@@ -67,8 +68,8 @@ class ContactsFragment : Fragment() {
             AlertDialog.Builder(requireContext())
                 .setTitle("Доступ к контактам")
                 .setMessage("Доступ к контактам отсутствует. Доступ можно будет предоставить только в настройках приложения.")
-                .setPositiveButton("Закрыть сообщение") {
-                        dialog, _ -> dialog.dismiss()
+                .setPositiveButton("Закрыть сообщение") { dialog, _ ->
+                    dialog.dismiss()
 
                     requireActivity().supportFragmentManager.apply {
                         beginTransaction()
@@ -110,5 +111,17 @@ class ContactsFragment : Fragment() {
             null,
             ContactsContract.Contacts.DISPLAY_NAME + " ASC"
         )
+
+        cursorWithContacts?.let {
+            for (i in 0..it.count - 1) {
+                it.moveToPosition(i)
+                val name = it.getString(it.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME))
+                binding.contactsContainer.addView(TextView(requireContext()).apply {
+                    text = name
+                    textSize = 30f
+                })
+            }
+        }
+        cursorWithContacts?.close()
     }
 }
