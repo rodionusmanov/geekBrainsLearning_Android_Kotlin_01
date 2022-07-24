@@ -1,25 +1,24 @@
 package com.example.chotamnaulitce.view.contacts
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.content.ContentResolver
 import android.content.pm.PackageManager
 import android.database.Cursor
 import android.os.Bundle
 import android.provider.ContactsContract
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.example.chotamnaulitce.R
 import com.example.chotamnaulitce.databinding.ContactsFragmentBinding
 import com.example.chotamnaulitce.utils.REQUEST_CODE_READ_CONTACTS
 import com.example.chotamnaulitce.view.citieslist.CitiesListFragment
-import okhttp3.Request
+
 
 class ContactsFragment : Fragment() {
 
@@ -102,6 +101,7 @@ class ContactsFragment : Fragment() {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
     }
 
+    @SuppressLint("SetTextI18n")
     private fun getContacts() {
         val contentResolver: ContentResolver = requireContext().contentResolver
         val cursorWithContacts: Cursor? = contentResolver.query(
@@ -115,11 +115,37 @@ class ContactsFragment : Fragment() {
         cursorWithContacts?.let {
             for (i in 0..it.count - 1) {
                 it.moveToPosition(i)
+                val identifier =
+                    it.getString(it.getColumnIndex(ContactsContract.Contacts.NAME_RAW_CONTACT_ID))
                 val name = it.getString(it.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME))
                 binding.contactsContainer.addView(TextView(requireContext()).apply {
-                    text = name
+                    text = "$identifier. $name"
                     textSize = 30f
                 })
+
+                if (it.getColumnIndex(ContactsContract.Contacts.HAS_PHONE_NUMBER) > 0){
+                    val phoneNumberCursor : Cursor? = requireContext().contentResolver.query(
+                        ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
+                        null,
+                        ContactsContract.CommonDataKinds.Phone.CONTACT_ID + " = $identifier",
+                        null,
+                        null
+                    )
+
+                    phoneNumberCursor?.let {pCursor ->
+                        for (j in 0 until pCursor.count) {
+                            pCursor.moveToPosition(j)
+                            val phone: String = pCursor.getString(
+                                pCursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER)
+                            )
+                            binding.contactsContainer.addView(TextView(requireContext()).apply {
+                                text = phone
+                                textSize = 30f
+                            })
+                        }
+                    }
+                    phoneNumberCursor?.close()
+                }
             }
         }
         cursorWithContacts?.close()
