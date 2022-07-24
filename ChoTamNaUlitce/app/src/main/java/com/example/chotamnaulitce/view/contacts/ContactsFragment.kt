@@ -10,9 +10,12 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.example.chotamnaulitce.databinding.ContactsFragmentBinding
+import com.example.chotamnaulitce.utils.REQUEST_CODE_READ_CONTACTS
+import okhttp3.Request
 
 class ContactsFragment : Fragment() {
 
@@ -41,12 +44,33 @@ class ContactsFragment : Fragment() {
         checkPermission()
     }
 
-    fun checkPermission() {
+    private fun checkPermission() {
         val permResult =
             ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.READ_CONTACTS)
-        if (permResult == PackageManager.PERMISSION_GRANTED){
+        if (permResult == PackageManager.PERMISSION_GRANTED) {
             getContacts()
+        } else {
+            permissionRequest(Manifest.permission.READ_CONTACTS)
         }
+    }
+
+    fun permissionRequest(permission: String) {
+        requestPermissions(arrayOf(permission), REQUEST_CODE_READ_CONTACTS)
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        if (requestCode == REQUEST_CODE_READ_CONTACTS) {
+            for (permsIndex in permissions.indices) {
+                if (permissions[permsIndex] == Manifest.permission.READ_CONTACTS && grantResults[permsIndex] == PackageManager.PERMISSION_GRANTED) {
+                    getContacts()
+                }
+            }
+        }
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
     }
 
     private fun getContacts() {
