@@ -8,12 +8,13 @@ import com.example.chotamnaulitce.databinding.WeatherFragmentFrameRecyclerItemBi
 import com.example.chotamnaulitce.domain.Weather
 import com.example.chotamnaulitce.view.details.IOnItemClick
 
+
 class CitiesListAdapter(private val dataList: List<Weather>, private val callback: IOnItemClick) :
     RecyclerView.Adapter<CitiesListAdapter.WeatherViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WeatherViewHolder {
         val binding =
-            WeatherFragmentFrameRecyclerItemBinding.inflate(LayoutInflater.from(parent.context))
+            WeatherFragmentFrameRecyclerItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return WeatherViewHolder(binding.root)
     }
 
