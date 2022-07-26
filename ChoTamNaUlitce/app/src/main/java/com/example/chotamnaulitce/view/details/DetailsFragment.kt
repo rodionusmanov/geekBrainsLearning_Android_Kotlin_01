@@ -120,7 +120,10 @@ class DetailsFragment : Fragment() {
                         add(SvgDecoder.Factory())
                     }
                     .build()
-                    conditionImageView.load("https://yastatic.net/weather/i/icons/funky/dark/${detailsFragmentAppState.weatherData.icon}.svg", imageLoader)
+                    conditionImageView.load("https://yastatic.net/weather/i/icons/funky/dark/${detailsFragmentAppState.weatherData.icon}.svg", imageLoader){
+                        placeholder(android.R.drawable.ic_lock_idle_alarm)
+                        error(android.R.drawable.ic_delete)
+                    }
                 }
             }
         }

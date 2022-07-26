@@ -1,9 +1,7 @@
 package com.example.chotamnaulitce.utils
 
-import android.widget.Toast
 import com.example.chotamnaulitce.domain.City
 import com.example.chotamnaulitce.domain.Weather
-import com.example.chotamnaulitce.domain.getDefaultCity
 import com.example.chotamnaulitce.model.DataTransferObject.Fact
 import com.example.chotamnaulitce.model.DataTransferObject.Info
 import com.example.chotamnaulitce.model.DataTransferObject.WeatherDataTransferObject
@@ -74,7 +72,9 @@ fun convertWeatherEntityToWeather(entityList: List<WeatherEntity>): List<Weather
 }
 
 fun convertWeatherToWeatherEntity(weather: Weather): WeatherEntity {
-    weather.city.name += " offline"
+    if (!isConnected) {
+        weather.city.name += " offline"
+    }
     return WeatherEntity(
         0,
         weather.city.name,
@@ -85,5 +85,6 @@ fun convertWeatherToWeatherEntity(weather: Weather): WeatherEntity {
         weather.humidity,
         weather.condition,
         weather.windSpeed,
-        weather.windDirection)
+        weather.windDirection
+    )
 }
