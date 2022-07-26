@@ -18,4 +18,5 @@
     <string name="repo_local">Локальный репозиторий</string>
     <string name="repo_room">Room репозиторий</string>
     <string name="contacts">Контакты</string>
+    <string name="room_history">история запросов</string>
 </resources>

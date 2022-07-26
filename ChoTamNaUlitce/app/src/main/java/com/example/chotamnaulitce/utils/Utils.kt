@@ -88,3 +88,43 @@ fun convertWeatherToWeatherEntity(weather: Weather): WeatherEntity {
         weather.windDirection
     )
 }
+
+fun conditionToRus(string: String): String {
+    when (string) {
+        "clear" -> return "ясно"
+        "partly-cloudy" -> return "малооблачно"
+        "cloudy" -> return "малооблачно с прояснениями"
+        "overcast" -> return "пасмурно"
+        "drizzle" -> return "морось"
+        "light-rain" -> return "небольшой дождь"
+        "rain" -> return "дождь"
+        "moderate-rain" -> return "умеренно сильный дождь"
+        "heavy-rain" -> return "сильный дождь"
+        "continuous-heavy-rain" -> return " длительный сильный дождь"
+        "showers" -> return "ливень"
+        "wet-snow" -> return "дождь со снегом"
+        "light-snow" -> return "небольшой снег"
+        "snow" -> return "снег"
+        "snow-showers" -> return "снегопад"
+        "hail" -> return " небольшой снег"
+        "thunderstorm" -> return "гроза"
+        "thunderstorm-with-rain" -> return "дождь с грозой"
+        "thunderstorm-with-hail" -> return "гроза с градом"
+        else -> return "неизвестно"
+    }
+}
+
+fun windDirectionToRus(string: String): String {
+    return when (string) {
+        "n" -> "север"
+        "ne" -> "северо-восток"
+        "e" -> "восток"
+        "se" -> "юго-восток"
+        "s" -> "юг"
+        "sw" -> "юго-запад"
+        "w" -> "запад"
+        "nw" -> "северо-запад"
+        "c" -> "штиль"
+        else -> "неизвестно"
+    }
+}
