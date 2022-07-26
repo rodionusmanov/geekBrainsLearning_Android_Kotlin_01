@@ -110,19 +110,24 @@ class DetailsFragment : Fragment() {
                         weatherLocal.city.name,
                         getString(R.string.return_to_cities_list)
                     ) {
-                        requireActivity()
-                            .supportFragmentManager
-                            .beginTransaction()
-                            .replace(R.id.container, CitiesListFragment.newInstance())
-                            .commit()
+                        if (isAdded) {
+                            requireActivity()
+                                .supportFragmentManager
+                                .beginTransaction()
+                                .replace(R.id.container, CitiesListFragment.newInstance())
+                                .commit()
+                        }
                     }
 
                     val imageLoader = ImageLoader.Builder(requireContext())
-                    .components {
-                        add(SvgDecoder.Factory())
-                    }
-                    .build()
-                    conditionImageView.load("https://yastatic.net/weather/i/icons/funky/dark/${detailsFragmentAppState.weatherData.icon}.svg", imageLoader){
+                        .components {
+                            add(SvgDecoder.Factory())
+                        }
+                        .build()
+                    conditionImageView.load(
+                        "https://yastatic.net/weather/i/icons/funky/dark/${detailsFragmentAppState.weatherData.icon}.svg",
+                        imageLoader
+                    ) {
                         placeholder(android.R.drawable.ic_lock_idle_alarm)
                         error(android.R.drawable.ic_delete)
                     }
@@ -136,7 +141,7 @@ class DetailsFragment : Fragment() {
         returnText: String,
         returnAction: () -> Unit
     ) {
-        Snackbar.make(requireView(), text, Snackbar.LENGTH_INDEFINITE)
+        Snackbar.make(requireView(), text, Snackbar.LENGTH_SHORT)
             .setAction(returnText) {
                 returnAction()
             }.show()

@@ -16,7 +16,7 @@ import com.example.chotamnaulitce.domain.Weather
 import com.example.chotamnaulitce.utils.LOCATION_CITIES_LIST
 import com.example.chotamnaulitce.utils.REPOSITORY_CHOSEN
 import com.example.chotamnaulitce.utils.chosenRepository
-import com.example.chotamnaulitce.view.ChooseRepositoryFragment
+import com.example.chotamnaulitce.view.chooseRepository.ChooseRepositoryFragment
 import com.example.chotamnaulitce.view.details.DetailsFragment
 import com.example.chotamnaulitce.view.details.IOnItemClick
 import com.example.chotamnaulitce.viewmodel.citieslist.CitiesListViewModel

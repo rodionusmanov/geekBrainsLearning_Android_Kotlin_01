@@ -10,10 +10,7 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import com.example.chotamnaulitce.databinding.ActivityMainBinding
-import com.example.chotamnaulitce.domain.getFailureWeather
-import com.example.chotamnaulitce.utils.convertWeatherEntityToWeather
 import com.example.chotamnaulitce.utils.isConnected
-import com.example.chotamnaulitce.view.ChooseRepositoryFragment
 import com.example.chotamnaulitce.view.citieslist.CitiesListFragment
 import com.example.chotamnaulitce.view.contacts.ContactsFragment
 import com.example.chotamnaulitce.view.roomHistory.RoomHistoryFragment

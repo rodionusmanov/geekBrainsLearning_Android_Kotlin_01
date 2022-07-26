@@ -131,8 +131,8 @@ class ContactsFragment : Fragment() {
                     setBackgroundColor(resources.getColor(R.color.black))
                 })
 
-                if (it.getColumnIndex(ContactsContract.Contacts.HAS_PHONE_NUMBER) > 0){
-                    val phoneNumberCursor : Cursor? = requireContext().contentResolver.query(
+                if (it.getColumnIndex(ContactsContract.Contacts.HAS_PHONE_NUMBER) > 0) {
+                    val phoneNumberCursor: Cursor? = requireContext().contentResolver.query(
                         ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
                         null,
                         ContactsContract.CommonDataKinds.Phone.CONTACT_ID + " = $identifier",
@@ -140,7 +140,7 @@ class ContactsFragment : Fragment() {
                         null
                     )
 
-                    phoneNumberCursor?.let {pCursor ->
+                    phoneNumberCursor?.let { pCursor ->
                         for (j in 0 until pCursor.count) {
                             pCursor.moveToPosition(j)
                             val phone: String = pCursor.getString(
@@ -151,10 +151,21 @@ class ContactsFragment : Fragment() {
                                 textSize = 30f
                                 setBackgroundColor(resources.getColor(R.color.loadingBackground))
                                 setOnClickListener {
-                                    val intent =
-                                        Intent(Intent.ACTION_DIAL,Uri.parse("tel:$phone"))
-                                    if (intent.resolveActivity(requireActivity().packageManager) != null) {
+                                    if (ContextCompat.checkSelfPermission(
+                                            requireContext(),
+                                            Manifest.permission.CALL_PHONE
+                                        ) == PackageManager.PERMISSION_GRANTED
+                                    ) {
+                                        val intent =
+                                            Intent(Intent.ACTION_CALL, Uri.parse("tel:$phone"))
+                                        if (intent.resolveActivity(requireActivity().packageManager) != null) {
                                         startActivity(intent)
+                                        }
+                                    } else {
+                                        requestPermissions(
+                                            arrayOf(Manifest.permission.CALL_PHONE),
+                                            1
+                                        )
                                     }
                                 }
                             })

@@ -10,7 +10,6 @@ import com.example.chotamnaulitce.ChoTamNaUlitceApp
 import com.example.chotamnaulitce.R
 import com.example.chotamnaulitce.databinding.RoomHistoryFragmentBinding
 import com.example.chotamnaulitce.domain.Weather
-import com.example.chotamnaulitce.domain.getFailureWeather
 import com.example.chotamnaulitce.utils.conditionToRus
 import com.example.chotamnaulitce.utils.convertWeatherEntityToWeather
 import com.example.chotamnaulitce.utils.windDirectionToRus
@@ -37,12 +36,12 @@ class RoomHistoryFragment : DialogFragment() {
             ChoTamNaUlitceApp.getWeatherDatabase().weatherDAO()
                 .getWeatherAll().let {
                     if (it.size > 0) {
-                        for (i in 0 until it.size) {
+                        for (i in it.size - 1 downTo 0) {
                             writeHistoryItem(convertWeatherEntityToWeather(it).get(i))
                         }
                         convertWeatherEntityToWeather(it).last()
                     } else {
-                        getFailureWeather()
+                        getFailureHistory()
                     }
                 }
         }.start()
@@ -75,13 +74,21 @@ class RoomHistoryFragment : DialogFragment() {
             textSize = 30f
         })
         binding.historyContainer.addView(TextView(requireContext()).apply {
-            text = "Ветер: направление - ${windDirectionToRus(weather.windDirection)} ${weather.windSpeed} м/с"
+            text =
+                "Ветер: направление - ${windDirectionToRus(weather.windDirection)} ${weather.windSpeed} м/с"
             textSize = 30f
         })
         binding.historyContainer.addView(TextView(requireContext()).apply {
             width = maxWidth
             height = 10
             setBackgroundColor(resources.getColor(R.color.black))
+        })
+    }
+
+    private fun getFailureHistory() {
+        binding.historyContainer.addView(TextView(requireContext()).apply {
+            text = "История пуста"
+            textSize = 30f
         })
     }
 }
