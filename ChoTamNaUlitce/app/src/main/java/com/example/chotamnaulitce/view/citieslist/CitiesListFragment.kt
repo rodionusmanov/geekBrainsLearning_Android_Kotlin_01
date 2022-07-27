@@ -4,11 +4,9 @@ import android.Manifest
 import android.app.AlertDialog
 import android.content.Context
 import android.content.pm.PackageManager
-import android.location.Criteria
-import android.location.Location
-import android.location.LocationListener
-import android.location.LocationManager
+import android.location.*
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -156,32 +154,63 @@ class CitiesListFragment : Fragment(), IOnItemClick {
 
     private fun getLocation() {
 
-            if (ActivityCompat.checkSelfPermission(
-                    requireContext(),
-                    Manifest.permission.ACCESS_FINE_LOCATION
-                ) == PackageManager.PERMISSION_GRANTED
-            ) { val locationManager =
+        if (ActivityCompat.checkSelfPermission(
+                requireContext(),
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) == PackageManager.PERMISSION_GRANTED
+        ) {
+            val locationManager =
                 requireContext().getSystemService(Context.LOCATION_SERVICE) as LocationManager
-                if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
-                    val criteria = Criteria()
-                    criteria.accuracy = Criteria.ACCURACY_FINE
-                    val provider = locationManager.getBestProvider(criteria, true)
-                    locationManager.requestLocationUpdates(
-                            LocationManager.GPS_PROVIDER,
+            if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+                val criteria = Criteria()
+                criteria.accuracy = Criteria.ACCURACY_FINE
+                val provider = locationManager.getBestProvider(criteria, true)
+                locationManager.requestLocationUpdates(
+                    LocationManager.GPS_PROVIDER,
                     0L,
                     1000F,
-                    object : LocationListener {
-                        override fun onLocationChanged(location: Location) {
-                            Toast.makeText(
-                                requireContext(),
-                                "${location.latitude} / ${location.longitude}",
-                                Toast.LENGTH_SHORT
-                            ).show()
-                        }
-                    })
-                }
-                return
+                    locationListener
+                )
             }
+            return
+        }
+    }
+
+    fun getAddress(location: Location) {
+        val geocoder = Geocoder(context)
+//        Thread {
+            val address = geocoder.getFromLocation(location.latitude, location.longitude, 1)
+            Toast.makeText(
+                requireContext(),
+                "${address.first().getAddressLine(0)}",
+                Toast.LENGTH_SHORT
+            )
+                .show()
+//        }.start()
+    }
+
+    private val locationListener = object : LocationListener {
+        override fun onLocationChanged(location: Location) {
+            getAddress(location)
+        }
+
+        override fun onProviderDisabled(provider: String) {
+            Toast.makeText(
+                requireContext(),
+                "GPS отключен",
+                Toast.LENGTH_SHORT
+            ).show()
+            super.onProviderDisabled(provider)
+        }
+
+        override fun onProviderEnabled(provider: String) {
+            Toast.makeText(
+                requireContext(),
+                "GPS включен",
+                Toast.LENGTH_SHORT
+            ).show()
+            super.onProviderEnabled(provider)
+        }
     }
 
     private fun renderData(appState: CitiesListFragmentAppState) {
