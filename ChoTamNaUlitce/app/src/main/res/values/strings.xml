@@ -19,4 +19,5 @@
     <string name="repo_room">Room репозиторий</string>
     <string name="contacts">Контакты</string>
     <string name="room_history">история запросов</string>
+    <string name="map_location">Карты</string>
 </resources>

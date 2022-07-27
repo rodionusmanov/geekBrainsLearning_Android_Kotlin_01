@@ -1,12 +1,20 @@
 package com.example.chotamnaulitce.view.citieslist
 
+import android.Manifest
+import android.app.AlertDialog
 import android.content.Context
+import android.content.pm.PackageManager
+import android.location.Criteria
+import android.location.Location
+import android.location.LocationListener
+import android.location.LocationManager
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.chotamnaulitce.ChoTamNaUlitceApp
@@ -15,12 +23,13 @@ import com.example.chotamnaulitce.databinding.WeatherFragmentFrameBinding
 import com.example.chotamnaulitce.domain.Weather
 import com.example.chotamnaulitce.utils.LOCATION_CITIES_LIST
 import com.example.chotamnaulitce.utils.REPOSITORY_CHOSEN
+import com.example.chotamnaulitce.utils.REQUEST_CODE_READ_CONTACTS
 import com.example.chotamnaulitce.utils.chosenRepository
 import com.example.chotamnaulitce.view.chooseRepository.ChooseRepositoryFragment
 import com.example.chotamnaulitce.view.details.DetailsFragment
 import com.example.chotamnaulitce.view.details.IOnItemClick
-import com.example.chotamnaulitce.viewmodel.citieslist.CitiesListViewModel
 import com.example.chotamnaulitce.viewmodel.citieslist.CitiesListFragmentAppState
+import com.example.chotamnaulitce.viewmodel.citieslist.CitiesListViewModel
 
 class CitiesListFragment : Fragment(), IOnItemClick {
     companion object {
@@ -78,6 +87,88 @@ class CitiesListFragment : Fragment(), IOnItemClick {
         binding.chooseRepositoryFloatingActionButton.setOnClickListener {
             val dialog = ChooseRepositoryFragment()
             dialog.show(requireActivity().supportFragmentManager, "repo")
+        }
+
+        binding.mapLocationFloatingActionButton.setOnClickListener {
+            checkPermission(Manifest.permission.ACCESS_FINE_LOCATION)
+        }
+    }
+
+    private val REQUEST_CODE_LOCATION = 666
+
+    private fun permissionRequest(permission: String) {
+        requestPermissions(arrayOf(permission), REQUEST_CODE_LOCATION)
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        if (requestCode == REQUEST_CODE_LOCATION) {
+            for (permsIndex in permissions.indices) {
+                if (permissions[permsIndex] == Manifest.permission.ACCESS_FINE_LOCATION && grantResults[permsIndex] == PackageManager.PERMISSION_GRANTED) {
+                    getLocation()
+                }
+            }
+        }
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+    }
+
+    private fun checkPermission(perm : String) {
+        val permResult = ContextCompat.checkSelfPermission(
+            requireContext(),
+            perm
+        )
+        PackageManager.PERMISSION_GRANTED
+        if (permResult == PackageManager.PERMISSION_GRANTED) {
+            getLocation()
+        } else if (shouldShowRequestPermissionRationale(perm)) {
+            AlertDialog.Builder(requireContext())
+                .setTitle("Доступ к геоданным")
+                .setMessage("Запрос на доступ к геоданным. В случае отказа, доступ можно будет предоставить только в настройках приложения.")
+                .setPositiveButton("Открыть окно предоставления доступа") { _, _ ->
+                    permissionRequest(perm)
+                }
+                .setNegativeButton("Отказать в запросе") { dialog, _ -> dialog.dismiss() }
+                .create()
+                .show()
+        } else {
+            permissionRequest(perm)
+            AlertDialog.Builder(requireContext())
+                .setTitle("Доступ к геоданным")
+                .setMessage("Доступ к геоданным отсутствует. Доступ можно будет предоставить только в настройках приложения.")
+                .setPositiveButton("Закрыть сообщение") { dialog, _ ->
+                    dialog.dismiss()
+
+                    requireActivity().supportFragmentManager.apply {
+                        beginTransaction()
+                            .replace(R.id.container, (CitiesListFragment()))
+                            .addToBackStack(null)
+                            .commitAllowingStateLoss()
+                    }
+                }
+                .create()
+                .show()
+        }
+    }
+
+    private fun getLocation() {
+        val locationManager =
+            requireContext().getSystemService(Context.LOCATION_SERVICE) as LocationManager
+        if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+            val criteria = Criteria()
+            criteria.accuracy = Criteria.ACCURACY_FINE
+            val provider = locationManager.getBestProvider(criteria, true)
+            locationManager.requestLocationUpdates(
+                LocationManager.GPS_PROVIDER,
+                0L,
+                1000F,
+                object : LocationListener {
+                    override fun onLocationChanged(location: Location) {
+                        Toast.makeText(requireContext(), "${location.latitude} / ${location.longitude}", Toast.LENGTH_SHORT).show()
+                    }
+                })
         }
     }
 
