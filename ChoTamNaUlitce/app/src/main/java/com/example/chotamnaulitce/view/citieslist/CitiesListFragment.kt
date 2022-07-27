@@ -14,6 +14,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.Toast
+import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -115,7 +116,7 @@ class CitiesListFragment : Fragment(), IOnItemClick {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
     }
 
-    private fun checkPermission(perm : String) {
+    private fun checkPermission(perm: String) {
         val permResult = ContextCompat.checkSelfPermission(
             requireContext(),
             perm
@@ -154,22 +155,33 @@ class CitiesListFragment : Fragment(), IOnItemClick {
     }
 
     private fun getLocation() {
-        val locationManager =
-            requireContext().getSystemService(Context.LOCATION_SERVICE) as LocationManager
-        if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
-            val criteria = Criteria()
-            criteria.accuracy = Criteria.ACCURACY_FINE
-            val provider = locationManager.getBestProvider(criteria, true)
-            locationManager.requestLocationUpdates(
-                LocationManager.GPS_PROVIDER,
-                0L,
-                1000F,
-                object : LocationListener {
-                    override fun onLocationChanged(location: Location) {
-                        Toast.makeText(requireContext(), "${location.latitude} / ${location.longitude}", Toast.LENGTH_SHORT).show()
-                    }
-                })
-        }
+
+            if (ActivityCompat.checkSelfPermission(
+                    requireContext(),
+                    Manifest.permission.ACCESS_FINE_LOCATION
+                ) == PackageManager.PERMISSION_GRANTED
+            ) { val locationManager =
+                requireContext().getSystemService(Context.LOCATION_SERVICE) as LocationManager
+                if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+                    val criteria = Criteria()
+                    criteria.accuracy = Criteria.ACCURACY_FINE
+                    val provider = locationManager.getBestProvider(criteria, true)
+                    locationManager.requestLocationUpdates(
+                            LocationManager.GPS_PROVIDER,
+                    0L,
+                    1000F,
+                    object : LocationListener {
+                        override fun onLocationChanged(location: Location) {
+                            Toast.makeText(
+                                requireContext(),
+                                "${location.latitude} / ${location.longitude}",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                    })
+                }
+                return
+            }
     }
 
     private fun renderData(appState: CitiesListFragmentAppState) {
