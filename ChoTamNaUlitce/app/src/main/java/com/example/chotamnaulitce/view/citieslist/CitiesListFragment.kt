@@ -6,7 +6,7 @@ import android.content.Context
 import android.content.pm.PackageManager
 import android.location.*
 import android.os.Bundle
-import android.util.Log
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,16 +19,18 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.chotamnaulitce.ChoTamNaUlitceApp
 import com.example.chotamnaulitce.R
 import com.example.chotamnaulitce.databinding.WeatherFragmentFrameBinding
+import com.example.chotamnaulitce.domain.City
 import com.example.chotamnaulitce.domain.Weather
 import com.example.chotamnaulitce.utils.LOCATION_CITIES_LIST
 import com.example.chotamnaulitce.utils.REPOSITORY_CHOSEN
-import com.example.chotamnaulitce.utils.REQUEST_CODE_READ_CONTACTS
 import com.example.chotamnaulitce.utils.chosenRepository
 import com.example.chotamnaulitce.view.chooseRepository.ChooseRepositoryFragment
 import com.example.chotamnaulitce.view.details.DetailsFragment
 import com.example.chotamnaulitce.view.details.IOnItemClick
 import com.example.chotamnaulitce.viewmodel.citieslist.CitiesListFragmentAppState
 import com.example.chotamnaulitce.viewmodel.citieslist.CitiesListViewModel
+import com.google.android.material.snackbar.Snackbar
+
 
 class CitiesListFragment : Fragment(), IOnItemClick {
     companion object {
@@ -178,15 +180,38 @@ class CitiesListFragment : Fragment(), IOnItemClick {
 
     fun getAddress(location: Location) {
         val geocoder = Geocoder(context)
-//        Thread {
+        Thread {
             val address = geocoder.getFromLocation(location.latitude, location.longitude, 1)
-            Toast.makeText(
-                requireContext(),
-                "${address.first().getAddressLine(0)}",
-                Toast.LENGTH_SHORT
-            )
-                .show()
-//        }.start()
+            try {
+                requireActivity().runOnUiThread {
+                    Snackbar.make(
+                        requireView(),
+                        address[0].getAddressLine(0),
+                        Snackbar.LENGTH_SHORT
+                    )
+                        .setAction("Получить погоду по координатам") {
+                            onItemClick(
+                                Weather(
+                                    City(
+                                        address[0].getAddressLine(0),
+                                        location.latitude,
+                                        location.longitude
+                                    ),
+                                    0,
+                                    0,
+                                    0,
+                                    "",
+                                    0.0,
+                                    "",
+                                    ""
+                                )
+                            )
+                        }.show()
+                }
+            } catch (e: InterruptedException) {
+                e.printStackTrace()
+            }
+        }.start()
     }
 
     private val locationListener = object : LocationListener {

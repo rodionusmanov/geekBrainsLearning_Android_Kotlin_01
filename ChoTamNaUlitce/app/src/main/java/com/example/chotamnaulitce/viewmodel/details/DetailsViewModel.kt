@@ -19,7 +19,6 @@ class DetailsViewModel(
     lateinit var repositoryAddable: IRepositoryAddable
 
     fun getLiveData(): MutableLiveData<DetailsFragmentAppState> {
-//        chooseRepository()
         return liveData
     }
 
