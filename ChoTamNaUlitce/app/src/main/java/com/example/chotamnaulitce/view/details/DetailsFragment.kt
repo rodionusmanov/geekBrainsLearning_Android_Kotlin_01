@@ -17,6 +17,8 @@ import coil.load
 import com.example.chotamnaulitce.R
 import com.example.chotamnaulitce.databinding.DetailsWeatherFragmentBinding
 import com.example.chotamnaulitce.domain.Weather
+import com.example.chotamnaulitce.utils.conditionToRus
+import com.example.chotamnaulitce.utils.windDirectionToRus
 import com.example.chotamnaulitce.view.citieslist.CitiesListFragment
 import com.example.chotamnaulitce.viewmodel.details.DetailsFragmentAppState
 import com.example.chotamnaulitce.viewmodel.details.DetailsViewModel
@@ -108,19 +110,27 @@ class DetailsFragment : Fragment() {
                         weatherLocal.city.name,
                         getString(R.string.return_to_cities_list)
                     ) {
-                        requireActivity()
-                            .supportFragmentManager
-                            .beginTransaction()
-                            .replace(R.id.container, CitiesListFragment.newInstance())
-                            .commit()
+                        if (isAdded) {
+                            requireActivity()
+                                .supportFragmentManager
+                                .beginTransaction()
+                                .replace(R.id.container, CitiesListFragment.newInstance())
+                                .commit()
+                        }
                     }
 
                     val imageLoader = ImageLoader.Builder(requireContext())
-                    .components {
-                        add(SvgDecoder.Factory())
+                        .components {
+                            add(SvgDecoder.Factory())
+                        }
+                        .build()
+                    conditionImageView.load(
+                        "https://yastatic.net/weather/i/icons/funky/dark/${detailsFragmentAppState.weatherData.icon}.svg",
+                        imageLoader
+                    ) {
+                        placeholder(android.R.drawable.ic_lock_idle_alarm)
+                        error(android.R.drawable.ic_delete)
                     }
-                    .build()
-                    conditionImageView.load("https://yastatic.net/weather/i/icons/funky/dark/${detailsFragmentAppState.weatherData.icon}.svg", imageLoader)
                 }
             }
         }
@@ -131,7 +141,7 @@ class DetailsFragment : Fragment() {
         returnText: String,
         returnAction: () -> Unit
     ) {
-        Snackbar.make(requireView(), text, Snackbar.LENGTH_INDEFINITE)
+        Snackbar.make(requireView(), text, Snackbar.LENGTH_SHORT)
             .setAction(returnText) {
                 returnAction()
             }.show()
@@ -150,45 +160,5 @@ class DetailsFragment : Fragment() {
 
     private fun returnToTextField(value: TextInputEditText, string: String) {
         return value.setText(string)
-    }
-
-    private fun conditionToRus(string: String): String {
-        when (string) {
-            "clear" -> return "ясно"
-            "partly-cloudy" -> return "малооблачно"
-            "cloudy" -> return "малооблачно с прояснениями"
-            "overcast" -> return "пасмурно"
-            "drizzle" -> return "морось"
-            "light-rain" -> return "небольшой дождь"
-            "rain" -> return "дождь"
-            "moderate-rain" -> return "умеренно сильный дождь"
-            "heavy-rain" -> return "сильный дождь"
-            "continuous-heavy-rain" -> return " длительный сильный дождь"
-            "showers" -> return "ливень"
-            "wet-snow" -> return "дождь со снегом"
-            "light-snow" -> return "небольшой снег"
-            "snow" -> return "снег"
-            "snow-showers" -> return "снегопад"
-            "hail" -> return " небольшой снег"
-            "thunderstorm" -> return "гроза"
-            "thunderstorm-with-rain" -> return "дождь с грозой"
-            "thunderstorm-with-hail" -> return "гроза с градом"
-            else -> return "неизвестно"
-        }
-    }
-
-    private fun windDirectionToRus(string: String): String {
-        return when (string) {
-            "n" -> "север"
-            "ne" -> "северо-восток"
-            "e" -> "восток"
-            "se" -> "юго-восток"
-            "s" -> "юг"
-            "sw" -> "юго-запад"
-            "w" -> "запад"
-            "nw" -> "северо-запад"
-            "c" -> "штиль"
-            else -> "неизвестно"
-        }
     }
 }

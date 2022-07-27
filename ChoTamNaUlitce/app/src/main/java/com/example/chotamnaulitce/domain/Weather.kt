@@ -54,6 +54,4 @@ fun getWorldCities(): List<Weather> {
     )
 }
 
-fun getDefaultCity() = City("Москва", 55.45, 37.36)
-
 fun getFailureWeather() = Weather(City("Не удалось получить погоду из базы данных", 0.0, 0.0), 0, 0, 0, "", 0.0, "", "")

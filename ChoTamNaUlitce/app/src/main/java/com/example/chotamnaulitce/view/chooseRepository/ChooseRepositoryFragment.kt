@@ -1,4 +1,4 @@
-package com.example.chotamnaulitce.view
+package com.example.chotamnaulitce.view.chooseRepository
 
 import android.content.Context
 import android.content.SharedPreferences
