@@ -13,6 +13,7 @@ import com.example.chotamnaulitce.databinding.ActivityMainBinding
 import com.example.chotamnaulitce.utils.isConnected
 import com.example.chotamnaulitce.view.citieslist.CitiesListFragment
 import com.example.chotamnaulitce.view.contacts.ContactsFragment
+import com.example.chotamnaulitce.view.mapsGoogle.MapsFragment
 import com.example.chotamnaulitce.view.roomHistory.RoomHistoryFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -57,6 +58,15 @@ class MainActivity : AppCompatActivity() {
         R.id.room_history -> {
             val dialog = RoomHistoryFragment()
             dialog.show(supportFragmentManager, "history")
+            true
+        }
+        R.id.maps -> {
+            supportFragmentManager.apply {
+                beginTransaction()
+                    .replace(R.id.container, (MapsFragment()))
+                    .addToBackStack(null)
+                    .commitAllowingStateLoss()
+            }
             true
         }
         else -> {

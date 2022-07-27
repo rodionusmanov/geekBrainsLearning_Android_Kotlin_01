@@ -3,6 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
+        android:id="@+id/maps"
+        android:icon="@android:drawable/ic_menu_mapmode"
+        android:title="@string/maps"
+        app:showAsAction="ifRoom" />
+
+    <item
         android:id="@+id/contacts_item"
         android:icon="@android:drawable/ic_menu_search"
         android:title="@string/contacts"
@@ -10,7 +16,7 @@
 
     <item
         android:id="@+id/room_history"
-        android:icon="@android:drawable/sym_contact_card"
+        android:icon="@android:drawable/ic_menu_agenda"
         android:title="@string/room_history"
         app:showAsAction="ifRoom" />
 

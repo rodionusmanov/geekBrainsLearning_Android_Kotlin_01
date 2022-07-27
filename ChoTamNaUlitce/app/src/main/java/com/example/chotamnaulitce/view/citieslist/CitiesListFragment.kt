@@ -30,6 +30,7 @@ import com.example.chotamnaulitce.view.details.IOnItemClick
 import com.example.chotamnaulitce.viewmodel.citieslist.CitiesListFragmentAppState
 import com.example.chotamnaulitce.viewmodel.citieslist.CitiesListViewModel
 import com.google.android.material.snackbar.Snackbar
+import java.util.*
 
 
 class CitiesListFragment : Fragment(), IOnItemClick {
@@ -173,13 +174,15 @@ class CitiesListFragment : Fragment(), IOnItemClick {
                     1000F,
                     locationListener
                 )
+            } else {
+                locationListener.onProviderDisabled("")
             }
             return
         }
     }
 
     fun getAddress(location: Location) {
-        val geocoder = Geocoder(context)
+        val geocoder = Geocoder(context, Locale("ru_RU"))
         Thread {
             val address = geocoder.getFromLocation(location.latitude, location.longitude, 1)
             try {

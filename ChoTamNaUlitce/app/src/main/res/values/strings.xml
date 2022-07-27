@@ -20,4 +20,7 @@
     <string name="contacts">Контакты</string>
     <string name="room_history">история запросов</string>
     <string name="map_location">Карты</string>
+    <string name="maps">Google-карта</string>
+    <string name="address">address</string>
+    <string name="search">Поиск</string>
 </resources>
