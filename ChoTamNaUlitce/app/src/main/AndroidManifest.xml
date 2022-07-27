@@ -35,11 +35,13 @@
         android:theme="@style/Theme.ChoTamNaUlitce"
         tools:targetApi="31">
 
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyC4Q7OtEFPeHIh5GARicSvXNTMEJ7g0Dfk"/>
-<!--            android:value="AIzaSyAXpt_jemWM5tH16FsDO8rqTgop_uZKW24" -->
+            android:value="YOUR_API_KEY" />
 
+        <!-- личный api-key. на данный момент не функционирует -->
+        <!-- android:value="AIzaSyAXpt_jemWM5tH16FsDO8rqTgop_uZKW24" -->
         <activity
             android:name=".MainActivity"
             android:exported="true">

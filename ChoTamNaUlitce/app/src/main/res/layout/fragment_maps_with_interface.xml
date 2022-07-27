@@ -13,7 +13,7 @@
         android:orientation="horizontal">
 
         <EditText
-            android:id="@+id/searchAddress"
+            android:id="@+id/search_address"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -22,7 +22,7 @@
             android:text="Moscow" />
 
         <Button
-            android:id="@+id/buttonSearch"
+            android:id="@+id/button_search"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
