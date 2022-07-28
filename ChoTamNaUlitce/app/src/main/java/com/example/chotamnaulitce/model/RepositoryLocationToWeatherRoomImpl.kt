@@ -16,7 +16,7 @@ class RepositoryLocationToWeatherRoomImpl : IRepositoryLocationToWeather, IRepos
             callback.onResponse(
                 ChoTamNaUlitceApp.getWeatherDatabase().weatherDAO()
                     .getWeatherByLocation(weather.city.latitude, weather.city.longitude).let {
-                        if (it.size > 0) {
+                        if (it.isNotEmpty()) {
                             convertWeatherEntityToWeather(it).last()
                         } else {
                             getFailureWeather()

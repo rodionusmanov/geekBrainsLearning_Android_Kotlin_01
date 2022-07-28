@@ -19,7 +19,7 @@ interface IUniversalCallback {
 
 interface IRepositorySingle {
     fun getWeatherList(location: Location): List<Weather>
-    fun getWeather(latitude: Double, longtitude: Double): Weather
+    fun getWeather(latitude: Double, longitude: Double): Weather
 }
 
 interface IRepositoryCitiesList {
