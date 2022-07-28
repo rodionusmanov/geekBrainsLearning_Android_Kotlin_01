@@ -1,14 +1,18 @@
 package com.example.chotamnaulitce
 
+import android.app.NotificationChannel
+import android.app.NotificationManager
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.net.ConnectivityManager
+import android.os.Build
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.NotificationCompat
 import com.example.chotamnaulitce.databinding.ActivityMainBinding
 import com.example.chotamnaulitce.utils.isConnected
 import com.example.chotamnaulitce.view.citieslist.CitiesListFragment
@@ -38,6 +42,32 @@ class MainActivity : AppCompatActivity() {
                         .newInstance()
                 ).commit()
         }
+        pushNotification("title", "text")
+    }
+
+    val CHANNEL_ID_HIGH_PRIORITY = "23rewfr"
+    val CHANNEL_ID_LOW_PRIORITY = "fcnvcf"
+    val NOTIFICATION_ID = 15
+
+    fun pushNotification(title: String, text: String) {
+        val notificationManager =
+            getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        val notification = NotificationCompat.Builder(this, CHANNEL_ID_HIGH_PRIORITY).apply {
+            setContentTitle(title)
+            setContentText(text)
+            setSmallIcon(android.R.drawable.btn_dialog)
+            priority = NotificationCompat.PRIORITY_HIGH
+        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val channelHigh = NotificationChannel(
+                CHANNEL_ID_HIGH_PRIORITY,
+                "high",
+                NotificationManager.IMPORTANCE_HIGH
+            )
+            channelHigh.description = "channel info"
+            notificationManager.createNotificationChannel(channelHigh)
+        }
+        notificationManager.notify(NOTIFICATION_ID, notification.build())
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
