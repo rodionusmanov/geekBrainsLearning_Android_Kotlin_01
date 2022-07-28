@@ -2,11 +2,13 @@ package com.example.chotamnaulitce
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
+import android.app.PendingIntent
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.net.ConnectivityManager
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.view.Menu
@@ -57,6 +59,11 @@ class MainActivity : AppCompatActivity() {
             setContentText(text)
             setSmallIcon(android.R.drawable.btn_dialog)
             priority = NotificationCompat.PRIORITY_HIGH
+
+            val intent = Intent(applicationContext, MainActivity::class.java)
+            val pendingIntent = PendingIntent.getActivity(applicationContext, 0, intent, 0)
+            setContentIntent(pendingIntent)
+
         }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val channelHigh = NotificationChannel(
