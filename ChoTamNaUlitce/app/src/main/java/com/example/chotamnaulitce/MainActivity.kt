@@ -56,7 +56,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     val CHANNEL_ID_HIGH_PRIORITY = "23rewfr"
-    val CHANNEL_ID_LOW_PRIORITY = "fcnvcf"
     val NOTIFICATION_ID = 15
 
     fun pushNotification(title: String, text: String) {
