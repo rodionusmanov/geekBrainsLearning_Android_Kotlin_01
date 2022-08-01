@@ -8,7 +8,6 @@ import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.net.ConnectivityManager
-import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.view.Menu
@@ -21,6 +20,8 @@ import com.example.chotamnaulitce.view.citieslist.CitiesListFragment
 import com.example.chotamnaulitce.view.contacts.ContactsFragment
 import com.example.chotamnaulitce.view.mapsGoogle.MapsFragment
 import com.example.chotamnaulitce.view.roomHistory.RoomHistoryFragment
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.firebase.messaging.FirebaseMessaging
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -44,7 +45,14 @@ class MainActivity : AppCompatActivity() {
                         .newInstance()
                 ).commit()
         }
-        pushNotification("title", "text")
+
+        FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener {
+            if (!it.isSuccessful) {
+                return@OnCompleteListener
+            }
+            val token = it.result
+            pushNotification("token, повторный вывод", token)
+        })
     }
 
     val CHANNEL_ID_HIGH_PRIORITY = "23rewfr"

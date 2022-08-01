@@ -6,7 +6,6 @@ import android.content.Context
 import android.content.pm.PackageManager
 import android.location.*
 import android.os.Bundle
-import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,6 +16,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.chotamnaulitce.ChoTamNaUlitceApp
+import com.example.chotamnaulitce.MyFirebaseMessagingService
 import com.example.chotamnaulitce.R
 import com.example.chotamnaulitce.databinding.WeatherFragmentFrameBinding
 import com.example.chotamnaulitce.domain.City
@@ -30,6 +30,7 @@ import com.example.chotamnaulitce.view.details.IOnItemClick
 import com.example.chotamnaulitce.viewmodel.citieslist.CitiesListFragmentAppState
 import com.example.chotamnaulitce.viewmodel.citieslist.CitiesListViewModel
 import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.messaging.FirebaseMessagingService
 import java.util.*
 
 
@@ -277,6 +278,7 @@ class CitiesListFragment : Fragment(), IOnItemClick {
         if (locationSwitchForFAB == 1) {
             viewModel.getWeatherListForRus()
             binding.chooseLocationFloatingActionButton.setImageResource(R.drawable.rus)
+
         } else {
             viewModel.getWeatherListForWorld()
             binding.chooseLocationFloatingActionButton.setImageResource(R.drawable.earth)
