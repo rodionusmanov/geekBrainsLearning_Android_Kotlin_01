@@ -16,7 +16,6 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.chotamnaulitce.ChoTamNaUlitceApp
-import com.example.chotamnaulitce.MyFirebaseMessagingService
 import com.example.chotamnaulitce.R
 import com.example.chotamnaulitce.databinding.WeatherFragmentFrameBinding
 import com.example.chotamnaulitce.domain.City
@@ -30,9 +29,7 @@ import com.example.chotamnaulitce.view.details.IOnItemClick
 import com.example.chotamnaulitce.viewmodel.citieslist.CitiesListFragmentAppState
 import com.example.chotamnaulitce.viewmodel.citieslist.CitiesListViewModel
 import com.google.android.material.snackbar.Snackbar
-import com.google.firebase.messaging.FirebaseMessagingService
 import java.util.*
-
 
 class CitiesListFragment : Fragment(), IOnItemClick {
     companion object {
@@ -68,11 +65,11 @@ class CitiesListFragment : Fragment(), IOnItemClick {
         super.onViewCreated(view, savedInstanceState)
 
         chosenRepository = weatherSharedPreferences.getInt(REPOSITORY_CHOSEN, 4)
+        binding.repositoryStateTextInput.setText(repositoryState(chosenRepository))
         viewModel = ViewModelProvider(this).get(CitiesListViewModel::class.java)
         viewModel.let {
             it.getLiveData().observe(viewLifecycleOwner) { t -> renderData(t) }
         }
-
         binding.chooseLocationFloatingActionButton.setOnClickListener {
             locationSwitchForFAB = (locationSwitchForFAB + 1) % 2
             weatherSharedPreferences.edit().apply {
@@ -94,6 +91,24 @@ class CitiesListFragment : Fragment(), IOnItemClick {
 
         binding.mapLocationFloatingActionButton.setOnClickListener {
             checkPermission(Manifest.permission.ACCESS_FINE_LOCATION)
+        }
+    }
+
+    private fun repositoryState(chosenRepository: Int): CharSequence {
+        return when (chosenRepository) {
+            1 -> {
+                resources.getString(R.string.OkHTTP)
+            }
+            2 -> {
+                resources.getString(R.string.Retrofit)
+            }
+            3 -> {
+                resources.getString(R.string.Room)
+            }
+            4 -> {
+                resources.getString(R.string.Local)
+            }
+            else -> ""
         }
     }
 
@@ -224,19 +239,19 @@ class CitiesListFragment : Fragment(), IOnItemClick {
         }
 
         override fun onProviderDisabled(provider: String) {
-            Toast.makeText(
-                requireContext(),
+            Snackbar.make(
+                requireView(),
                 "GPS отключен",
-                Toast.LENGTH_SHORT
+                Snackbar.LENGTH_SHORT
             ).show()
             super.onProviderDisabled(provider)
         }
 
         override fun onProviderEnabled(provider: String) {
-            Toast.makeText(
-                requireContext(),
+            Snackbar.make(
+                requireView(),
                 "GPS включен",
-                Toast.LENGTH_SHORT
+                Snackbar.LENGTH_SHORT
             ).show()
             super.onProviderEnabled(provider)
         }

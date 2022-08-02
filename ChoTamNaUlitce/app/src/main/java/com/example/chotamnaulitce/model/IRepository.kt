@@ -1,7 +1,6 @@
 package com.example.chotamnaulitce.model
 
 import com.example.chotamnaulitce.domain.Weather
-import com.example.chotamnaulitce.model.DataTransferObject.WeatherDataTransferObject
 import java.io.IOException
 
 interface IRepositoryLocationToWeather {

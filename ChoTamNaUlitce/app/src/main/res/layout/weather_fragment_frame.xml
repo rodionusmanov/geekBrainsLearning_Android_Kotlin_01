@@ -14,7 +14,7 @@
             android:id="@+id/cities_fragment_recycler_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -55,6 +55,22 @@
                 android:src="@android:drawable/ic_dialog_map"
                 app:maxImageSize="40dp"
                 app:tint="@null" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:textColor="@color/black"
+                android:textSize="24sp"
+                android:textStyle="bold">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/repository_state_text_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:hint="@string/repository" />
+
+            </com.google.android.material.textfield.TextInputLayout>
 
         </LinearLayout>
 
