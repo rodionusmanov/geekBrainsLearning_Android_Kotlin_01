@@ -68,7 +68,11 @@
                     android:id="@+id/repository_state_text_input"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:hint="@string/repository" />
+                    android:hint="@string/repository"
+                    android:enabled="false"
+                    android:textColor="@color/black"
+                    android:textSize="24sp"
+                    android:textStyle="bold"/>
 
             </com.google.android.material.textfield.TextInputLayout>
 
