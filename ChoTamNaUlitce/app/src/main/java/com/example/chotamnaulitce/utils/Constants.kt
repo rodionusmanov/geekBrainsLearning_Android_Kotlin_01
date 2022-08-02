@@ -9,6 +9,8 @@ const val LOCATION_CITIES_LIST = "Location"
 const val REPOSITORY_CHOSEN = "Repo_key"
 const val ROOM_DB_NAME_WEATHER = "WeatherDB"
 const val REQUEST_CODE_READ_CONTACTS = 4513
+val NOTIFICATION_KEY_TITLE = "myTitle"
+val NOTIFICATION_KEY_MESSAGE = "myMessage"
 
 var isConnected: Boolean = false
 var chosenRepository: Int = 3

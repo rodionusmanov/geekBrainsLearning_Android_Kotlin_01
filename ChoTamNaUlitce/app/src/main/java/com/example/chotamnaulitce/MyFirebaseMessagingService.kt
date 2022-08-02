@@ -6,8 +6,10 @@ import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.os.Build
+import android.util.Log
 import androidx.core.app.NotificationCompat
 import com.google.firebase.messaging.FirebaseMessagingService
+import com.google.firebase.messaging.RemoteMessage
 
 class MyFirebaseMessagingService : FirebaseMessagingService() {
 
@@ -16,8 +18,15 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         super.onNewToken(token)
     }
 
+    override fun onMessageReceived(message: RemoteMessage) {
+        pushNotification("message", "${message}")
+        super.onMessageReceived(message)
+    }
+
     val CHANNEL_ID_HIGH_PRIORITY = "23rewfr"
     val NOTIFICATION_ID = 15
+
+
 
     fun pushNotification(title: String, text: String) {
         val notificationManager =
