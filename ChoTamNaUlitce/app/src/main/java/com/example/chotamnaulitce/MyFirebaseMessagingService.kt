@@ -6,8 +6,11 @@ import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.os.Build
-import android.util.Log
 import androidx.core.app.NotificationCompat
+import com.example.chotamnaulitce.utils.CHANNEL_ID_HIGH_PRIORITY
+import com.example.chotamnaulitce.utils.NOTIFICATION_ID
+import com.example.chotamnaulitce.utils.NOTIFICATION_KEY_BODY
+import com.example.chotamnaulitce.utils.NOTIFICATION_KEY_TITLE
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 
@@ -19,16 +22,16 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
     }
 
     override fun onMessageReceived(message: RemoteMessage) {
-        pushNotification("message", "${message}")
+        val data = message.data
+        val title = data[NOTIFICATION_KEY_TITLE]
+        val body = data[NOTIFICATION_KEY_BODY]
+        if (!title.isNullOrEmpty() && !body.isNullOrEmpty()) {
+            pushNotification(title, body)
+        }
         super.onMessageReceived(message)
     }
 
-    val CHANNEL_ID_HIGH_PRIORITY = "23rewfr"
-    val NOTIFICATION_ID = 15
-
-
-
-    fun pushNotification(title: String, text: String) {
+    private fun pushNotification(title: String, text: String) {
         val notificationManager =
             getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         val notification = NotificationCompat.Builder(this, CHANNEL_ID_HIGH_PRIORITY).apply {

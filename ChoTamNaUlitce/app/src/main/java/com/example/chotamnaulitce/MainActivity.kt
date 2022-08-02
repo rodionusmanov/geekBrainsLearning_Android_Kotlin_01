@@ -16,6 +16,8 @@ import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.NotificationCompat
 import com.example.chotamnaulitce.databinding.ActivityMainBinding
+import com.example.chotamnaulitce.utils.CHANNEL_ID_HIGH_PRIORITY
+import com.example.chotamnaulitce.utils.NOTIFICATION_ID
 import com.example.chotamnaulitce.utils.isConnected
 import com.example.chotamnaulitce.view.citieslist.CitiesListFragment
 import com.example.chotamnaulitce.view.contacts.ContactsFragment
@@ -57,10 +59,7 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
-    val CHANNEL_ID_HIGH_PRIORITY = "23rewfr"
-    val NOTIFICATION_ID = 15
-
-    fun pushNotification(title: String, text: String) {
+    private fun pushNotification(title: String, text: String) {
         val notificationManager =
             getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         val notification = NotificationCompat.Builder(this, CHANNEL_ID_HIGH_PRIORITY).apply {
