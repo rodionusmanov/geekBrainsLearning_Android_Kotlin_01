@@ -6,12 +6,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import com.example.chotamnaulitce.ChoTamNaUlitceApp
 import com.example.chotamnaulitce.R
 import com.example.chotamnaulitce.utils.REPOSITORY_CHOSEN
 import com.example.chotamnaulitce.utils.chosenRepository
-import com.google.android.material.textfield.TextInputEditText
 import kotlinx.android.synthetic.main.repository_radiobutton_fragment.*
 
 class ChooseRepositoryFragment: DialogFragment() {
@@ -34,33 +34,34 @@ class ChooseRepositoryFragment: DialogFragment() {
             3 -> {repository_room.isChecked = true}
             4 -> {repository_local.isChecked = true}
         }
-val textInputRepository = requireActivity().findViewById<TextInputEditText>(R.id.repository_state_text_input)
+
         super.onViewCreated(view, savedInstanceState)
 
         repository_okhttp.setOnClickListener{
             chosenRepository = 1
-            textInputRepository.setText(resources.getString(R.string.OkHTTP))
+            Toast.makeText(requireContext(),"OkHTTP",Toast.LENGTH_SHORT).show()
             saveRepositoryState(weatherSharedPreferences)
             dismiss()
+
         }
 
         repository_retrofit.setOnClickListener{
             chosenRepository = 2
-            textInputRepository.setText(resources.getString(R.string.Retrofit))
+            Toast.makeText(requireContext(),"Retrofit",Toast.LENGTH_SHORT).show()
             saveRepositoryState(weatherSharedPreferences)
             dismiss()
         }
 
         repository_room.setOnClickListener{
             chosenRepository = 3
-            textInputRepository.setText(resources.getString(R.string.Room))
+            Toast.makeText(requireContext(),"Room",Toast.LENGTH_SHORT).show()
             saveRepositoryState(weatherSharedPreferences)
             dismiss()
         }
 
         repository_local.setOnClickListener{
             chosenRepository = 4
-            textInputRepository.setText(resources.getString(R.string.Local))
+            Toast.makeText(requireContext(),"Local",Toast.LENGTH_SHORT).show()
             saveRepositoryState(weatherSharedPreferences)
             dismiss()
         }

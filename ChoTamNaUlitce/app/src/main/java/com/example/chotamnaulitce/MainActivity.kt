@@ -1,30 +1,20 @@
 package com.example.chotamnaulitce
 
-import android.app.NotificationChannel
-import android.app.NotificationManager
-import android.app.PendingIntent
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.net.ConnectivityManager
-import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.NotificationCompat
 import com.example.chotamnaulitce.databinding.ActivityMainBinding
-import com.example.chotamnaulitce.utils.CHANNEL_ID_HIGH_PRIORITY
-import com.example.chotamnaulitce.utils.NOTIFICATION_ID
 import com.example.chotamnaulitce.utils.isConnected
 import com.example.chotamnaulitce.view.citieslist.CitiesListFragment
 import com.example.chotamnaulitce.view.contacts.ContactsFragment
 import com.example.chotamnaulitce.view.mapsGoogle.MapsFragment
 import com.example.chotamnaulitce.view.roomHistory.RoomHistoryFragment
-import com.google.android.gms.tasks.OnCompleteListener
-import com.google.firebase.messaging.FirebaseMessaging
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -48,41 +38,6 @@ class MainActivity : AppCompatActivity() {
                         .newInstance()
                 ).commit()
         }
-
-        FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener {
-            if (!it.isSuccessful) {
-                return@OnCompleteListener
-            }
-            val token = it.result
-            Log.d("keyToken",token)
-            pushNotification("token, повторный вывод", token)
-        })
-    }
-
-    private fun pushNotification(title: String, text: String) {
-        val notificationManager =
-            getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-        val notification = NotificationCompat.Builder(this, CHANNEL_ID_HIGH_PRIORITY).apply {
-            setContentTitle(title)
-            setContentText(text)
-            setSmallIcon(android.R.drawable.btn_dialog)
-            priority = NotificationCompat.PRIORITY_HIGH
-
-            val intent = Intent(applicationContext, MainActivity::class.java)
-            val pendingIntent = PendingIntent.getActivity(applicationContext, 0, intent, 0)
-            setContentIntent(pendingIntent)
-
-        }
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val channelHigh = NotificationChannel(
-                CHANNEL_ID_HIGH_PRIORITY,
-                "high",
-                NotificationManager.IMPORTANCE_HIGH
-            )
-            channelHigh.description = "channel info"
-            notificationManager.createNotificationChannel(channelHigh)
-        }
-        notificationManager.notify(NOTIFICATION_ID, notification.build())
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="default_web_client_id" translatable="false">494425200027-oceh6l3q503d77o8vdpg556prskk9cu0.apps.googleusercontent.com</string>
+    <string name="gcm_defaultSenderId" translatable="false">494425200027</string>
+    <string name="google_api_key" translatable="false">AIzaSyBhs0Ac_bZlh7HAkeLHta9iynI5ro6-mbc</string>
+    <string name="google_app_id" translatable="false">1:494425200027:android:9ba0bddb4fb0a3c8b8fd3e</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyBhs0Ac_bZlh7HAkeLHta9iynI5ro6-mbc</string>
+    <string name="google_storage_bucket" translatable="false">weather-studying-gb.appspot.com</string>
+    <string name="project_id" translatable="false">weather-studying-gb</string>
+</resources>

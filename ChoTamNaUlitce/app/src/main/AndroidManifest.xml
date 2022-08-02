@@ -9,7 +9,6 @@
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
 
     <queries>
         <intent>
@@ -39,12 +38,10 @@
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyC4Q7OtEFPeHIh5GARicSvXNTMEJ7g0Dfk">
+            android:value="AIzaSyC4Q7OtEFPeHIh5GARicSvXNTMEJ7g0Dfk" />
 
-            <!-- личный api-key. на данный момент не функционирует -->
-            <!-- android:value="AIzaSyAXpt_jemWM5tH16FsDO8rqTgop_uZKW24" -->
-        </meta-data>
-
+        <!-- личный api-key. на данный момент не функционирует -->
+        <!-- android:value="AIzaSyAXpt_jemWM5tH16FsDO8rqTgop_uZKW24" -->
         <activity
             android:name=".MainActivity"
             android:exported="true">
@@ -56,16 +53,6 @@
         </activity>
 
         <service android:name=".view.details.DetailsServiceIntent" />
-
-        <service
-            android:name=".MyFirebaseMessagingService"
-            android:enabled="true"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT" />
-            </intent-filter>
-        </service>
-
     </application>
 
 </manifest>

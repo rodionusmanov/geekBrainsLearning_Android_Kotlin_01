@@ -1,0 +1,118 @@
+[
+    {
+        "merged": "C:\\Users\\79262\\.gradle\\daemon\\7.3.3\\com.example.chotamnaulitce.app-merged_res-42:\\mipmap-mdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\79262\\.gradle\\daemon\\7.3.3\\com.example.chotamnaulitce.app-main-44:\\mipmap-mdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "C:\\Users\\79262\\.gradle\\daemon\\7.3.3\\com.example.chotamnaulitce.app-merged_res-42:\\mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "C:\\Users\\79262\\.gradle\\daemon\\7.3.3\\com.example.chotamnaulitce.app-main-44:\\mipmap-anydpi-v26\\ic_launcher_round.xml"
+    },
+    {
+        "merged": "C:\\Users\\79262\\.gradle\\daemon\\7.3.3\\com.example.chotamnaulitce.app-merged_res-42:\\layout_weather_fragment_frame_recycler_item.xml.flat",
+        "source": "C:\\Users\\79262\\.gradle\\daemon\\7.3.3\\com.example.chotamnaulitce.app-main-44:\\layout\\weather_fragment_frame_recycler_item.xml"
+    },
+    {
+        "merged": "C:\\Users\\79262\\.gradle\\daemon\\7.3.3\\com.example.chotamnaulitce.app-merged_res-42:\\xml_backup_rules.xml.flat",
+        "source": "C:\\Users\\79262\\.gradle\\daemon\\7.3.3\\com.example.chotamnaulitce.app-main-44:\\xml\\backup_rules.xml"
+    },
+    {
+        "merged": "com.example.chotamnaulitce.app-merged_res-42:/layout_weather_fragment_frame.xml.flat",
+        "source": "com.example.chotamnaulitce.app-main-44:/layout/weather_fragment_frame.xml"
+    },
+    {
+        "merged": "C:\\Users\\79262\\.gradle\\daemon\\7.3.3\\com.example.chotamnaulitce.app-merged_res-42:\\layout_fragment_maps_with_interface.xml.flat",
+        "source": "C:\\Users\\79262\\.gradle\\daemon\\7.3.3\\com.example.chotamnaulitce.app-main-44:\\layout\\fragment_maps_with_interface.xml"
+    },
+    {
+        "merged": "C:\\Users\\79262\\.gradle\\daemon\\7.3.3\\com.example.chotamnaulitce.app-merged_res-42:\\layout_details_weather_fragment.xml.flat",
+        "source": "C:\\Users\\79262\\.gradle\\daemon\\7.3.3\\com.example.chotamnaulitce.app-main-44:\\layout\\details_weather_fragment.xml"
+    },
+    {
+        "merged": "C:\\Users\\79262\\.gradle\\daemon\\7.3.3\\com.example.chotamnaulitce.app-merged_res-42:\\mipmap-mdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\79262\\.gradle\\daemon\\7.3.3\\com.example.chotamnaulitce.app-main-44:\\mipmap-mdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "C:\\Users\\79262\\.gradle\\daemon\\7.3.3\\com.example.chotamnaulitce.app-merged_res-42:\\layout_activity_main.xml.flat",
+        "source": "C:\\Users\\79262\\.gradle\\daemon\\7.3.3\\com.example.chotamnaulitce.app-main-44:\\layout\\activity_main.xml"
+    },
+    {
+        "merged": "C:\\Users\\79262\\.gradle\\daemon\\7.3.3\\com.example.chotamnaulitce.app-merged_res-42:\\drawable_rus.png.flat",
+        "source": "C:\\Users\\79262\\.gradle\\daemon\\7.3.3\\com.example.chotamnaulitce.app-main-44:\\drawable\\rus.png"
+    },
+    {
+        "merged": "C:\\Users\\79262\\.gradle\\daemon\\7.3.3\\com.example.chotamnaulitce.app-merged_res-42:\\drawable_earth.png.flat",
+        "source": "C:\\Users\\79262\\.gradle\\daemon\\7.3.3\\com.example.chotamnaulitce.app-main-44:\\drawable\\earth.png"
+    },
+    {
+        "merged": "C:\\Users\\79262\\.gradle\\daemon\\7.3.3\\com.example.chotamnaulitce.app-merged_res-42:\\mipmap-xxxhdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\79262\\.gradle\\daemon\\7.3.3\\com.example.chotamnaulitce.app-main-44:\\mipmap-xxxhdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "C:\\Users\\79262\\.gradle\\daemon\\7.3.3\\com.example.chotamnaulitce.app-merged_res-42:\\xml_data_extraction_rules.xml.flat",
+        "source": "C:\\Users\\79262\\.gradle\\daemon\\7.3.3\\com.example.chotamnaulitce.app-main-44:\\xml\\data_extraction_rules.xml"
+    },
+    {
+        "merged": "C:\\Users\\79262\\.gradle\\daemon\\7.3.3\\com.example.chotamnaulitce.app-merged_res-42:\\layout_weather_fragment_frame.xml.flat",
+        "source": "C:\\Users\\79262\\.gradle\\daemon\\7.3.3\\com.example.chotamnaulitce.app-main-44:\\layout\\weather_fragment_frame.xml"
+    },
+    {
+        "merged": "C:\\Users\\79262\\.gradle\\daemon\\7.3.3\\com.example.chotamnaulitce.app-merged_res-42:\\layout_contacts_fragment.xml.flat",
+        "source": "C:\\Users\\79262\\.gradle\\daemon\\7.3.3\\com.example.chotamnaulitce.app-main-44:\\layout\\contacts_fragment.xml"
+    },
+    {
+        "merged": "C:\\Users\\79262\\.gradle\\daemon\\7.3.3\\com.example.chotamnaulitce.app-merged_res-42:\\layout_repository_radiobutton_fragment.xml.flat",
+        "source": "C:\\Users\\79262\\.gradle\\daemon\\7.3.3\\com.example.chotamnaulitce.app-main-44:\\layout\\repository_radiobutton_fragment.xml"
+    },
+    {
+        "merged": "C:\\Users\\79262\\.gradle\\daemon\\7.3.3\\com.example.chotamnaulitce.app-merged_res-42:\\mipmap-xxhdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\79262\\.gradle\\daemon\\7.3.3\\com.example.chotamnaulitce.app-main-44:\\mipmap-xxhdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "C:\\Users\\79262\\.gradle\\daemon\\7.3.3\\com.example.chotamnaulitce.app-merged_res-42:\\mipmap-xhdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\79262\\.gradle\\daemon\\7.3.3\\com.example.chotamnaulitce.app-main-44:\\mipmap-xhdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "C:\\Users\\79262\\.gradle\\daemon\\7.3.3\\com.example.chotamnaulitce.app-merged_res-42:\\mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "C:\\Users\\79262\\.gradle\\daemon\\7.3.3\\com.example.chotamnaulitce.app-main-44:\\mipmap-anydpi-v26\\ic_launcher.xml"
+    },
+    {
+        "merged": "C:\\Users\\79262\\.gradle\\daemon\\7.3.3\\com.example.chotamnaulitce.app-merged_res-42:\\drawable_ic_launcher_background.xml.flat",
+        "source": "C:\\Users\\79262\\.gradle\\daemon\\7.3.3\\com.example.chotamnaulitce.app-main-44:\\drawable\\ic_launcher_background.xml"
+    },
+    {
+        "merged": "C:\\Users\\79262\\.gradle\\daemon\\7.3.3\\com.example.chotamnaulitce.app-merged_res-42:\\layout_room_history_fragment.xml.flat",
+        "source": "C:\\Users\\79262\\.gradle\\daemon\\7.3.3\\com.example.chotamnaulitce.app-main-44:\\layout\\room_history_fragment.xml"
+    },
+    {
+        "merged": "C:\\Users\\79262\\.gradle\\daemon\\7.3.3\\com.example.chotamnaulitce.app-merged_res-42:\\drawable-v24_ic_launcher_foreground.xml.flat",
+        "source": "C:\\Users\\79262\\.gradle\\daemon\\7.3.3\\com.example.chotamnaulitce.app-main-44:\\drawable-v24\\ic_launcher_foreground.xml"
+    },
+    {
+        "merged": "C:\\Users\\79262\\.gradle\\daemon\\7.3.3\\com.example.chotamnaulitce.app-merged_res-42:\\layout_fragment_maps.xml.flat",
+        "source": "C:\\Users\\79262\\.gradle\\daemon\\7.3.3\\com.example.chotamnaulitce.app-main-44:\\layout\\fragment_maps.xml"
+    },
+    {
+        "merged": "C:\\Users\\79262\\.gradle\\daemon\\7.3.3\\com.example.chotamnaulitce.app-merged_res-42:\\mipmap-hdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\79262\\.gradle\\daemon\\7.3.3\\com.example.chotamnaulitce.app-main-44:\\mipmap-hdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "C:\\Users\\79262\\.gradle\\daemon\\7.3.3\\com.example.chotamnaulitce.app-merged_res-42:\\mipmap-hdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\79262\\.gradle\\daemon\\7.3.3\\com.example.chotamnaulitce.app-main-44:\\mipmap-hdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "C:\\Users\\79262\\.gradle\\daemon\\7.3.3\\com.example.chotamnaulitce.app-merged_res-42:\\mipmap-xxhdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\79262\\.gradle\\daemon\\7.3.3\\com.example.chotamnaulitce.app-main-44:\\mipmap-xxhdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "C:\\Users\\79262\\.gradle\\daemon\\7.3.3\\com.example.chotamnaulitce.app-merged_res-42:\\mipmap-xhdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\79262\\.gradle\\daemon\\7.3.3\\com.example.chotamnaulitce.app-main-44:\\mipmap-xhdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "C:\\Users\\79262\\.gradle\\daemon\\7.3.3\\com.example.chotamnaulitce.app-merged_res-42:\\mipmap-xxxhdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\79262\\.gradle\\daemon\\7.3.3\\com.example.chotamnaulitce.app-main-44:\\mipmap-xxxhdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "C:\\Users\\79262\\.gradle\\daemon\\7.3.3\\com.example.chotamnaulitce.app-merged_res-42:\\menu_app_menu.xml.flat",
+        "source": "C:\\Users\\79262\\.gradle\\daemon\\7.3.3\\com.example.chotamnaulitce.app-main-44:\\menu\\app_menu.xml"
+    }
+]

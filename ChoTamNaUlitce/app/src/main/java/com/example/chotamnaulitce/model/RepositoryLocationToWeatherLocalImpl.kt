@@ -15,4 +15,5 @@ class RepositoryLocationToWeatherLocalImpl : IRepositoryLocationToWeather {
             list.filter { it.city.latitude == weather.city.latitude && it.city.longitude == weather.city.longitude }
         callback.onResponse(response.first())
     }
+
 }

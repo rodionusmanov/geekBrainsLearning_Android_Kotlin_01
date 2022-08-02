@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/repository_chooser"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center">
+
+    <RadioGroup
+        android:id="@+id/repository_chooser_radiogroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <RadioButton
+            android:id="@+id/repository_okhttp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/repo_okhttp"
+            android:textSize="24sp"
+            android:layout_margin="10dp"/>
+
+        <RadioButton
+            android:id="@+id/repository_retrofit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/repo_retrofit"
+            android:textSize="24sp"
+            android:layout_margin="10dp"/>
+
+        <RadioButton
+            android:id="@+id/repository_room"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/repo_room"
+            android:textSize="24sp"
+            android:layout_margin="10dp"/>
+
+        <RadioButton
+            android:id="@+id/repository_local"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/repo_local"
+            android:textSize="24sp"
+            android:layout_margin="10dp"/>
+
+    </RadioGroup>
+</FrameLayout>

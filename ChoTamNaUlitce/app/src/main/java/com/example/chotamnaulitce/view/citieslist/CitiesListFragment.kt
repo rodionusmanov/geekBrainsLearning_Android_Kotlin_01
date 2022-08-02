@@ -6,6 +6,7 @@ import android.content.Context
 import android.content.pm.PackageManager
 import android.location.*
 import android.os.Bundle
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -30,6 +31,7 @@ import com.example.chotamnaulitce.viewmodel.citieslist.CitiesListFragmentAppStat
 import com.example.chotamnaulitce.viewmodel.citieslist.CitiesListViewModel
 import com.google.android.material.snackbar.Snackbar
 import java.util.*
+
 
 class CitiesListFragment : Fragment(), IOnItemClick {
     companion object {
@@ -65,11 +67,11 @@ class CitiesListFragment : Fragment(), IOnItemClick {
         super.onViewCreated(view, savedInstanceState)
 
         chosenRepository = weatherSharedPreferences.getInt(REPOSITORY_CHOSEN, 4)
-        binding.repositoryStateTextInput.setText(repositoryState(chosenRepository))
         viewModel = ViewModelProvider(this).get(CitiesListViewModel::class.java)
         viewModel.let {
             it.getLiveData().observe(viewLifecycleOwner) { t -> renderData(t) }
         }
+
         binding.chooseLocationFloatingActionButton.setOnClickListener {
             locationSwitchForFAB = (locationSwitchForFAB + 1) % 2
             weatherSharedPreferences.edit().apply {
@@ -91,24 +93,6 @@ class CitiesListFragment : Fragment(), IOnItemClick {
 
         binding.mapLocationFloatingActionButton.setOnClickListener {
             checkPermission(Manifest.permission.ACCESS_FINE_LOCATION)
-        }
-    }
-
-    private fun repositoryState(chosenRepository: Int): CharSequence {
-        return when (chosenRepository) {
-            1 -> {
-                resources.getString(R.string.OkHTTP)
-            }
-            2 -> {
-                resources.getString(R.string.Retrofit)
-            }
-            3 -> {
-                resources.getString(R.string.Room)
-            }
-            4 -> {
-                resources.getString(R.string.Local)
-            }
-            else -> ""
         }
     }
 
@@ -239,19 +223,19 @@ class CitiesListFragment : Fragment(), IOnItemClick {
         }
 
         override fun onProviderDisabled(provider: String) {
-            Snackbar.make(
-                requireView(),
+            Toast.makeText(
+                requireContext(),
                 "GPS отключен",
-                Snackbar.LENGTH_SHORT
+                Toast.LENGTH_SHORT
             ).show()
             super.onProviderDisabled(provider)
         }
 
         override fun onProviderEnabled(provider: String) {
-            Snackbar.make(
-                requireView(),
+            Toast.makeText(
+                requireContext(),
                 "GPS включен",
-                Snackbar.LENGTH_SHORT
+                Toast.LENGTH_SHORT
             ).show()
             super.onProviderEnabled(provider)
         }
@@ -293,7 +277,6 @@ class CitiesListFragment : Fragment(), IOnItemClick {
         if (locationSwitchForFAB == 1) {
             viewModel.getWeatherListForRus()
             binding.chooseLocationFloatingActionButton.setImageResource(R.drawable.rus)
-
         } else {
             viewModel.getWeatherListForWorld()
             binding.chooseLocationFloatingActionButton.setImageResource(R.drawable.earth)

@@ -23,9 +23,4 @@
     <string name="maps">Google-карта</string>
     <string name="address">address</string>
     <string name="search">Поиск</string>
-    <string name="OkHTTP">OkHTTP</string>
-    <string name="Retrofit">Retrofit</string>
-    <string name="Room">Room</string>
-    <string name="Local">Local</string>
-    <string name="repository">Репозиторий</string>
 </resources>

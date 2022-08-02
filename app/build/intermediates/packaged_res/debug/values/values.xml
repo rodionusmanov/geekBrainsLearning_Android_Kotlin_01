@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:ns1="http://schemas.android.com/tools">
+    <color name="black">#FF000000</color>
+    <color name="loadingBackground">#11333333</color>
+    <color name="pale_golden_rod">#FFEEE8AA</color>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="white">#FFFFFFFF</color>
+    <dimen name="main_text_size">30sp</dimen>
+    <string name="Local">Local</string>
+    <string name="OkHTTP">OkHTTP</string>
+    <string name="Retrofit">Retrofit</string>
+    <string name="Room">Room</string>
+    <string name="address">address</string>
+    <string name="app_name">ChoTamNaUlitce</string>
+    <string name="cho_tam">Чо там с погодой?</string>
+    <string name="condition">А вообще на улице:</string>
+    <string name="contacts">Контакты</string>
+    <string name="default_web_client_id" translatable="false">494425200027-oceh6l3q503d77o8vdpg556prskk9cu0.apps.googleusercontent.com</string>
+    <string name="gcm_defaultSenderId" translatable="false">494425200027</string>
+    <string name="google_api_key" translatable="false">AIzaSyBhs0Ac_bZlh7HAkeLHta9iynI5ro6-mbc</string>
+    <string name="google_app_id" translatable="false">1:494425200027:android:9ba0bddb4fb0a3c8b8fd3e</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyBhs0Ac_bZlh7HAkeLHta9iynI5ro6-mbc</string>
+    <string name="google_storage_bucket" translatable="false">weather-studying-gb.appspot.com</string>
+    <string name="humidity">И влажность:</string>
+    <string name="latitude">Широта</string>
+    <string name="location_change">location change</string>
+    <string name="longitude">Долгота</string>
+    <string name="map_location">Карты</string>
+    <string name="maps">Google-карта</string>
+    <string name="moscow">Москва</string>
+    <string name="project_id" translatable="false">weather-studying-gb</string>
+    <string name="repo_local">Локальный репозиторий</string>
+    <string name="repo_okhttp">OkHTTP репозиторий</string>
+    <string name="repo_retrofit">Retrofit репозиторий</string>
+    <string name="repo_room">Room репозиторий</string>
+    <string name="repository">Репозиторий</string>
+    <string name="return_to_cities_list">Вернуться к списку</string>
+    <string name="room_history">история запросов</string>
+    <string name="search">Поиск</string>
+    <string name="temperature_actual">На градуснике:</string>
+    <string name="temperature_feels">Но по ощущениям:</string>
+    <string name="toolbar_title">Чо там на улице?</string>
+    <string name="wind_direction">Дует на:</string>
+    <string name="wind_speed">И ветер:</string>
+    <style name="Theme.ChoTamNaUlitce" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        
+        <item name="colorPrimary">@color/purple_500</item>
+        <item name="colorPrimaryVariant">@color/purple_700</item>
+        <item name="colorOnPrimary">@color/white</item>
+        
+        <item name="colorSecondary">@color/teal_200</item>
+        <item name="colorSecondaryVariant">@color/teal_700</item>
+        <item name="colorOnSecondary">@color/black</item>
+        
+        <item name="android:statusBarColor" ns1:targetApi="l">?attr/colorPrimaryVariant</item>
+        
+        <item name="android:textViewStyle">@style/textViewDefaultStyle</item>
+
+
+    </style>
+    <style name="textViewDefaultStyle">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">@dimen/main_text_size</item>
+    </style>
+</resources>

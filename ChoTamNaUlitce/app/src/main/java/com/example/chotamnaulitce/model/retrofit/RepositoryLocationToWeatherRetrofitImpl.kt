@@ -16,7 +16,7 @@ import java.io.IOException
 
 class RepositoryLocationToWeatherRetrofitImpl : IRepositoryLocationToWeather {
 
-    private val retrofitImpl = Retrofit.Builder()
+    val retrofitImpl = Retrofit.Builder()
 
     override fun getWeather(weather: Weather, callback: IUniversalCallback) {
         retrofitImpl.baseUrl("https://api.weather.yandex.ru")
