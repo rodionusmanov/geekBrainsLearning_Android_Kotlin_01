@@ -18,7 +18,7 @@
     <string name="repo_local">Локальный репозиторий</string>
     <string name="repo_room">Room репозиторий</string>
     <string name="contacts">Контакты</string>
-    <string name="room_history">история запросов</string>
+    <string name="room_history">История запросов</string>
     <string name="map_location">Карты</string>
     <string name="maps">Google-карта</string>
     <string name="address">address</string>
