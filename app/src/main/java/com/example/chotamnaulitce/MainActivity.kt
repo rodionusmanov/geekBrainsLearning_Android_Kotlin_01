@@ -10,7 +10,6 @@ import android.content.IntentFilter
 import android.net.ConnectivityManager
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
@@ -54,8 +53,6 @@ class MainActivity : AppCompatActivity() {
                 return@OnCompleteListener
             }
             val token = it.result
-            Log.d("keyToken",token)
-            pushNotification("token, повторный вывод", token)
         })
     }
 
