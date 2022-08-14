@@ -2,7 +2,7 @@ package com.example.chotamnaulitce.model.retrofit
 
 import com.example.chotamnaulitce.BuildConfig
 import com.example.chotamnaulitce.domain.Weather
-import com.example.chotamnaulitce.model.DataTransferObject.WeatherDataTransferObject
+import com.example.chotamnaulitce.model.dataTransferObject.WeatherDataTransferObject
 import com.example.chotamnaulitce.model.IRepositoryLocationToWeather
 import com.example.chotamnaulitce.model.IUniversalCallback
 import com.example.chotamnaulitce.utils.convertDTOToWeather

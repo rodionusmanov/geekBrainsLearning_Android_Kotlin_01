@@ -1,6 +1,6 @@
 package com.example.chotamnaulitce.model.retrofit
 
-import com.example.chotamnaulitce.model.DataTransferObject.WeatherDataTransferObject
+import com.example.chotamnaulitce.model.dataTransferObject.WeatherDataTransferObject
 import com.example.chotamnaulitce.utils.WEATHER_KEY
 import retrofit2.Call
 import retrofit2.http.GET

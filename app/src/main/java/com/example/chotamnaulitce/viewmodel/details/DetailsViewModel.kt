@@ -4,7 +4,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.chotamnaulitce.domain.Weather
 import com.example.chotamnaulitce.model.*
-import com.example.chotamnaulitce.model.DataTransferObject.WeatherDataTransferObject
 import com.example.chotamnaulitce.model.retrofit.RepositoryLocationToWeatherRetrofitImpl
 import com.example.chotamnaulitce.utils.chosenRepository
 import com.example.chotamnaulitce.utils.isConnected
@@ -46,7 +45,6 @@ class DetailsViewModel(
                 1 -> {
                     RepositoryLocationToWeatherRoomImpl()
                 }
-
                 else -> {
                     RepositoryLocationToWeatherRoomImpl()
                 }

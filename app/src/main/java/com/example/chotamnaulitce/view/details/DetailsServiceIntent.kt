@@ -5,7 +5,7 @@ import android.content.Intent
 import android.util.Log
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.example.chotamnaulitce.BuildConfig
-import com.example.chotamnaulitce.model.DataTransferObject.WeatherDataTransferObject
+import com.example.chotamnaulitce.model.dataTransferObject.WeatherDataTransferObject
 import com.example.chotamnaulitce.utils.*
 import com.google.gson.Gson
 import com.google.gson.JsonSyntaxException

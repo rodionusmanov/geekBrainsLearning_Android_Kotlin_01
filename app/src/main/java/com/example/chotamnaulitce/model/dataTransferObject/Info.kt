@@ -1,4 +1,4 @@
-package com.example.chotamnaulitce.model.DataTransferObject
+package com.example.chotamnaulitce.model.dataTransferObject
 
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName

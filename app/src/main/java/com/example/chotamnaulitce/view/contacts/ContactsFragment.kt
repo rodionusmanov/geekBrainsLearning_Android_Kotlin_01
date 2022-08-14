@@ -115,7 +115,7 @@ class ContactsFragment : Fragment() {
         )
 
         cursorWithContacts?.let {
-            for (i in 0..it.count - 1) {
+            for (i in 0 until it.count) {
                 it.moveToPosition(i)
                 val identifier =
                     it.getString(it.getColumnIndex(ContactsContract.Contacts.NAME_RAW_CONTACT_ID))

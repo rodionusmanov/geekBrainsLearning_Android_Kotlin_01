@@ -41,7 +41,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
             priority = NotificationCompat.PRIORITY_HIGH
 
             val intent = Intent(applicationContext, MainActivity::class.java)
-            val pendingIntent = PendingIntent.getActivity(applicationContext, 0, intent, 0)
+            val pendingIntent = PendingIntent.getActivity(applicationContext, 0, intent, PendingIntent.FLAG_IMMUTABLE)
             setContentIntent(pendingIntent)
 
         }
