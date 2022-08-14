@@ -8,7 +8,6 @@ import com.example.chotamnaulitce.databinding.WeatherFragmentFrameRecyclerItemBi
 import com.example.chotamnaulitce.domain.Weather
 import com.example.chotamnaulitce.view.details.IOnItemClick
 
-
 class CitiesListAdapter(private val dataList: List<Weather>, private val callback: IOnItemClick) :
     RecyclerView.Adapter<CitiesListAdapter.WeatherViewHolder>() {
 

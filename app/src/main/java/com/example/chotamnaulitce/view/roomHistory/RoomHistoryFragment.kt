@@ -35,9 +35,9 @@ class RoomHistoryFragment : DialogFragment() {
         Thread {
             ChoTamNaUlitceApp.getWeatherDatabase().weatherDAO()
                 .getWeatherAll().let {
-                    if (it.size > 0) {
+                    if (it.isNotEmpty()) {
                         for (i in it.size - 1 downTo 0) {
-                            writeHistoryItem(convertWeatherEntityToWeather(it).get(i))
+                            writeHistoryItem(convertWeatherEntityToWeather(it)[i])
                         }
                         convertWeatherEntityToWeather(it).last()
                     } else {
@@ -48,7 +48,7 @@ class RoomHistoryFragment : DialogFragment() {
         super.onViewCreated(view, savedInstanceState)
     }
 
-    fun writeHistoryItem(weather: Weather) {
+    private fun writeHistoryItem(weather: Weather) {
         binding.historyContainer.addView(TextView(requireContext()).apply {
             text = weather.city.name
             textSize = 30f

@@ -2,9 +2,7 @@ package com.example.chotamnaulitce.utils
 
 import com.example.chotamnaulitce.domain.City
 import com.example.chotamnaulitce.domain.Weather
-import com.example.chotamnaulitce.model.DataTransferObject.Fact
-import com.example.chotamnaulitce.model.DataTransferObject.Info
-import com.example.chotamnaulitce.model.DataTransferObject.WeatherDataTransferObject
+import com.example.chotamnaulitce.model.dataTransferObject.WeatherDataTransferObject
 import com.example.chotamnaulitce.model.room.WeatherEntity
 import java.io.BufferedReader
 import java.util.stream.Collectors
@@ -25,38 +23,6 @@ fun convertDTOToWeather(weatherDataTransferObject: WeatherDataTransferObject, ci
         fact.windDir
     ))
 }
-
-fun convertWeatherToDTO(weather: Weather): WeatherDataTransferObject {
-    val fact = Fact(
-        "неизвестно",
-        weather.temperatureFeels,
-        0,
-        weather.temperatureActual,
-        "неизвестно",
-        0.0,
-        ""
-    )
-    val info = Info(weather.city.latitude, weather.city.longitude, "")
-    return WeatherDataTransferObject(fact, info)
-}
-
-fun convertWeatherEntityToWeatherDTO(entityList: List<WeatherEntity>): List<WeatherDataTransferObject> {
-    return entityList.map {
-        WeatherDataTransferObject(
-            Fact(
-                it.condition,
-                it.temperatureFeels,
-                it.humidity,
-                it.temperatureActual,
-                it.windDirection,
-                it.windSpeed,
-                "bkn_d"
-            ),
-            Info(it.latitude, it.longitude, it.name)
-        )
-    }
-}
-
 fun convertWeatherEntityToWeather(entityList: List<WeatherEntity>): List<Weather> {
     return entityList.map {
         Weather(

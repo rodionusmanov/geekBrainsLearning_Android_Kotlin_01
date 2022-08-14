@@ -10,7 +10,7 @@ class CitiesListViewModel(
 ) :
     ViewModel() {
 
-    lateinit var repositoryCitiesList: IRepositoryCitiesList
+    private lateinit var repositoryCitiesList: IRepositoryCitiesList
 
     fun getLiveData(): MutableLiveData<CitiesListFragmentAppState> {
         chooseRepository()
@@ -35,9 +35,5 @@ class CitiesListViewModel(
         } else {
             liveData.postValue(CitiesListFragmentAppState.Error(Any()))
         }
-    }
-
-    private fun isConnected(): Boolean {
-        return false
     }
 }

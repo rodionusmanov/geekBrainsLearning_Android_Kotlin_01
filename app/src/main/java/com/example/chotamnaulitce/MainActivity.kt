@@ -1,22 +1,15 @@
 package com.example.chotamnaulitce
 
-import android.app.NotificationChannel
-import android.app.NotificationManager
-import android.app.PendingIntent
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.net.ConnectivityManager
-import android.os.Build
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.NotificationCompat
 import com.example.chotamnaulitce.databinding.ActivityMainBinding
-import com.example.chotamnaulitce.utils.CHANNEL_ID_HIGH_PRIORITY
-import com.example.chotamnaulitce.utils.NOTIFICATION_ID
 import com.example.chotamnaulitce.utils.isConnected
 import com.example.chotamnaulitce.view.citieslist.CitiesListFragment
 import com.example.chotamnaulitce.view.contacts.ContactsFragment
@@ -52,34 +45,7 @@ class MainActivity : AppCompatActivity() {
             if (!it.isSuccessful) {
                 return@OnCompleteListener
             }
-            val token = it.result
         })
-    }
-
-    private fun pushNotification(title: String, text: String) {
-        val notificationManager =
-            getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-        val notification = NotificationCompat.Builder(this, CHANNEL_ID_HIGH_PRIORITY).apply {
-            setContentTitle(title)
-            setContentText(text)
-            setSmallIcon(android.R.drawable.btn_dialog)
-            priority = NotificationCompat.PRIORITY_HIGH
-
-            val intent = Intent(applicationContext, MainActivity::class.java)
-            val pendingIntent = PendingIntent.getActivity(applicationContext, 0, intent, PendingIntent.FLAG_IMMUTABLE)
-            setContentIntent(pendingIntent)
-
-        }
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val channelHigh = NotificationChannel(
-                CHANNEL_ID_HIGH_PRIORITY,
-                "high",
-                NotificationManager.IMPORTANCE_HIGH
-            )
-            channelHigh.description = "channel info"
-            notificationManager.createNotificationChannel(channelHigh)
-        }
-        notificationManager.notify(NOTIFICATION_ID, notification.build())
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

@@ -16,11 +16,6 @@ interface IUniversalCallback {
     fun onFailure(e: IOException)
 }
 
-interface IRepositorySingle {
-    fun getWeatherList(location: Location): List<Weather>
-    fun getWeather(latitude: Double, longitude: Double): Weather
-}
-
 interface IRepositoryCitiesList {
     fun getCitiesList(location: Location): List<Weather>
 }
